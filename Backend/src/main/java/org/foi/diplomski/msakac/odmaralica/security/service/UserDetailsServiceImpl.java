@@ -3,7 +3,6 @@ package org.foi.diplomski.msakac.odmaralica.security.service;
 import org.foi.diplomski.msakac.odmaralica.model.UserRole;
 import org.foi.diplomski.msakac.odmaralica.security.dto.AuthenticatedUserDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +14,6 @@ import java.util.Collections;
 import java.util.Objects;
 
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
