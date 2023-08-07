@@ -20,12 +20,12 @@ public class JwtTokenManager {
 
 	public String generateToken(User user) {
 
-		final String username = user.getUsername();
+		final String email = user.getEmail();
 		final UserRole userRole = user.getUserRole();
 
 		//@formatter:off
 		return JWT.create()
-				.withSubject(username)
+				.withSubject(email)
 				.withIssuer(jwtProperties.getIssuer())
 				.withClaim("role", userRole.name())
 				.withIssuedAt(new Date())
@@ -34,21 +34,21 @@ public class JwtTokenManager {
 		//@formatter:on
 	}
 
-	public String getUsernameFromToken(String token) {
+	public String getEmailFromToken(String token) {
 
 		final DecodedJWT decodedJWT = getDecodedJWT(token);
 
 		return decodedJWT.getSubject();
 	}
 
-	public boolean validateToken(String token, String authenticatedUsername) {
+	public boolean validateToken(String token, String authenticatedEmail) {
 
-		final String usernameFromToken = getUsernameFromToken(token);
+		final String emailFromToken = getEmailFromToken(token);
 
-		final boolean equalsUsername = usernameFromToken.equals(authenticatedUsername);
+		final boolean equalsEmail = emailFromToken.equals(authenticatedEmail);
 		final boolean tokenExpired = isTokenExpired(token);
 
-		return equalsUsername && !tokenExpired;
+		return equalsEmail && !tokenExpired;
 	}
 
 	private boolean isTokenExpired(String token) {

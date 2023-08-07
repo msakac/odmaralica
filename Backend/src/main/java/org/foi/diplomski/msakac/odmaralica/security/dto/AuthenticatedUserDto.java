@@ -13,7 +13,9 @@ public class AuthenticatedUserDto {
 
 	private String name;
 
-	private String username;
+	private String forname;
+
+	private String email;
 
 	private String password;
 

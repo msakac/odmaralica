@@ -31,9 +31,9 @@ public class UserServiceImpl implements UserService {
 	private final GeneralMessageAccessor generalMessageAccessor;
 
 	@Override
-	public User findByUsername(String username) {
+	public User findByEmail(String email) {
 
-		return userRepository.findByUsername(username);
+		return userRepository.findByEmail(email);
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
 
 		userRepository.save(user);
 
-		final String username = registrationRequest.getUsername();
+		final String username = registrationRequest.getEmail();
 		final String registrationSuccessMessage = generalMessageAccessor.getMessage(null, REGISTRATION_SUCCESSFUL, username);
 
 		log.info("{} registered successfully!", username);
@@ -56,9 +56,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public AuthenticatedUserDto findAuthenticatedUserByUsername(String username) {
+	public AuthenticatedUserDto findAuthenticatedUserByEmail(String email) {
 
-		final User user = findByUsername(username);
+		final User user = findByEmail(email);
 
 		return UserMapper.INSTANCE.convertToAuthenticatedUserDto(user);
 	}

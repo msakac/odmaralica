@@ -19,12 +19,20 @@ public class User {
 
 	private String name;
 
-	@Column(unique = true)
-	private String username;
+	private String surname;
 
 	private String password;
 
+	@Column(unique = true)
 	private String email;
+
+	private Boolean active;
+
+	private String description;
+
+	private String profilePicture;
+
+	private String phoneNumber;
 
 	@Enumerated(EnumType.STRING)
 	private UserRole userRole;

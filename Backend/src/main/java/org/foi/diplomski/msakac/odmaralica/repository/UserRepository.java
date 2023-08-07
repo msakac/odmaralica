@@ -9,13 +9,10 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-	User findByUsername(String username);
+	User findByEmail(String email);
 
 	boolean existsByEmail(String email);
 
-	boolean existsByUsername(String username);
-
 	@Query(value = "SELECT * FROM users WHERE age > :age", nativeQuery = true)
     List<User> findUsersByAgeGreaterThan(int age);
-
 }
