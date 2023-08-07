@@ -15,7 +15,7 @@
 
     <name>odmaralica</name>
     <description>
-        Spring Boot Boilerplate is a starter kit. This project includes : Spring Boot(2.7.4), Spring Data JPA, Spring Validation, Spring Security +
+        Odmaralica is travel agency project for master thesis. This project includes : Spring Boot(2.7.4), Spring Data JPA, Spring Validation, Spring Security +
         JWT Token, PostgreSQL, Mapstruct, Lombok, Swagger
     </description>
 

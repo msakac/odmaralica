@@ -23,7 +23,7 @@ public class SecurityConstants {
 	 * The company who provided token.
 	 * You can customize issuer name, this is given as an example.
 	 */
-	public static final String ISSUER = "www.boilerplate.design";
+	public static final String ISSUER = "www.odmaralica.com";
 
 	/**
 	 * Token Prefix
