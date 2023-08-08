@@ -1,6 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.security.service;
 
-import org.foi.diplomski.msakac.odmaralica.model.UserRole;
+import org.foi.diplomski.msakac.odmaralica.model.Role;
 import org.foi.diplomski.msakac.odmaralica.security.dto.AuthenticatedUserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -33,8 +33,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		final String authenticatedEmail = authenticatedUser.getEmail();
 		final String authenticatedPassword = authenticatedUser.getPassword();
-		final UserRole userRole = authenticatedUser.getUserRole();
-		final SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(userRole.name());
+		final Role userRole = authenticatedUser.getRole();
+		final SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(userRole.getRole());
 
 		return new User(authenticatedEmail, authenticatedPassword, Collections.singletonList(grantedAuthority));
 	}

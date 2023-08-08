@@ -1,6 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.security.dto;
+import org.foi.diplomski.msakac.odmaralica.model.Role;
 
-import org.foi.diplomski.msakac.odmaralica.model.UserRole;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,12 +13,12 @@ public class AuthenticatedUserDto {
 
 	private String name;
 
-	private String forname;
+	private String surname;
 
 	private String email;
 
 	private String password;
 
-	private UserRole userRole;
+	private Role role;
 
 }
