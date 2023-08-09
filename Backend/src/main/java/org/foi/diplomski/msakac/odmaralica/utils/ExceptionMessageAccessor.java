@@ -17,7 +17,11 @@ public class ExceptionMessageAccessor {
 		this.messageSource = messageSource;
 	}
 
-	public String getMessage(Locale locale, String key, Object... parameter) {
+	public String getMessage(String key, Object ... parameter){
+		return this.getMessage(null, key, parameter);
+	}
+
+	private String getMessage(Locale locale, String key, Object... parameter) {
 
 		if (Objects.isNull(locale)) {
 			return messageSource.getMessage(key, parameter, ProjectConstants.DEFAULT_LOCALE);

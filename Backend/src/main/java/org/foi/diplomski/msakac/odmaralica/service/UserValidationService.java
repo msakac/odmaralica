@@ -1,11 +1,13 @@
 package org.foi.diplomski.msakac.odmaralica.service;
 
 import org.foi.diplomski.msakac.odmaralica.utils.ExceptionMessageAccessor;
-import org.foi.diplomski.msakac.odmaralica.exceptions.RegistrationException;
+import org.foi.diplomski.msakac.odmaralica.exceptions.CommonException;
 import org.foi.diplomski.msakac.odmaralica.repository.UserRepository;
 import org.foi.diplomski.msakac.odmaralica.security.dto.RegistrationRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 
@@ -35,8 +37,8 @@ public class UserValidationService {
 
 			log.warn("{} is already being used!", email);
 
-			final String existsEmail = exceptionMessageAccessor.getMessage(null, EMAIL_ALREADY_EXISTS);
-			throw new RegistrationException(existsEmail);
+			final String existsEmail = exceptionMessageAccessor.getMessage(EMAIL_ALREADY_EXISTS);
+			throw new CommonException(existsEmail, HttpStatus.CONFLICT);
 		}
 	}
 

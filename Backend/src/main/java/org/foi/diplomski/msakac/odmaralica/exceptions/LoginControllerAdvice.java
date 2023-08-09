@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class LoginControllerAdvice {
 
 	@ExceptionHandler(BadCredentialsException.class)
-	ResponseEntity<ApiExceptionResponse> handleRegistrationException(BadCredentialsException exception) {
+	ResponseEntity<ApiExceptionResponse> handleCommonException(BadCredentialsException exception) {
 
 		final ApiExceptionResponse response = new ApiExceptionResponse(exception.getMessage(), HttpStatus.UNAUTHORIZED, LocalDateTime.now());
 

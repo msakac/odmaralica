@@ -1,9 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.security.service;
 
 import org.foi.diplomski.msakac.odmaralica.service.UserValidationService;
-
-import java.util.List;
-
 import org.foi.diplomski.msakac.odmaralica.model.User;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
 import org.foi.diplomski.msakac.odmaralica.security.dto.AuthenticatedUserDto;
@@ -26,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
 	private static final String REGISTRATION_SUCCESSFUL = "registration_successful";
 
-	private static final String REGISTRATION_ROLE = "User";
+	private static final String REGISTRATION_ROLE = "user";
 
 	private final UserRepository userRepository;
 
@@ -45,12 +42,19 @@ public class UserServiceImpl implements UserService {
 
 		final User user = UserMapper.INSTANCE.convertToUser(registrationRequest);
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		final Role role = roleRepository.findByRole(REGISTRATION_ROLE);
+		user.setActivated(true);
+		Role role = roleRepository.findByRole(REGISTRATION_ROLE);
+
+		if (role == null) {
+			role = new Role();
+			role.setRole(REGISTRATION_ROLE);
+			roleRepository.save(role);
+		}
 		user.setRole(role);
-		userRepository.save(user);
+ 		userRepository.save(user);
 
 		final String username = registrationRequest.getEmail();
-		final String registrationSuccessMessage = generalMessageAccessor.getMessage(null, REGISTRATION_SUCCESSFUL, username);
+		final String registrationSuccessMessage = generalMessageAccessor.getMessage(REGISTRATION_SUCCESSFUL, username);
 
 		log.info("{} registered successfully!", username);
 

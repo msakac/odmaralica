@@ -7,9 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-
 
 @CrossOrigin
 @RestController
@@ -18,7 +16,6 @@ import javax.validation.Valid;
 public class RegistrationController {
 
 	private final UserService userService;
-//	public ResponseEntity<RegistrationResponse> registrationRequest(@Valid @RequestBody @DTO(RegistrationRequest.class) User user) {
 
 	@PostMapping
 	public ResponseEntity<RegistrationResponse> registrationRequest(@Valid @RequestBody RegistrationRequest registrationRequest) {
