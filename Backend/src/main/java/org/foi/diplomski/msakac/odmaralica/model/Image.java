@@ -1,32 +1,22 @@
 package org.foi.diplomski.msakac.odmaralica.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import lombok.Data;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import javax.persistence.*;
+import java.io.Serializable;
 
-@Getter
-@Setter
+@Data
 @Entity
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name="image", schema="public")
-public class Image {
+@Table(name = "image")
+public class Image implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @Lob // Annotation for large binary objects
-    @Column(name = "image_data", columnDefinition = "BLOB")
-    private byte[] imageData;
+    @Lob
+    @Column(name = "image", nullable = false)
+    private byte[] image;
 }
