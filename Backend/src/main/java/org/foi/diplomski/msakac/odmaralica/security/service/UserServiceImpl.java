@@ -1,12 +1,12 @@
 package org.foi.diplomski.msakac.odmaralica.security.service;
 
-import org.foi.diplomski.msakac.odmaralica.service.UserValidationService;
 import org.foi.diplomski.msakac.odmaralica.model.User;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
 import org.foi.diplomski.msakac.odmaralica.security.dto.AuthenticatedUserDto;
 import org.foi.diplomski.msakac.odmaralica.security.dto.RegistrationRequest;
 import org.foi.diplomski.msakac.odmaralica.security.dto.RegistrationResponse;
 import org.foi.diplomski.msakac.odmaralica.security.mapper.UserMapper;
+import org.foi.diplomski.msakac.odmaralica.service.implementation.UserValidationService;
 import org.foi.diplomski.msakac.odmaralica.utils.GeneralMessageAccessor;
 import org.foi.diplomski.msakac.odmaralica.utils.GenericRepository;
 import org.foi.diplomski.msakac.odmaralica.repository.RoleRepository;
