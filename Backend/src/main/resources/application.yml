@@ -7,7 +7,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: create #create mi svaki put brise podatke, update ih ostavlja
+      ddl-auto: create
       show-sql: true
       format-sql: true
       type: info

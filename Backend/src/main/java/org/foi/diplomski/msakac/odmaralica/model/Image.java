@@ -20,7 +20,7 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="IMAGE")
+@Table(name="image", schema="public")
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
