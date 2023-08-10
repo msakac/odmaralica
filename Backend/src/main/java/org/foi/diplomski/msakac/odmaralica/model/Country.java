@@ -31,8 +31,8 @@ public class Country {
     @NotNull
     private String name;
 
-    @Column(unique = true)
+    @Column(name = "country_code", unique = true)
     @NotNull
     @Size(min = 2, max = 2, message = "Country code must be exactly 2 characters long")
-    private String country_code;
+    private String countryCode;
 }
