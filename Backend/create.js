@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 function generateFiles(names, folderPaths) {
-  const fileTypes = ["Controller", "Repository", "Service", "ServiceImpl", "GetDTO", "PostDTO", "PutDto",""];
+  const fileTypes = ["Mapper"];
 
   names.forEach((name) => {
     folderPaths.forEach((folderPath, index) => {
@@ -20,20 +20,12 @@ function generateFiles(names, folderPaths) {
 
 function generateFileContent(name, fileType) {
   const className = `${name}${fileType}`;
-  return `public class ${className} {\n    // TODO: Implement ${className}\n}\n`;
+  return `package org.foi.diplomski.msakac.odmaralica.mapper;\n\nimport org.mapstruct.Mapper;\nimport org.mapstruct.ReportingPolicy;\n\n@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)\npublic interface ${className} {\n}\n`;
 }
 
-const names = ["Reservation", "ResidenceAttribute", "Residence", "Region", "City", "Address", "Amenity", "Amount", "PricePeriod", "AccommodationUnit", "ResidenceImage", "AccommodationUnitImage", "Log", "ActivityType"];
+const names = ["Reservation", "ResidenceAttribute", "Residence", "Region", "City", "Address", "Amenity", "Amount", "PricePeriod", "AccommodationUnit", "ResidenceImage", "AccommodationUnitImage", "Log", "ActivityType", "Country"];
 const folderPaths = [
-    "./src/main/java/org/foi/diplomski/msakac/odmaralica/controller",
-    "./src/main/java/org/foi/diplomski/msakac/odmaralica/repository",
-    "./src/main/java/org/foi/diplomski/msakac/odmaralica/service/interface",
-    "./src/main/java/org/foi/diplomski/msakac/odmaralica/service",
-    "./src/main/java/org/foi/diplomski/msakac/odmaralica/dto/get",
-    "./src/main/java/org/foi/diplomski/msakac/odmaralica/dto/post",
-    "./src/main/java/org/foi/diplomski/msakac/odmaralica/dto/put",
-    "./src/main/java/org/foi/diplomski/msakac/odmaralica/model",
-
+    "./src/main/java/org/foi/diplomski/msakac/odmaralica/mapper",
 ];
 
 generateFiles(names, folderPaths);

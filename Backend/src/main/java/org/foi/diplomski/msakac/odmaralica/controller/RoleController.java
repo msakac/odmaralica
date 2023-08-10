@@ -1,7 +1,7 @@
 package org.foi.diplomski.msakac.odmaralica.controller;
 
+import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
-import org.foi.diplomski.msakac.odmaralica.security.dto.CreateResponseDTO;
 import org.foi.diplomski.msakac.odmaralica.security.dto.RoleRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.security.service.RoleService;
 import lombok.RequiredArgsConstructor;
