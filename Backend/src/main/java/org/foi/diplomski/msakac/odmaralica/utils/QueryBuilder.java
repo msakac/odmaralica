@@ -24,7 +24,23 @@ public class QueryBuilder<T> {
         criteriaQuery.select(root);
     }
 
-    // FIXME: Osim q parametara trebam jos sort=, offset, limit
+    private Path<?> getAttributePath(String key, Operator op) {
+        String[] keyValue = key.split(op.getSymbol());
+        String attributeName = keyValue[0];
+
+        Path<?> attributePath;
+        if (attributeName.contains(".")) {
+            String[] attributeNames = attributeName.split("\\.");
+            attributePath = root;
+            for (String attrName : attributeNames) {
+                attributePath = attributePath.get(attrName);
+            }
+        } else {
+            attributePath = root.get(attributeName);
+        }
+        return attributePath;
+    }
+
     public CriteriaQuery<T> buildQuery(String query) {
         Map<String, String> parsedQuery = parseQuery(query);
         List<Predicate> predicates = new ArrayList<>();
@@ -32,32 +48,31 @@ public class QueryBuilder<T> {
         for (String key : parsedQuery.keySet()) {
             String value = parsedQuery.get(key);
 
-            if (key.contains("!=")) {
-                String[] keyValue = key.split("!=");
-                String attributeName = keyValue[0];
-                Path<Object> attributePath = root.get(attributeName);
-                predicates.add(criteriaBuilder.notEqual(attributePath, (Comparable<? super Comparable<?>>) castToComparable(value)));
-            }  else if (key.contains(">")) {
-                String[] keyValue = key.split(">");
-                String attributeName = keyValue[0];
-                Path<Comparable<? super Comparable<?>>> attributePath = root.get(attributeName);
-                predicates.add(criteriaBuilder.greaterThan(attributePath, (Comparable<? super Comparable<?>>) castToComparable(value)));
-            } else if (key.contains("<")) {
-                String[] keyValue = key.split("<");
-                String attributeName = keyValue[0];
-                Path<Comparable<? super Comparable<?>>> attributePath = root.get(attributeName);
-                predicates.add(criteriaBuilder.lessThan(attributePath, (Comparable<? super Comparable<?>>) castToComparable(value)));
-            } else if (key.contains("(in)=")) {
-                String[] keyValue = key.split("\\(in\\)=");
-                String attributeName = keyValue[0];
-                Path<Object> attributePath = root.get(attributeName);
-                List<String> values = Arrays.asList(value.split(","));
-                predicates.add(attributePath.in(values));
-            } else if (key.contains("=")) {
-                String[] keyValue = key.split("=");
-                String attributeName = keyValue[0];
-                Path<Object> attributePath = root.get(attributeName);
-                predicates.add(criteriaBuilder.equal(attributePath, value));
+            Operator operator = Operator.findOperator(key);
+
+            if (operator != null) {
+                Path<?> attributePath = getAttributePath(key, operator);
+
+                switch (operator) {
+                    case NOT_EQUAL:
+                        predicates.add(criteriaBuilder.notEqual(attributePath, castToComparable(value)));
+                        break;
+                    case GREATER_THAN:
+                        predicates.add(criteriaBuilder.greaterThan((Path<Comparable<? super Comparable<?>>>) attributePath,
+                                                                   (Comparable<? super Comparable<?>>) castToComparable(value)));
+                        break;
+                    case LESS_THAN:
+                        predicates.add(criteriaBuilder.lessThan((Path<Comparable<? super Comparable<?>>>) attributePath,
+                                                                (Comparable<? super Comparable<?>>) castToComparable(value)));
+                        break;
+                    case IN:
+                        List<String> values = Arrays.asList(value.split(","));
+                        predicates.add(attributePath.in(values));
+                        break;
+                    case EQUAL:
+                        predicates.add(criteriaBuilder.equal(attributePath, value));
+                        break;
+                }
             }
         }
 
@@ -66,6 +81,7 @@ public class QueryBuilder<T> {
     }
 
     //FIXME: Compares only integers
+    //FIXME: Retard more linka poslati i zbrejkati sve zivo
     private Comparable<?> castToComparable(String value) {
         try {
             return Integer.parseInt(value);
@@ -74,7 +90,7 @@ public class QueryBuilder<T> {
         }
     }
 
-    public static Map<String, String> parseQuery(String query) {
+    private static Map<String, String> parseQuery(String query) {
         Map<String, String> result = new HashMap<>();
         List<String> operators = Arrays.asList("<", ">", "=", "!=", "(in)=");
 
