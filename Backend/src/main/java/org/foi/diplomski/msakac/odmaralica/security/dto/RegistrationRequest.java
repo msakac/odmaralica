@@ -2,7 +2,6 @@ package org.foi.diplomski.msakac.odmaralica.security.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 

@@ -1,7 +1,11 @@
 package org.foi.diplomski.msakac.odmaralica.controller;
 
 import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.post.RegionPostDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.put.RegionPutDto;
+import org.foi.diplomski.msakac.odmaralica.model.Country;
 import org.foi.diplomski.msakac.odmaralica.model.Region;
+import org.foi.diplomski.msakac.odmaralica.service.CountryService;
 import org.foi.diplomski.msakac.odmaralica.service.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,24 +20,40 @@ import java.util.List;
 public class RegionController {
 
     private final RegionService regionService;
+
+    private final CountryService countryService;
+
     private final CreateResponseDTO<Region> notFoundResponse = new CreateResponseDTO<Region>
             (HttpStatus.NOT_FOUND, "Region not found");
+
+    private final CreateResponseDTO<Region> countryNotFoundResponse = new CreateResponseDTO<Region>
+            (HttpStatus.NOT_FOUND, "Country not found");
+
     private final CreateResponseDTO<Region> conflictResponse = new CreateResponseDTO<Region>
             (HttpStatus.CONFLICT, "Name already exists!");
 
     @Autowired
-    public RegionController(RegionService regionService) {
+    public RegionController(RegionService regionService, CountryService countryService) {
         this.regionService = regionService;
+        this.countryService = countryService;
     }
 
     @PostMapping
-    public ResponseEntity<Object> createRegion(@Valid @RequestBody Region region) {
-        Region existingName = regionService.findByName(region.getName());
+    public ResponseEntity<Object> createRegion(@Valid @RequestBody RegionPostDTO region) {
 
+        Region existingName = regionService.findByName(region.getName());
+        Country existingCountry = countryService.findById(region.getCountryId());
+        // Region regionToCreate = Region.builder()
+        //         .name(region.getName())
+        //         .country(existingCountry)
+        //         .build();
         if (existingName != null) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(conflictResponse);
         }
 
+        if(existingCountry == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(countryNotFoundResponse);
+        }
         Region createdRegion = regionService.createRegion(region);
         CreateResponseDTO<Region> response = new CreateResponseDTO<Region>(createdRegion, HttpStatus.OK);
         return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -58,24 +78,20 @@ public class RegionController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> updateRegion(@PathVariable Long id,
-                                               @Valid @RequestBody Region region) {
-        Region existingRegion = regionService.findById(id);
-
-        if (existingRegion == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(notFoundResponse);
-        }
-
+    @PutMapping()
+    public ResponseEntity<Object> updateRegion(@Valid @RequestBody RegionPutDto region) {
         Region existingName = regionService.findByName(region.getName());
 
-        if (existingName != null && !existingName.getId().equals(existingRegion.getId())) {
+        if (existingName != null && !existingName.getId().equals(region.getId())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(conflictResponse);
         }
 
-        existingRegion.setName(region.getName());
+        Country existingCountry = countryService.findById(region.getCountryId());
+        if(existingCountry == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(countryNotFoundResponse);
+        }
 
-        final Region updatedRegion = regionService.updateRegion(existingRegion);
+        final Region updatedRegion = regionService.updateRegion(region);
         CreateResponseDTO<Region> response = new CreateResponseDTO<Region>(updatedRegion, HttpStatus.OK);
         return ResponseEntity.ok(response);
     }
@@ -90,6 +106,19 @@ public class RegionController {
 
         regionService.deleteRegion(id);
         CreateResponseDTO<Region> response = new CreateResponseDTO<Region>(HttpStatus.OK, "Region deleted");
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/find")
+    public ResponseEntity<Object> queryCountries(@RequestParam("q") String queryParams) {
+        // FIXME: Osim q parametara trebam jos sort=, offset, limit
+        List<Region> regions = regionService.find(queryParams);
+
+        if (regions.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(notFoundResponse);
+        }
+
+        CreateResponseDTO<List<Region>> response = new CreateResponseDTO<List<Region>>(regions, HttpStatus.OK);
         return ResponseEntity.ok(response);
     }
 }
