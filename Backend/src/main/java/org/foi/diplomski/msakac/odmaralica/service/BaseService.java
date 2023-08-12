@@ -1,17 +1,11 @@
 package org.foi.diplomski.msakac.odmaralica.service;
 
 import org.apache.commons.lang3.NotImplementedException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.List;
 import java.util.Optional;
 
-
-
-public abstract class BaseService<T, RepositoryType extends JpaRepository<T, Long>,
-                                Mapper, PostDTO, PutDTO> {
-
+public abstract class BaseService<T, RepositoryType extends JpaRepository<T, Long>, Mapper, PostDTO, PutDTO> {
 
     protected final RepositoryType repository;
     protected final Mapper mapper;
