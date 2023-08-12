@@ -1,7 +1,7 @@
 package org.foi.diplomski.msakac.odmaralica.mapper;
 
 import org.foi.diplomski.msakac.odmaralica.dto.post.RegionPostDTO;
-import org.foi.diplomski.msakac.odmaralica.dto.put.RegionPutDto;
+import org.foi.diplomski.msakac.odmaralica.dto.put.RegionPutDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Country;
 import org.foi.diplomski.msakac.odmaralica.model.Region;
 import org.foi.diplomski.msakac.odmaralica.service.CountryService;
@@ -18,7 +18,7 @@ public abstract class RegionMapper {
     @Mapping(source = "regionPostDTO.countryId", target = "country")
     public abstract Region convertToRegion(RegionPostDTO regionPostDTO);
     @Mapping(source = "regionPutDTO.countryId", target = "country")
-    public abstract Region convertToRegion(RegionPutDto regionPutDTO);
+    public abstract Region convertToRegion(RegionPutDTO regionPutDTO);
 
     protected Country mapToCountry(Long countryId) {
         return countryService.findById(countryId);

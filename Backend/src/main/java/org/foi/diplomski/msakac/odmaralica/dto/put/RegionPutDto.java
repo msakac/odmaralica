@@ -12,7 +12,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class RegionPutDto {
+public class RegionPutDTO {
     @NotNull(message = "Id cannot be empty")
     private Long id;
     @NotEmpty(message = "Name cannot be empty")

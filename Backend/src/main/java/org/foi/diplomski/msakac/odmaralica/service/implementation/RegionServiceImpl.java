@@ -1,7 +1,7 @@
 package org.foi.diplomski.msakac.odmaralica.service.implementation;
 
 import org.foi.diplomski.msakac.odmaralica.dto.post.RegionPostDTO;
-import org.foi.diplomski.msakac.odmaralica.dto.put.RegionPutDto;
+import org.foi.diplomski.msakac.odmaralica.dto.put.RegionPutDTO;
 import org.foi.diplomski.msakac.odmaralica.mapper.RegionMapper;
 import org.foi.diplomski.msakac.odmaralica.model.Region;
 import org.foi.diplomski.msakac.odmaralica.repository.RegionRepository;
@@ -53,7 +53,7 @@ public class RegionServiceImpl implements RegionService {
     }
 
     @Override
-    public Region update(RegionPutDto regionPut) {
+    public Region update(RegionPutDTO regionPut) {
         final Region region = regionMapper.convertToRegion(regionPut);
         return regionRepository.save(region);
     }

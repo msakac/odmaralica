@@ -2,7 +2,7 @@ package org.foi.diplomski.msakac.odmaralica.controller;
 
 import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.RegionPostDTO;
-import org.foi.diplomski.msakac.odmaralica.dto.put.RegionPutDto;
+import org.foi.diplomski.msakac.odmaralica.dto.put.RegionPutDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Country;
 import org.foi.diplomski.msakac.odmaralica.model.Region;
 import org.foi.diplomski.msakac.odmaralica.service.CountryService;
@@ -75,7 +75,7 @@ public class RegionController {
     }
 
     @PutMapping()
-    public ResponseEntity<Object> updateRegion(@Valid @RequestBody RegionPutDto region) {
+    public ResponseEntity<Object> updateRegion(@Valid @RequestBody RegionPutDTO region) {
         Region existingName = regionService.findByName(region.getName());
 
         if (existingName != null && !existingName.getId().equals(region.getId())) {

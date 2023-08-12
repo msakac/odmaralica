@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 @Data
 @Entity
@@ -18,7 +17,7 @@ public class Amount implements Serializable {
     private Long id;
 
     @Column(name = "amount", nullable = false)
-    private BigDecimal amount;
+    private double amount;
 
     @Column(name = "currency", length = 3, nullable = false)
     private String currency;
