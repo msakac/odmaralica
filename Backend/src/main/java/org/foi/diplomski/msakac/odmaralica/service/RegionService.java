@@ -7,11 +7,11 @@ import org.foi.diplomski.msakac.odmaralica.model.Region;
 import java.util.List;
 
 public interface RegionService {
-    Region createRegion(RegionPostDTO region);
+    Region create(RegionPostDTO region);
     Region findByName(String name);
     Region findById(Long id);
     List<Region> findAll();
-    Region updateRegion(RegionPutDto region);
-    void deleteRegion(Long id);
+    Region update(RegionPutDto region);
+    void delete(Long id);
     List<Region> find(String queryParams);
 }

@@ -1,23 +1,30 @@
 package org.foi.diplomski.msakac.odmaralica.service.implementation;
 
+import org.foi.diplomski.msakac.odmaralica.dto.post.AmountPostDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.put.AmountPutDto;
+import org.foi.diplomski.msakac.odmaralica.mapper.AmountMapper;
 import org.foi.diplomski.msakac.odmaralica.model.Amount;
 import org.foi.diplomski.msakac.odmaralica.repository.AmountRepository;
-import org.foi.diplomski.msakac.odmaralica.service.AmountService;
+import org.foi.diplomski.msakac.odmaralica.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AmountServiceImpl implements AmountService {
+public class AmountServiceImpl extends BaseService<Amount, AmountRepository, AmountMapper, AmountPostDTO, AmountPutDto> {
 
-    private final AmountRepository amountRepository;
 
     @Autowired
-    public AmountServiceImpl(AmountRepository amountRepository) {
-        this.amountRepository = amountRepository;
+    public AmountServiceImpl(AmountRepository repository, AmountMapper mapper) {
+        super(repository, mapper);
     }
 
     @Override
-    public Amount createAmount(Amount amount) {
-        return amountRepository.save(amount);
+    public Amount convertPost(AmountPostDTO entityPost) {
+        return mapper.convert(entityPost);
     }
+    @Override
+    public Amount convertPut(AmountPutDto entityPut) {
+        return mapper.convert(entityPut);
+    }
+
 }

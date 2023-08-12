@@ -43,10 +43,6 @@ public class RegionController {
 
         Region existingName = regionService.findByName(region.getName());
         Country existingCountry = countryService.findById(region.getCountryId());
-        // Region regionToCreate = Region.builder()
-        //         .name(region.getName())
-        //         .country(existingCountry)
-        //         .build();
         if (existingName != null) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(conflictResponse);
         }
@@ -54,7 +50,7 @@ public class RegionController {
         if(existingCountry == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(countryNotFoundResponse);
         }
-        Region createdRegion = regionService.createRegion(region);
+        Region createdRegion = regionService.create(region);
         CreateResponseDTO<Region> response = new CreateResponseDTO<Region>(createdRegion, HttpStatus.OK);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
@@ -91,7 +87,7 @@ public class RegionController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(countryNotFoundResponse);
         }
 
-        final Region updatedRegion = regionService.updateRegion(region);
+        final Region updatedRegion = regionService.update(region);
         CreateResponseDTO<Region> response = new CreateResponseDTO<Region>(updatedRegion, HttpStatus.OK);
         return ResponseEntity.ok(response);
     }
@@ -104,7 +100,7 @@ public class RegionController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(notFoundResponse);
         }
 
-        regionService.deleteRegion(id);
+        regionService.delete(id);
         CreateResponseDTO<Region> response = new CreateResponseDTO<Region>(HttpStatus.OK, "Region deleted");
         return ResponseEntity.ok(response);
     }

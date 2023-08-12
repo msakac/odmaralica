@@ -1,25 +1,26 @@
 package org.foi.diplomski.msakac.odmaralica.controller;
 
+import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.post.AmountPostDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.put.AmountPutDto;
 import org.foi.diplomski.msakac.odmaralica.model.Amount;
-import org.foi.diplomski.msakac.odmaralica.service.AmountService;
+import org.foi.diplomski.msakac.odmaralica.service.implementation.AmountServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/amounts")
-public class AmountController {
-
-    private final AmountService amountService;
-
+@RequestMapping("/amounts")
+public class AmountController extends BaseController<Amount, AmountPostDTO, AmountPutDto, AmountServiceImpl> {
     @Autowired
-    public AmountController(AmountService amountService) {
-        this.amountService = amountService;
+    public AmountController(AmountServiceImpl service) {
+        super(service);
+        //TODO Auto-generated constructor stub
     }
 
-    @PostMapping
-    public ResponseEntity<Amount> createAmount(@RequestBody Amount amount) {
-        Amount createdAmount = amountService.createAmount(amount);
-        return ResponseEntity.ok(createdAmount);
+    @Override
+    protected CreateResponseDTO<Amount> getNotFoundResponse() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getNotFoundResponse'");
     }
+
 }

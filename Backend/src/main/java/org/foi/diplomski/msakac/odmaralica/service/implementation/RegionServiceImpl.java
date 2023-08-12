@@ -32,7 +32,7 @@ public class RegionServiceImpl implements RegionService {
     }
 
     @Override
-    public Region createRegion(RegionPostDTO regionPost) {
+    public Region create(RegionPostDTO regionPost) {
         final Region region = regionMapper.convertToRegion(regionPost);
         return regionRepository.save(region);
     }
@@ -53,13 +53,13 @@ public class RegionServiceImpl implements RegionService {
     }
 
     @Override
-    public Region updateRegion(RegionPutDto regionPut) {
+    public Region update(RegionPutDto regionPut) {
         final Region region = regionMapper.convertToRegion(regionPut);
         return regionRepository.save(region);
     }
 
     @Override
-    public void deleteRegion(Long id) {
+    public void delete(Long id) {
         regionRepository.deleteById(id);
     }
 
