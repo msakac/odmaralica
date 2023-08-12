@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://${POSTGRES_DB_SERVER_ADDRESS:localhost}:${POSTGRES_DB_SERVER_PORT:5432}/odmaralica
-    username: ${POSTGRES_USER:postgres}
-    password: ${POSTGRES_PASSWORD:example}
+    url: jdbc:postgresql://ep-billowing-sound-02425339.eu-central-1.aws.neon.tech/odmaralica
+    username: 
+    password: 
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
