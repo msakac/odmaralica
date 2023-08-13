@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2d26f1b2-b327-4841-b3ad-1c24adee7547",
+		"_postman_id": "183a8d16-d543-45c7-829f-506488fe5efc",
 		"name": "Odmaralica API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "28955474"
@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Primjer\",\r\n    \"countryCode\": \"PR\"\r\n}",
+							"raw": "{\r\n    \"name\":\"Italija\",\r\n    \"countryCode\": \"IT\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -69,7 +69,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/country/find?q=name(in)=Germany",
+							"raw": "http://localhost:8080/country/find?q=name~in=Njemacka,id=3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -82,7 +82,7 @@
 							"query": [
 								{
 									"key": "q",
-									"value": "name(in)=Germany"
+									"value": "name~in=Njemacka,id=3"
 								}
 							]
 						}
@@ -119,7 +119,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Splitsko-dalmatinskea\",\r\n    \"countryId\": 123\r\n}",
+							"raw": "{\r\n    \"name\": \"Zadarska\",\r\n    \"countryId\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -155,14 +155,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Drecka\",\r\n}",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"Updated\",\r\n    \"countryId\": 3\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8080/region/1"
+						"url": "http://localhost:8080/region"
 					},
 					"response": []
 				},
@@ -190,7 +190,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/region/find?q=idin3",
+							"raw": "http://localhost:8080/region/find?q=id~in=2,country.id=3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -203,7 +203,7 @@
 							"query": [
 								{
 									"key": "q",
-									"value": "idin3"
+									"value": "id~in=2,country.id=3"
 								}
 							]
 						}
@@ -223,68 +223,265 @@
 						"url": "http://localhost:8080/amount"
 					},
 					"response": []
+				},
+				{
+					"name": "Amount POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currency\": \"USD\",\r\n    \"amount\": 150\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/amount"
+					},
+					"response": []
+				},
+				{
+					"name": "Amount GET{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/amount/214"
+					},
+					"response": []
+				},
+				{
+					"name": "Amount PUT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 12354,\r\n    \"amount\": 33.2,\r\n    \"currency\": \"EUR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/amount"
+					},
+					"response": []
+				},
+				{
+					"name": "Amount DEL",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hrvatska\",\r\n    \"countryCode\": \"HR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/amount/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Amount FIND",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/amount/find?q=id>2;amount>14;currency=USD",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"amount",
+								"find"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "id>2;amount>14;currency=USD"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
 		{
-			"name": "Register",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"User\",\r\n    \"surname\":\"Userovic\",\r\n    \"email\":\"user@gmail.com\",\r\n    \"password\":\"user\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+			"name": "City",
+			"item": [
+				{
+					"name": "City GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/city"
+					},
+					"response": []
 				},
-				"url": "http://localhost:8080/register"
-			},
-			"response": []
+				{
+					"name": "City POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Blabla\",\r\n    \"zip\":432204,\r\n    \"regionId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/city"
+					},
+					"response": []
+				},
+				{
+					"name": "City GET{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/city/2"
+					},
+					"response": []
+				},
+				{
+					"name": "City PUT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 14,\r\n    \"name\": \"MockCity\",\r\n    \"zip\": \"11111\",\r\n    \"regionId\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/city"
+					},
+					"response": []
+				},
+				{
+					"name": "City DEL",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hrvatska\",\r\n    \"countryCode\": \"HR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/city/6"
+					},
+					"response": []
+				},
+				{
+					"name": "City FIND",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/city/find?q=region.country.id=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"city",
+								"find"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "region.country.id=3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
-			"name": "Role",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": {
-						"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3QiLCJleHAiOjE2OTE1ODUyNDQsImlhdCI6MTY5MTU4NDY0NH0.E7DwQxXYerIn71K7fGHrWVul1d8wRaKdFQVfwFK0r3Q"
-					}
+			"name": "SECURITY",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"User\",\r\n    \"surname\":\"Userovic\",\r\n    \"email\":\"user@gmail.com\",\r\n    \"password\":\"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/register"
+					},
+					"response": []
 				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"role\": \"BLA2\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+				{
+					"name": "Role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3QiLCJleHAiOjE2OTE1ODUyNDQsImlhdCI6MTY5MTU4NDY0NH0.E7DwQxXYerIn71K7fGHrWVul1d8wRaKdFQVfwFK0r3Q"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\": \"BLA2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/role"
+					},
+					"response": []
 				},
-				"url": "http://localhost:8080/role"
-			},
-			"response": []
-		},
-		{
-			"name": "Login",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"user@gmail.com\",\r\n    \"password\":\"user\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "http://localhost:8080/login"
-			},
-			"response": []
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"user@gmail.com\",\r\n    \"password\":\"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/login"
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
