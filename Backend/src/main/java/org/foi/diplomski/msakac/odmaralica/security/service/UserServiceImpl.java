@@ -2,6 +2,8 @@ package org.foi.diplomski.msakac.odmaralica.security.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.foi.diplomski.msakac.odmaralica.model.Country;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
 import org.foi.diplomski.msakac.odmaralica.model.User;
 import org.foi.diplomski.msakac.odmaralica.repository.RoleRepository;
@@ -69,5 +71,9 @@ public class UserServiceImpl implements UserService {
         final User user = GenericRepository.findOneByExample(exampleUser, userRepository);
 
         return UserMapper.INSTANCE.convertToAuthenticatedUserDto(user);
+    }
+
+    public User findById(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 }

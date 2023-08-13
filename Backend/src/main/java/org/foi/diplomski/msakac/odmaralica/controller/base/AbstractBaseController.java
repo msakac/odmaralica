@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-
+//FIXME: Conflict exception da ima lepsi ispis
 public abstract class AbstractBaseController<T, PostDTO, PutDTO, ServiceType extends AbstractBaseService<T, ?, ?, PostDTO, PutDTO>> implements IBaseController<T, PostDTO, PutDTO> {
 
     protected final ServiceType service;
