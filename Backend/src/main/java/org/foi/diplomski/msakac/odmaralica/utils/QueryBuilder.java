@@ -32,7 +32,7 @@ public class QueryBuilder<T> {
         }
         return attributePath;
     }
-
+    //FIXME: Add support for sort, limit and offset
     public CriteriaQuery<T> buildQuery(String query) {
         Map<String, String> parsedQuery = parseQuery(query);
         List<Predicate> predicates = new ArrayList<>();
