@@ -1,7 +1,7 @@
-package org.foi.diplomski.msakac.odmaralica.controller;
+package org.foi.diplomski.msakac.odmaralica.controller.base;
 
 import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
-import org.foi.diplomski.msakac.odmaralica.service.AbstractBaseService;
+import org.foi.diplomski.msakac.odmaralica.service.base.AbstractBaseService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-public abstract class AbstractBaseController<T, PostDTO, PutDTO, ServiceType extends AbstractBaseService<T, ?, ?, PostDTO, PutDTO>> {
+public abstract class AbstractBaseController<T, PostDTO, PutDTO, ServiceType extends AbstractBaseService<T, ?, ?, PostDTO, PutDTO>> implements IBaseController<T, PostDTO, PutDTO> {
 
     protected final ServiceType service;
 
@@ -82,7 +82,7 @@ public abstract class AbstractBaseController<T, PostDTO, PutDTO, ServiceType ext
         return ResponseEntity.ok(new CreateResponseDTO<List<T>>(entities, HttpStatus.OK));
     }
 
-    protected CreateResponseDTO<T> getNotFoundResponse() {
+    public CreateResponseDTO<T> getNotFoundResponse() {
         return new CreateResponseDTO<T>(HttpStatus.NOT_FOUND, "Entity not found");
     }
 }

@@ -1,5 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.controller;
 
+import org.foi.diplomski.msakac.odmaralica.controller.base.AbstractBaseController;
 import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.AmountPostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.AmountPutDTO;
@@ -19,7 +20,7 @@ public class AmountController extends AbstractBaseController<Amount, AmountPostD
     }
 
     @Override
-    protected CreateResponseDTO<Amount> getNotFoundResponse() {
+    public CreateResponseDTO<Amount> getNotFoundResponse() {
         return new CreateResponseDTO<Amount>(HttpStatus.NOT_FOUND, "Amount not found");
     }
 

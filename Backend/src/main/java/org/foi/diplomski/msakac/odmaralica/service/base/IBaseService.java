@@ -1,4 +1,4 @@
-package org.foi.diplomski.msakac.odmaralica.service;
+package org.foi.diplomski.msakac.odmaralica.service.base;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

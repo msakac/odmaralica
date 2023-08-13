@@ -1,4 +1,4 @@
-package org.foi.diplomski.msakac.odmaralica.service;
+package org.foi.diplomski.msakac.odmaralica.service.base;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.foi.diplomski.msakac.odmaralica.utils.QueryBuilder;
