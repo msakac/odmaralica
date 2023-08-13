@@ -10,6 +10,8 @@ import org.mapstruct.factory.Mappers;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface AmountMapper {
     AmountMapper INSTANCE = Mappers.getMapper(AmountMapper.class);
+
     Amount convert(AmountPostDTO amountPostDTO);
+
     Amount convert(AmountPutDTO amountPostDTO);
 }

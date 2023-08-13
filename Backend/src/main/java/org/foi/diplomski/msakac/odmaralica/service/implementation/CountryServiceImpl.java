@@ -1,10 +1,5 @@
 package org.foi.diplomski.msakac.odmaralica.service.implementation;
 
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import org.foi.diplomski.msakac.odmaralica.dto.post.CountryPostDTO;
 import org.foi.diplomski.msakac.odmaralica.mapper.CountryMapper;
 import org.foi.diplomski.msakac.odmaralica.model.Country;
@@ -13,6 +8,12 @@ import org.foi.diplomski.msakac.odmaralica.service.CountryService;
 import org.foi.diplomski.msakac.odmaralica.utils.QueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import java.util.List;
 
 @Service
 public class CountryServiceImpl implements CountryService {
@@ -74,4 +75,5 @@ public class CountryServiceImpl implements CountryService {
 
         return typedQuery.getResultList();
     }
+
 }

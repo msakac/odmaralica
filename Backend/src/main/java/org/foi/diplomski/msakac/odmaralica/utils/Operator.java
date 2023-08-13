@@ -1,5 +1,8 @@
 package org.foi.diplomski.msakac.odmaralica.utils;
 
+import lombok.Getter;
+
+@Getter
 public enum Operator {
     NOT_EQUAL("!="),
     GREATER_THAN(">"),
@@ -12,10 +15,6 @@ public enum Operator {
 
     Operator(String symbol) {
         this.symbol = symbol;
-    }
-
-    public String getSymbol() {
-        return symbol;
     }
 
     public static Operator findOperator(String key) {

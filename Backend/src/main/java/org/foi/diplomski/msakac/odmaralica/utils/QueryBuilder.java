@@ -1,17 +1,9 @@
 package org.foi.diplomski.msakac.odmaralica.utils;
 
+import javax.persistence.criteria.*;
+import java.util.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+@SuppressWarnings("unchecked")
 public class QueryBuilder<T> {
     private final CriteriaBuilder criteriaBuilder;
     private final CriteriaQuery<T> criteriaQuery;
@@ -59,11 +51,11 @@ public class QueryBuilder<T> {
                         break;
                     case GREATER_THAN:
                         predicates.add(criteriaBuilder.greaterThan((Path<Comparable<? super Comparable<?>>>) attributePath,
-                                                                   (Comparable<? super Comparable<?>>) castToComparable(value)));
+                                (Comparable<? super Comparable<?>>) castToComparable(value)));
                         break;
                     case LESS_THAN:
                         predicates.add(criteriaBuilder.lessThan((Path<Comparable<? super Comparable<?>>>) attributePath,
-                                                                (Comparable<? super Comparable<?>>) castToComparable(value)));
+                                (Comparable<? super Comparable<?>>) castToComparable(value)));
                         break;
                     case IN:
                         List<String> values = Arrays.asList(value.split(","));
@@ -94,7 +86,7 @@ public class QueryBuilder<T> {
         Map<String, String> result = new HashMap<>();
         List<String> operators = Arrays.asList("<", ">", "=", "!=", "(in)=");
 
-        String[] queryParams = query.split("&");
+        String[] queryParams = query.split(";");
         for (String param : queryParams) {
             String operator = null;
             for (String op : operators) {

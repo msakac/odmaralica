@@ -1,10 +1,10 @@
 package org.foi.diplomski.msakac.odmaralica.dto.common;
-import org.springframework.http.HttpStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter

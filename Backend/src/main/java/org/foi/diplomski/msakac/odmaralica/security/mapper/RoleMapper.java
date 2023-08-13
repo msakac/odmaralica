@@ -10,5 +10,6 @@ import org.mapstruct.factory.Mappers;
 public interface RoleMapper {
 
     RoleMapper INSTANCE = Mappers.getMapper(RoleMapper.class);
-	Role convertToRole(RoleRequestDTO roleRequest);
+
+    Role convertToRole(RoleRequestDTO roleRequest);
 }

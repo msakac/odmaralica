@@ -1,8 +1,8 @@
 package org.foi.diplomski.msakac.odmaralica.security.service;
 
+import lombok.RequiredArgsConstructor;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
 import org.foi.diplomski.msakac.odmaralica.security.dto.AuthenticatedUserDto;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,24 +18,24 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-	private static final String EMAIL_OR_PASSWORD_INVALID = "Invalid email or password.";
+    private static final String EMAIL_OR_PASSWORD_INVALID = "Invalid email or password.";
 
-	private final UserService userService;
+    private final UserService userService;
 
-	@Override
-	public UserDetails loadUserByUsername(String email) {
+    @Override
+    public UserDetails loadUserByUsername(String email) {
 
-		final AuthenticatedUserDto authenticatedUser = userService.findAuthenticatedUserByEmail(email);
+        final AuthenticatedUserDto authenticatedUser = userService.findAuthenticatedUserByEmail(email);
 
-		if (Objects.isNull(authenticatedUser)) {
-			throw new UsernameNotFoundException(EMAIL_OR_PASSWORD_INVALID);
-		}
+        if (Objects.isNull(authenticatedUser)) {
+            throw new UsernameNotFoundException(EMAIL_OR_PASSWORD_INVALID);
+        }
 
-		final String authenticatedEmail = authenticatedUser.getEmail();
-		final String authenticatedPassword = authenticatedUser.getPassword();
-		final Role userRole = authenticatedUser.getRole();
-		final SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(userRole.getRole());
+        final String authenticatedEmail = authenticatedUser.getEmail();
+        final String authenticatedPassword = authenticatedUser.getPassword();
+        final Role userRole = authenticatedUser.getRole();
+        final SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(userRole.getRole());
 
-		return new User(authenticatedEmail, authenticatedPassword, Collections.singletonList(grantedAuthority));
-	}
+        return new User(authenticatedEmail, authenticatedPassword, Collections.singletonList(grantedAuthority));
+    }
 }

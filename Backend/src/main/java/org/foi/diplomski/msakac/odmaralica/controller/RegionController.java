@@ -47,7 +47,7 @@ public class RegionController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(conflictResponse);
         }
 
-        if(existingCountry == null) {
+        if (existingCountry == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(countryNotFoundResponse);
         }
         Region createdRegion = regionService.create(region);
@@ -83,7 +83,7 @@ public class RegionController {
         }
 
         Country existingCountry = countryService.findById(region.getCountryId());
-        if(existingCountry == null) {
+        if (existingCountry == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(countryNotFoundResponse);
         }
 

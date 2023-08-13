@@ -1,21 +1,9 @@
 package org.foi.diplomski.msakac.odmaralica.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import lombok.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -23,27 +11,27 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user", schema="public")
+@Table(name = "user", schema = "public")
 public class User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@NotNull
-	private String name;
+    @NotNull
+    private String name;
 
-	@NotNull
-	private String surname;
+    @NotNull
+    private String surname;
 
-	@NotNull
-	@Column(unique = true)
-	private String email;
+    @NotNull
+    @Column(unique = true)
+    private String email;
 
-	@NotNull
-	private String password;
+    @NotNull
+    private String password;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "image_id")
     private Image image;
 
@@ -51,10 +39,10 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
-	@NotNull
-	private Boolean activated;
+    @NotNull
+    private Boolean activated;
 
-	private String description;
+    private String description;
 
-	private String phoneNumber;
+    private String phoneNumber;
 }

@@ -1,10 +1,10 @@
 package org.foi.diplomski.msakac.odmaralica.utils;
 
-import java.util.List;
-
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
 
 public class GenericRepository {
 

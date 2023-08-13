@@ -17,6 +17,7 @@ public abstract class RegionMapper {
 
     @Mapping(source = "regionPostDTO.countryId", target = "country")
     public abstract Region convertToRegion(RegionPostDTO regionPostDTO);
+
     @Mapping(source = "regionPutDTO.countryId", target = "country")
     public abstract Region convertToRegion(RegionPutDTO regionPutDTO);
 

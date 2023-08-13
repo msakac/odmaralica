@@ -7,8 +7,8 @@ import org.foi.diplomski.msakac.odmaralica.security.dto.RegistrationResponse;
 
 public interface UserService {
 
-	RegistrationResponse registration(RegistrationRequest registrationRequest);
+    RegistrationResponse registration(RegistrationRequest registrationRequest);
 
-	AuthenticatedUserDto findAuthenticatedUserByEmail(String email);
+    AuthenticatedUserDto findAuthenticatedUserByEmail(String email);
 
 }

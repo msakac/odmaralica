@@ -9,5 +9,6 @@ import org.mapstruct.factory.Mappers;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CountryMapper {
     CountryMapper INSTANCE = Mappers.getMapper(CountryMapper.class);
+
     Country convertToCountry(CountryPostDTO countryPostDTO);
 }

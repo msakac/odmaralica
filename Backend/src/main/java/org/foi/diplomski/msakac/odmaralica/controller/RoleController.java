@@ -1,13 +1,17 @@
 package org.foi.diplomski.msakac.odmaralica.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
 import org.foi.diplomski.msakac.odmaralica.security.dto.RoleRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.security.service.RoleService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import javax.validation.Valid;
 
 @RestController
@@ -19,7 +23,7 @@ public class RoleController {
     @PostMapping
     public ResponseEntity<CreateResponseDTO<Role>> rolePost(@Valid @RequestBody RoleRequestDTO roleRequest) {
         Role existingRole = roleService.find(roleRequest.getRole());
-        if(existingRole != null) {
+        if (existingRole != null) {
             CreateResponseDTO<Role> response = new CreateResponseDTO<Role>(null, HttpStatus.CONFLICT);
             return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
         }

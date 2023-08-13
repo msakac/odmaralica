@@ -1,14 +1,7 @@
 package org.foi.diplomski.msakac.odmaralica.service.implementation;
 
-import org.foi.diplomski.msakac.odmaralica.dto.post.CityPostDTO;
-import org.foi.diplomski.msakac.odmaralica.mapper.CityMapper;
-import org.foi.diplomski.msakac.odmaralica.model.City;
-import org.foi.diplomski.msakac.odmaralica.repository.CityRepository;
 import org.foi.diplomski.msakac.odmaralica.service.CityService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class CityServiceImpl implements CityService {

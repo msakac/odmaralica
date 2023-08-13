@@ -12,10 +12,10 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 public class LoginRequest {
 
-	@NotEmpty(message = "{login_email_not_empty}")
-	private String email;
+    @NotEmpty(message = "{login_email_not_empty}")
+    private String email;
 
-	@NotEmpty(message = "{login_password_not_empty}")
-	private String password;
+    @NotEmpty(message = "{login_password_not_empty}")
+    private String password;
 
 }

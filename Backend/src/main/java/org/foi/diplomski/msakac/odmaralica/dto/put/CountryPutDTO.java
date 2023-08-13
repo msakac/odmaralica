@@ -10,6 +10,6 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class CountryPutDTO {
-	private String name;
-	private String countryCode;
+    private String name;
+    private String countryCode;
 }

@@ -8,10 +8,16 @@ import java.util.List;
 
 public interface RegionService {
     Region create(RegionPostDTO region);
+
     Region findByName(String name);
+
     Region findById(Long id);
+
     List<Region> findAll();
+
     Region update(RegionPutDTO region);
+
     void delete(Long id);
+
     List<Region> find(String queryParams);
 }
