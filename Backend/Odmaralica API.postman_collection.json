@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "183a8d16-d543-45c7-829f-506488fe5efc",
+		"_postman_id": "05a2da38-b492-4c8b-add6-fa7488493802",
 		"name": "Odmaralica API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "28955474"
@@ -258,7 +258,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 12354,\r\n    \"amount\": 33.2,\r\n    \"currency\": \"EUR\"\r\n}",
+							"raw": "{\r\n    \"id\": 14,\r\n    \"amount\": 1234.5,\r\n    \"currency\": \"EUR\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -323,7 +323,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/city"
+						"url": "http://localhost:8080/city/5"
 					},
 					"response": []
 				},
@@ -350,7 +350,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/city/2"
+						"url": "http://localhost:8080/city/2124"
 					},
 					"response": []
 				},
@@ -361,7 +361,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 14,\r\n    \"name\": \"MockCity\",\r\n    \"zip\": \"11111\",\r\n    \"regionId\":2\r\n}",
+							"raw": "{\r\n    \"id\": 5,\r\n    \"name\": \"Split Univers\",\r\n    \"zip\": \"43220\",\r\n    \"regionId\":2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -386,7 +386,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/city/6"
+						"url": "http://localhost:8080/city/61245215"
 					},
 					"response": []
 				},
@@ -410,6 +410,212 @@
 								{
 									"key": "q",
 									"value": "region.country.id=3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Residence",
+			"item": [
+				{
+					"name": "Residence GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/residence"
+					},
+					"response": []
+				},
+				{
+					"name": "Residence POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Vila Pakle\",\r\n    \"type\": \"Vila\",\r\n    \"description\": \"Predivna vila bla bla\",\r\n    \"ownerId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/residence"
+					},
+					"response": []
+				},
+				{
+					"name": "Residence GET{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/residence/4"
+					},
+					"response": []
+				},
+				{
+					"name": "Residence PUT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 4,\r\n    \"name\": \"nikaj\",\r\n    \"type\": \"nikaj\",\r\n    \"description\": \"nikaj\",\r\n    \"ownerId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/residence"
+					},
+					"response": []
+				},
+				{
+					"name": "Residence DEL",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hrvatska\",\r\n    \"countryCode\": \"HR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/city/6"
+					},
+					"response": []
+				},
+				{
+					"name": "Residence FIND",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/residence/find?q=owner.id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"residence",
+								"find"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "owner.id=1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Address",
+			"item": [
+				{
+					"name": "Address GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/residence"
+					},
+					"response": []
+				},
+				{
+					"name": "Address POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"residenceId\": 1,\r\n    \"street\": \"Kucica 16\",\r\n    \"cityId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/address"
+					},
+					"response": []
+				},
+				{
+					"name": "Address GET{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/address/4"
+					},
+					"response": []
+				},
+				{
+					"name": "Address PUT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 4,\r\n    \"name\": \"nikaj\",\r\n    \"type\": \"nikaj\",\r\n    \"description\": \"nikaj\",\r\n    \"ownerId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/address"
+					},
+					"response": []
+				},
+				{
+					"name": "Address DEL",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hrvatska\",\r\n    \"countryCode\": \"HR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/address/6"
+					},
+					"response": []
+				},
+				{
+					"name": "Address FIND",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/address/find?q=owner.id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"address",
+								"find"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "owner.id=1"
 								}
 							]
 						}
