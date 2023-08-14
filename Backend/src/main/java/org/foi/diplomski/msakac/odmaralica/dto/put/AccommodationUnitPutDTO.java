@@ -1,5 +1,5 @@
 package org.foi.diplomski.msakac.odmaralica.dto.put;
 
-public class AccommodationUnitPutDto {
+public class AccommodationUnitPutDTO {
     // TODO: Implement AccommodationUnitPutDto
 }

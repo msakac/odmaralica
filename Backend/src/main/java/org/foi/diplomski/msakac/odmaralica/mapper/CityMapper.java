@@ -1,5 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.mapper;
 
+import org.foi.diplomski.msakac.odmaralica.dto.get.CityGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.CityPostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.CityPutDTO;
 import org.foi.diplomski.msakac.odmaralica.model.City;
@@ -20,6 +21,8 @@ public abstract class CityMapper {
 
     @Mapping(source = "cityPutDTO.regionId", target = "region")
     public abstract City convert(CityPutDTO cityPutDTO);
+
+    public abstract CityGetDTO convert(City city);
 
     protected Region mapToRegion(Long regionId) {
         return regionService.findById(regionId);

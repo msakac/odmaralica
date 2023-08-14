@@ -1,5 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.mapper;
 
+import org.foi.diplomski.msakac.odmaralica.dto.get.ResidenceGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.ResidencePostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.ResidencePutDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Residence;
@@ -21,7 +22,9 @@ public abstract class ResidenceMapper {
     @Mapping(source = "residencePutDTO.ownerId", target = "owner")
     public abstract Residence convert(ResidencePutDTO residencePutDTO);
 
-    protected User mapToUser(Long ownerId) {
+    public abstract ResidenceGetDTO convert(Residence residence);
+
+    protected User mapToOwner(Long ownerId) {
         return userService.findById(ownerId);
     }
 }

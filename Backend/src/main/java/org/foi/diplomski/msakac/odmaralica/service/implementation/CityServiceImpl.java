@@ -1,5 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.service.implementation;
 
+import org.foi.diplomski.msakac.odmaralica.dto.get.CityGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.CityPostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.CityPutDTO;
 import org.foi.diplomski.msakac.odmaralica.mapper.CityMapper;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 
 @Service
-public class CityServiceImpl extends AbstractBaseService<City, CityRepository, CityMapper, CityPostDTO, CityPutDTO> implements CityService {
+public class CityServiceImpl extends AbstractBaseService<City, CityRepository, CityMapper, CityGetDTO, CityPostDTO, CityPutDTO> implements CityService {
 
     @Autowired
     public CityServiceImpl(CityRepository repository, CityMapper mapper, EntityManager entityManager) {
@@ -28,6 +29,11 @@ public class CityServiceImpl extends AbstractBaseService<City, CityRepository, C
     @Override
     public City convertPut(CityPutDTO entityPut) {
         return mapper.convert(entityPut);
+    }
+
+    @Override
+    public CityGetDTO convertGet(City entity) {
+        return mapper.convert(entity);
     }
 
     public Class<City> getEntityClass() {

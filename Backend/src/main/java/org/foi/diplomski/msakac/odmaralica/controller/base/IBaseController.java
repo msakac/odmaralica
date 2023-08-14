@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 
 import javax.validation.Valid;
 
-public interface IBaseController<T, PostDTO, PutDTO> {
+public interface IBaseController<T, GetDTO, PostDTO, PutDTO> {
 
     ResponseEntity<Object> create(@Valid PostDTO dto);
 

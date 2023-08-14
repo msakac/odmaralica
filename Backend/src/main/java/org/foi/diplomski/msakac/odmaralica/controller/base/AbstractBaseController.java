@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 //FIXME: Conflict exception da ima lepsi ispis
-public abstract class AbstractBaseController<T, PostDTO, PutDTO, ServiceType extends AbstractBaseService<T, ?, ?, PostDTO, PutDTO>> implements IBaseController<T, PostDTO, PutDTO> {
+public abstract class AbstractBaseController<T, GetDTO, PostDTO, PutDTO, ServiceType extends AbstractBaseService<T, ?, ?, GetDTO, PostDTO, PutDTO>> implements IBaseController<T, GetDTO, PostDTO, PutDTO> {
 
     protected final ServiceType service;
 
@@ -20,8 +20,8 @@ public abstract class AbstractBaseController<T, PostDTO, PutDTO, ServiceType ext
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody PostDTO dto) {
         try {
-            T createdEntity = service.create(dto);
-            return ResponseEntity.ok(new CreateResponseDTO<T>(createdEntity, HttpStatus.OK));
+            GetDTO createdEntity = service.create(dto);
+            return ResponseEntity.ok(new CreateResponseDTO<GetDTO>(createdEntity, HttpStatus.OK));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new CreateResponseDTO<T>(HttpStatus.CONFLICT, e.getMessage()));
         }
@@ -29,26 +29,26 @@ public abstract class AbstractBaseController<T, PostDTO, PutDTO, ServiceType ext
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getById(@PathVariable Long id) {
-        T entity = service.findById(id);
+        GetDTO entity = service.findById(id);
 
         if (entity == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(getNotFoundResponse());
         }
 
-        return ResponseEntity.ok(new CreateResponseDTO<T>(entity, HttpStatus.OK));
+        return ResponseEntity.ok(new CreateResponseDTO<GetDTO>(entity, HttpStatus.OK));
     }
 
     @GetMapping
     public ResponseEntity<Object> getAll() {
-        List<T> entities = service.findAll();
-        return ResponseEntity.ok(new CreateResponseDTO<List<T>>(entities, HttpStatus.OK));
+        List<GetDTO> entities = service.findAll();
+        return ResponseEntity.ok(new CreateResponseDTO<List<GetDTO>>(entities, HttpStatus.OK));
     }
 
     @PutMapping()
     public ResponseEntity<Object> update(@Valid @RequestBody PutDTO dto) {
         try {
-            T updatedEntity = service.update(dto);
-            return ResponseEntity.ok(new CreateResponseDTO<T>(updatedEntity, HttpStatus.OK));
+            GetDTO updatedEntity = service.update(dto);
+            return ResponseEntity.ok(new CreateResponseDTO<GetDTO>(updatedEntity, HttpStatus.OK));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new CreateResponseDTO<T>(HttpStatus.CONFLICT, e.getMessage()));
         }
@@ -56,7 +56,7 @@ public abstract class AbstractBaseController<T, PostDTO, PutDTO, ServiceType ext
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable Long id) {
-        T existingEntity = service.findById(id);
+        GetDTO existingEntity = service.findById(id);
 
         if (existingEntity == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(getNotFoundResponse());
@@ -73,13 +73,13 @@ public abstract class AbstractBaseController<T, PostDTO, PutDTO, ServiceType ext
     @GetMapping("/find")
     public ResponseEntity<Object> queryCountries(@RequestParam("q") String queryParams) {
         // FIXME: Osim q parametara trebam jos sort=, offset, limit
-        List<T> entities = service.find(queryParams);
+        List<GetDTO> entities = service.find(queryParams);
 
         if (entities.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(getNotFoundResponse());
         }
 
-        return ResponseEntity.ok(new CreateResponseDTO<List<T>>(entities, HttpStatus.OK));
+        return ResponseEntity.ok(new CreateResponseDTO<List<GetDTO>>(entities, HttpStatus.OK));
     }
 
     public CreateResponseDTO<T> getNotFoundResponse() {

@@ -1,14 +1,12 @@
 package org.foi.diplomski.msakac.odmaralica.security.service;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
 import org.foi.diplomski.msakac.odmaralica.repository.RoleRepository;
 import org.foi.diplomski.msakac.odmaralica.security.dto.RoleRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.security.mapper.RoleMapper;
 import org.springframework.stereotype.Service;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService {

@@ -4,23 +4,25 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface IBaseService<T, RepositoryType extends JpaRepository<T, Long>, Mapper, PostDTO, PutDTO> {
+public interface IBaseService<T, RepositoryType extends JpaRepository<T, Long>, Mapper, GetDTO, PostDTO, PutDTO> {
 
     T convertPost(PostDTO entityPost);
 
     T convertPut(PutDTO entityPut);
 
-    T create(PostDTO entityPost);
+    GetDTO convertGet(T entityPut);
 
-    T findById(Long id);
+    GetDTO create(PostDTO entityPost);
 
-    List<T> findAll();
+    GetDTO findById(Long id);
 
-    T update(PutDTO entityPut);
+    List<GetDTO> findAll();
+
+    GetDTO update(PutDTO entityPut);
 
     void delete(Long id);
 
-    List<T> find(String queryParams);
+    List<GetDTO> find(String queryParams);
 
     Class<T> getEntityClass();
 }

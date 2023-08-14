@@ -2,6 +2,7 @@ package org.foi.diplomski.msakac.odmaralica.controller;
 
 import org.foi.diplomski.msakac.odmaralica.controller.base.AbstractBaseController;
 import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.get.AmountGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.AmountPostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.AmountPutDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Amount;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/amount")
-public class AmountController extends AbstractBaseController<Amount, AmountPostDTO, AmountPutDTO, AmountServiceImpl> {
+public class AmountController extends AbstractBaseController<Amount, AmountGetDTO, AmountPostDTO, AmountPutDTO, AmountServiceImpl> {
     @Autowired
     public AmountController(AmountServiceImpl service) {
         super(service);

@@ -1,4 +1,4 @@
-package org.foi.diplomski.msakac.odmaralica.dto.get;
+package org.foi.diplomski.msakac.odmaralica.security.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,8 +9,9 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class CityGetDTO {
-    private Long id;
+public class UserGetDTO {
     private String name;
-    private String zip;
+    private String surname;
+    private String email;
+    private String description;
 }

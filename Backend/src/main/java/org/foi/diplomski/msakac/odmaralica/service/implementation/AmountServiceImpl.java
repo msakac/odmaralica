@@ -1,5 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.service.implementation;
 
+import org.foi.diplomski.msakac.odmaralica.dto.get.AmountGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.AmountPostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.AmountPutDTO;
 import org.foi.diplomski.msakac.odmaralica.mapper.AmountMapper;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 
 @Service
-public class AmountServiceImpl extends AbstractBaseService<Amount, AmountRepository, AmountMapper, AmountPostDTO, AmountPutDTO> implements AmountService {
+public class AmountServiceImpl extends AbstractBaseService<Amount, AmountRepository, AmountMapper, AmountGetDTO, AmountPostDTO, AmountPutDTO> implements AmountService {
 
 
     @Autowired
@@ -29,6 +30,11 @@ public class AmountServiceImpl extends AbstractBaseService<Amount, AmountReposit
     @Override
     public Amount convertPut(AmountPutDTO entityPut) {
         return mapper.convert(entityPut);
+    }
+
+    @Override
+    public AmountGetDTO convertGet(Amount entity) {
+        return mapper.convert(entity);
     }
 
     public Class<Amount> getEntityClass() {

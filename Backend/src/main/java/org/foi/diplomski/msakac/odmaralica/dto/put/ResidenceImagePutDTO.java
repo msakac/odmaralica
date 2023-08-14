@@ -1,5 +1,5 @@
 package org.foi.diplomski.msakac.odmaralica.dto.put;
 
-public class ResidenceImagePutDto {
+public class ResidenceImagePutDTO {
     // TODO: Implement ResidenceImagePutDto
 }

@@ -18,12 +18,13 @@ public class Residence implements Serializable {
 
     @Column(name = "name", nullable = false)
     private String name;
-
+    //FIXME: mozda bi tip trebal biti entitet
     @Column(name = "type", nullable = false)
     private String type;
 
     @Column(name = "description", nullable = false)
     private String description;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", nullable = false)

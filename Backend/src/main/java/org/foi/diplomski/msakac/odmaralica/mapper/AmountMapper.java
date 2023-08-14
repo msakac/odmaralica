@@ -1,5 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.mapper;
 
+import org.foi.diplomski.msakac.odmaralica.dto.get.AmountGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.AmountPostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.AmountPutDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Amount;
@@ -14,4 +15,6 @@ public interface AmountMapper {
     Amount convert(AmountPostDTO amountPostDTO);
 
     Amount convert(AmountPutDTO amountPostDTO);
+
+    AmountGetDTO convert(Amount amount);
 }

@@ -1,5 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.service;
 
+import org.foi.diplomski.msakac.odmaralica.dto.get.AmountGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.AmountPostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.AmountPutDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Amount;
@@ -11,17 +12,19 @@ public interface AmountService {
 
     Amount convertPut(AmountPutDTO entityPut);
 
-    Amount create(AmountPostDTO entityPost);
+    AmountGetDTO convertGet(Amount entity);
 
-    Amount findById(Long id);
+    AmountGetDTO create(AmountPostDTO entityPost);
 
-    List<Amount> findAll();
+    AmountGetDTO findById(Long id);
 
-    Amount update(AmountPutDTO entityPut);
+    List<AmountGetDTO> findAll();
+
+    AmountGetDTO update(AmountPutDTO entityPut);
 
     void delete(Long id);
 
-    List<Amount> find(String queryParams);
+    List<AmountGetDTO> find(String queryParams);
 
     Class<Amount> getEntityClass();
 }

@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class CityPutDTO {
     @NotNull(message = "Id cannot be empty")
     private Long id;
-    
+
     @NotEmpty(message = "City name cannot be empty")
     private String name;
 

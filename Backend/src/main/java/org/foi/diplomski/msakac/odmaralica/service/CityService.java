@@ -1,5 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.service;
 
+import org.foi.diplomski.msakac.odmaralica.dto.get.CityGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.CityPostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.CityPutDTO;
 import org.foi.diplomski.msakac.odmaralica.model.City;
@@ -11,17 +12,19 @@ public interface CityService {
 
     City convertPut(CityPutDTO entityPut);
 
-    City create(CityPostDTO entityPost);
+    CityGetDTO convertGet(City entityPut);
 
-    City findById(Long id);
+    CityGetDTO create(CityPostDTO entityPost);
 
-    List<City> findAll();
+    CityGetDTO findById(Long id);
 
-    City update(CityPutDTO entityPut);
+    List<CityGetDTO> findAll();
+
+    CityGetDTO update(CityPutDTO entityPut);
 
     void delete(Long id);
 
-    List<City> find(String queryParams);
+    List<CityGetDTO> find(String queryParams);
 
     Class<City> getEntityClass();
 }

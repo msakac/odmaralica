@@ -1,5 +1,5 @@
 package org.foi.diplomski.msakac.odmaralica.dto.put;
 
-public class PricePeriodPutDto {
+public class PricePeriodPutDTO {
     // TODO: Implement PricePeriodPutDto
 }
