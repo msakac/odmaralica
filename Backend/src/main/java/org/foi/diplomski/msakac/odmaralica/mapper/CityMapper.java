@@ -24,6 +24,8 @@ public abstract class CityMapper {
 
     public abstract CityGetDTO convert(City city);
 
+    public abstract City convert(CityGetDTO cityGetDTO);
+
     protected Region mapToRegion(Long regionId) {
         return regionService.findById(regionId);
     }

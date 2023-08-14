@@ -24,6 +24,8 @@ public abstract class ResidenceMapper {
 
     public abstract ResidenceGetDTO convert(Residence residence);
 
+    public abstract Residence convert(ResidenceGetDTO residenceGetDTO);
+
     protected User mapToOwner(Long ownerId) {
         return userService.findById(ownerId);
     }

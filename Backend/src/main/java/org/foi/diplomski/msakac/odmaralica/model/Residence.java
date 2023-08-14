@@ -1,12 +1,16 @@
 package org.foi.diplomski.msakac.odmaralica.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Data
+@Getter
+@Setter
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "residence")
 public class Residence implements Serializable {
     private static final long serialVersionUID = 1L;
