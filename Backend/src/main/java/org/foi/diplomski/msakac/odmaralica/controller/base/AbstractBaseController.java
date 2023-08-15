@@ -73,13 +73,17 @@ public abstract class AbstractBaseController<T, GetDTO, PostDTO, PutDTO, Service
     @GetMapping("/find")
     public ResponseEntity<Object> queryCountries(@RequestParam("q") String queryParams) {
         // FIXME: Osim q parametara trebam jos sort=, offset, limit
-        List<GetDTO> entities = service.find(queryParams);
-
-        if (entities.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(getNotFoundResponse());
+        try {
+            List<GetDTO> entities = service.find(queryParams);
+            if (entities.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(getNotFoundResponse());
+            }
+            return ResponseEntity.ok(new CreateResponseDTO<List<GetDTO>>(entities, HttpStatus.OK));
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CreateResponseDTO<T>(HttpStatus.BAD_REQUEST, e.getMessage()));
         }
 
-        return ResponseEntity.ok(new CreateResponseDTO<List<GetDTO>>(entities, HttpStatus.OK));
+
     }
 
     public CreateResponseDTO<T> getNotFoundResponse() {

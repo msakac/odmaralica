@@ -15,10 +15,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AddressServiceImpl extends AbstractBaseService<Address, AddressRepository, AddressMapper, AddressGetDTO, AddressPostDTO, AddressPutDTO> implements AddressService {
-    //FIXME: Apartnan more imati samo jednu adresu
     @Autowired
     public AddressServiceImpl(AddressRepository repository, AddressMapper mapper, EntityManager entityManager) {
         super(repository, mapper, entityManager);
+    }
+    
+    @Override
+    public AddressGetDTO create(AddressPostDTO entityPost) {
+        Address existingAddress = repository.findByResidenceId(entityPost.getResidenceId());
+        if (existingAddress != null) {
+            throw new RuntimeException("Address with residenceId already exists");
+        }
+        return super.create(entityPost);
     }
 
     @Override

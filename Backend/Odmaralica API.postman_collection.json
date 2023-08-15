@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "05a2da38-b492-4c8b-add6-fa7488493802",
+		"_postman_id": "b7927537-1609-48e1-bd5e-694cb71fc8c3",
 		"name": "Odmaralica API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "28955474"
@@ -437,7 +437,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Vila Pakle\",\r\n    \"type\": \"Vila\",\r\n    \"description\": \"Predivna vila bla bla\",\r\n    \"ownerId\": 1\r\n}",
+							"raw": "{\r\n    \"name\": \"Klet Sakac\",\r\n    \"type\": \"Vinograd\",\r\n    \"description\": \"Vine\",\r\n    \"ownerId\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -529,7 +529,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/residence"
+						"url": "http://localhost:8080/address"
 					},
 					"response": []
 				},
@@ -540,7 +540,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"residenceId\": 1,\r\n    \"street\": \"Kucica 16\",\r\n    \"cityId\": 1\r\n}",
+							"raw": "{\r\n    \"residenceId\": 3,\r\n    \"street\": \"Kucica 16\",\r\n    \"cityId\": 2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -602,7 +602,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/address/find?q=owner.id=1",
+							"raw": "http://localhost:8080/address/find?q=owner.name=User",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -615,7 +615,110 @@
 							"query": [
 								{
 									"key": "q",
-									"value": "owner.id=1"
+									"value": "owner.name=User"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Accommodation Unit",
+			"item": [
+				{
+					"name": "Accommodation Unit GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/accommodation-unit"
+					},
+					"response": []
+				},
+				{
+					"name": "Accommodation Unit POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"residenceId\": 1,\r\n    \"name\": \"Apartman A2\",\r\n    \"description\": \"Predivan apartmana sa svega 4 kvadrata\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/accommodation-unit"
+					},
+					"response": []
+				},
+				{
+					"name": "Accommodation Unit GET{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/accommodation-unit/4"
+					},
+					"response": []
+				},
+				{
+					"name": "Accommodation Unit PUT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 4,\r\n    \"name\": \"nikaj\",\r\n    \"type\": \"nikaj\",\r\n    \"description\": \"nikaj\",\r\n    \"ownerId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/accommodation-unit"
+					},
+					"response": []
+				},
+				{
+					"name": "Accommodation Unit DEL",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hrvatska\",\r\n    \"countryCode\": \"HR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/accommodation-unit/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Accommodation Unit FIND",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/accommodation-unit/find?q=residence.owner.name=User",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"accommodation-unit",
+								"find"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "residence.owner.name=User"
 								}
 							]
 						}
@@ -658,7 +761,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"role\": \"BLA2\"\r\n}",
+							"raw": "{\r\n    \"role\": \"Renter\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
