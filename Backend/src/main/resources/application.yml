@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:postgresql://ep-billowing-sound-02425339.eu-central-1.aws.neon.tech/odmaralica
-    username: msakac
-    password: DMgAFOEUVH18
+    username: 
+    password: 
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
