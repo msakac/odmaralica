@@ -22,7 +22,7 @@ public class PricePeriodController extends AbstractBaseController<PricePeriod, P
 
     @Override
     public CreateResponseDTO<PricePeriod> getNotFoundResponse() {
-        return new CreateResponseDTO<PricePeriod>(HttpStatus.NOT_FOUND, "PricePeriod not found");
+        return new CreateResponseDTO<PricePeriod>(HttpStatus.NOT_FOUND, "Price period not found");
     }
 
 }

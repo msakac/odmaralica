@@ -1,6 +1,9 @@
 package org.foi.diplomski.msakac.odmaralica.utils;
 
 import javax.persistence.criteria.*;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @SuppressWarnings("unchecked")
@@ -44,7 +47,6 @@ public class QueryBuilder<T> {
 
             if (operator != null) {
                 Path<?> attributePath = getAttributePath(key, operator);
-
                 switch (operator) {
                     case NOT_EQUAL:
                         predicates.add(criteriaBuilder.notEqual(attributePath, castToComparable(value)));
@@ -72,14 +74,24 @@ public class QueryBuilder<T> {
         return criteriaQuery;
     }
 
-    //FIXME: Compares only integers
-    //FIXME: Retard more linka poslati i zbrejkati sve zivo
+    //FIXME Add nicer exception message when value is wrong
     private Comparable<?> castToComparable(String value) {
         try {
             return Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-            return value;
-        }
+        } catch (NumberFormatException ignored) {}
+
+        try {
+            return Double.parseDouble(value);
+        } catch (NumberFormatException ignored) {}
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        try {
+            Date date = dateFormat.parse(value);
+            return date;
+        } catch (ParseException ignored) {}
+
+        return value;
     }
 
     private static Map<String, String> parseQuery(String query) {

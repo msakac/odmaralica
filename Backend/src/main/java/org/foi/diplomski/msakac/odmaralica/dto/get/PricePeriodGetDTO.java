@@ -1,6 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.dto.get;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,8 +13,8 @@ import lombok.ToString;
 
 public class PricePeriodGetDTO {
     private Long id;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private Date startAt;
+    private Date endAt;
     private AccommodationUnitGetDTO accommodationUnit;
     private AmountGetDTO amount;
 }

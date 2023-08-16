@@ -35,6 +35,8 @@ public abstract class PricePeriodMapper {
     @Mapping(source="pricePeriodPutDTO.amountId", target="amount")
     public abstract PricePeriod convert(PricePeriodPutDTO pricePeriodPutDTO);
 
+    @Mapping(source="pricePeriod.startAt", target="startAt", dateFormat = "yyyy-MM-dd")
+    @Mapping(source="pricePeriod.endAt", target="endAt", dateFormat = "yyyy-MM-dd")
     public abstract PricePeriodGetDTO convert(PricePeriod pricePeriod);
 
     protected AccommodationUnit mapToAccommodationUnit(Long accommodationUnitId) {
