@@ -1,14 +1,17 @@
 package org.foi.diplomski.msakac.odmaralica.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
-@Data
+import java.sql.Timestamp;
+import java.util.Date;
+@Getter
+@Setter
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "reservation")
 public class Reservation implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -27,16 +30,16 @@ public class Reservation implements Serializable {
     private AccommodationUnit accommodationUnit;
 
     @Column(name = "start_at", nullable = false)
-    private LocalDate startAt;
+    private Date startAt;
 
     @Column(name = "end_at", nullable = false)
-    private LocalDate endAt;
+    private Date endAt;
 
     @Column(name = "note")
     private String note;
 
     @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
+    private Timestamp createdAt;
 
     @Column(name = "cancelled", nullable = false)
     private boolean cancelled;
