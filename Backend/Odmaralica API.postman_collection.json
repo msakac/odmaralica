@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b7927537-1609-48e1-bd5e-694cb71fc8c3",
+		"_postman_id": "1130e346-5a50-4765-8e74-dd90b15fd3c7",
 		"name": "Odmaralica API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "28955474"
@@ -247,7 +247,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/amount/214"
+						"url": "http://localhost:8080/amount/2"
 					},
 					"response": []
 				},
@@ -293,7 +293,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/amount/find?q=id>2;amount>14;currency=USD",
+							"raw": "http://localhost:8080/amount/find?q=amount>13.3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -306,7 +306,7 @@
 							"query": [
 								{
 									"key": "q",
-									"value": "id>2;amount>14;currency=USD"
+									"value": "amount>13.3"
 								}
 							]
 						}
@@ -643,7 +643,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"residenceId\": 1,\r\n    \"name\": \"Apartman A2\",\r\n    \"description\": \"Predivan apartmana sa svega 4 kvadrata\"\r\n}",
+							"raw": "{\r\n    \"id\": 5,\r\n    \"residenceId\": 2,\r\n    \"name\": \"Apartman A2+2\",\r\n    \"description\": \"Predivan apartmana sa svega 4 kvadratada\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -670,7 +670,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 4,\r\n    \"name\": \"nikaj\",\r\n    \"type\": \"nikaj\",\r\n    \"description\": \"nikaj\",\r\n    \"ownerId\": 1\r\n}",
+							"raw": "{\r\n    \"id\": 5,\r\n    \"residenceId\": 2,\r\n    \"name\": \"Apartman A2+2\",\r\n    \"description\": \"Predivan apartmana sa svega 4 kvadratada\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -719,6 +719,418 @@
 								{
 									"key": "q",
 									"value": "residence.owner.name=User"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Price Period",
+			"item": [
+				{
+					"name": "Price Period GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/price-period"
+					},
+					"response": []
+				},
+				{
+					"name": "Price Period  POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accommodationUnitId\": 4,\r\n    \"startAt\": \"2023-02-15\",\r\n    \"endAt\": \"2023-02-20\",\r\n    \"amountId\": 2\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/price-period"
+					},
+					"response": []
+				},
+				{
+					"name": "Price Period GET{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/price-period/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Price Period PUT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"accommodationUnitId\": 4,\r\n    \"startAt\": \"2022-08-01\",\r\n    \"endAt\": \"2022-10-30\",\r\n    \"amountId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/price-period"
+					},
+					"response": []
+				},
+				{
+					"name": "Price Period DEL",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hrvatska\",\r\n    \"countryCode\": \"HR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/price-period/6"
+					},
+					"response": []
+				},
+				{
+					"name": "Price Period FIND",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/price-period/find?q=startAt>2023-01-15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"price-period",
+								"find"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "startAt>2023-01-15"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reservation",
+			"item": [
+				{
+					"name": "Reservation GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/reservation"
+					},
+					"response": []
+				},
+				{
+					"name": "Reservation POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 1,\r\n    \"accommodationUnitId\": 4,\r\n    \"startAt\": \"2023-08-20\",\r\n    \"endAt\": \"2023-08-23\",\r\n    \"isCancelled\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/reservation"
+					},
+					"response": []
+				},
+				{
+					"name": "Reservation GET{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/reservation/12"
+					},
+					"response": []
+				},
+				{
+					"name": "Reservation PUT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 11,\r\n    \"accommodationUnitId\": 4,\r\n    \"startAt\": \"2014-08-01\",\r\n    \"endAt\": \"2014-10-30\",\r\n    \"amountId\": 2,\r\n    \"userId\": 1,\r\n    \"cancelled\": false,\r\n    \"createdAt\": \"2023-08-16T10:45:17.196\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/reservation"
+					},
+					"response": []
+				},
+				{
+					"name": "Reservation DEL",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hrvatska\",\r\n    \"countryCode\": \"HR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/reservation/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Reservation FIND",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/reservation/find?q=startAt>2023-01-15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reservation",
+								"find"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "startAt>2023-01-15"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Activity Type",
+			"item": [
+				{
+					"name": "Activity Type GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/activity-type"
+					},
+					"response": []
+				},
+				{
+					"name": "Activity Type POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Create\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/activity-type"
+					},
+					"response": []
+				},
+				{
+					"name": "Activity Type GET{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/activity-type/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Activity Type PUT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Create\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/activity-type"
+					},
+					"response": []
+				},
+				{
+					"name": "Activity Type DEL",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hrvatska\",\r\n    \"countryCode\": \"HR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/activity-type/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Activity Type FIND",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/activity-type/find?q=name=Create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"activity-type",
+								"find"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "name=Create"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Log",
+			"item": [
+				{
+					"name": "Log GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/log"
+					},
+					"response": []
+				},
+				{
+					"name": "Log POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 1,\r\n    \"activityTypeId\": 1,\r\n    \"logMessage\": \"Created bla bla\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/log"
+					},
+					"response": []
+				},
+				{
+					"name": "Log  GET{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/log/3"
+					},
+					"response": []
+				},
+				{
+					"name": "Log PUT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 436,\r\n    \"userId\": 1,\r\n    \"activityTypeId\": 2,\r\n    \"logMessage\": \"Created bla bl43da\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/log"
+					},
+					"response": []
+				},
+				{
+					"name": "Log DEL",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hrvatska\",\r\n    \"countryCode\": \"HR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/log/6"
+					},
+					"response": []
+				},
+				{
+					"name": "Log FIND",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/log/find?q=owner.name=User",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"log",
+								"find"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "owner.name=User"
 								}
 							]
 						}
