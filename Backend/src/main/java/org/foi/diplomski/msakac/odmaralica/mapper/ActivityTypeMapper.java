@@ -14,4 +14,5 @@ public interface ActivityTypeMapper {
     ActivityType convert(ActivityTypePutDTO activityTypePutDTO);
     ActivityType convert(ActivityTypePostDTO activityTypePostDTO);
     ActivityTypeGetDTO convert(ActivityType activityType);
+    ActivityType convert(ActivityTypeGetDTO activityTypeGetDTO);
 }
