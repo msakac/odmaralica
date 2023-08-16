@@ -6,7 +6,7 @@ import org.foi.diplomski.msakac.odmaralica.dto.put.CityPutDTO;
 import org.foi.diplomski.msakac.odmaralica.mapper.CityMapper;
 import org.foi.diplomski.msakac.odmaralica.model.City;
 import org.foi.diplomski.msakac.odmaralica.repository.CityRepository;
-import org.foi.diplomski.msakac.odmaralica.service.CityService;
+import org.foi.diplomski.msakac.odmaralica.service.ICityService;
 import org.foi.diplomski.msakac.odmaralica.service.base.AbstractBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 
 @Service
-public class CityServiceImpl extends AbstractBaseService<City, CityRepository, CityMapper, CityGetDTO, CityPostDTO, CityPutDTO> implements CityService {
+public class CityServiceImpl extends AbstractBaseService<City, CityRepository, CityMapper, CityGetDTO, CityPostDTO, CityPutDTO> implements ICityService {
 
     @Autowired
     public CityServiceImpl(CityRepository repository, CityMapper mapper, EntityManager entityManager) {

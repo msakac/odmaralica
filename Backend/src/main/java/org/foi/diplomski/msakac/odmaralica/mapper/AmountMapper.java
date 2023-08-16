@@ -17,4 +17,6 @@ public interface AmountMapper {
     Amount convert(AmountPutDTO amountPostDTO);
 
     AmountGetDTO convert(Amount amount);
+
+    Amount convert(AmountGetDTO amountGetDTO);
 }

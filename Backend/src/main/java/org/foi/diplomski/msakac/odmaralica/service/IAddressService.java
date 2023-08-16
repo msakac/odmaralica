@@ -6,7 +6,7 @@ import org.foi.diplomski.msakac.odmaralica.dto.post.AddressPostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.AddressPutDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Address;
 
-public interface AddressService {
+public interface IAddressService {
     Address convertPost(AddressPostDTO entityPost);
 
     Address convertPut(AddressPutDTO entityPut);

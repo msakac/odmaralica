@@ -5,8 +5,8 @@ import org.foi.diplomski.msakac.odmaralica.dto.post.RegionPostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.RegionPutDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Country;
 import org.foi.diplomski.msakac.odmaralica.model.Region;
-import org.foi.diplomski.msakac.odmaralica.service.CountryService;
-import org.foi.diplomski.msakac.odmaralica.service.RegionService;
+import org.foi.diplomski.msakac.odmaralica.service.ICountryService;
+import org.foi.diplomski.msakac.odmaralica.service.IRegionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +19,9 @@ import java.util.List;
 @RequestMapping("/region")
 public class RegionController {
 
-    private final RegionService regionService;
+    private final IRegionService regionService;
 
-    private final CountryService countryService;
+    private final ICountryService countryService;
 
     private final CreateResponseDTO<Region> notFoundResponse = new CreateResponseDTO<Region>
             (HttpStatus.NOT_FOUND, "Region not found");
@@ -33,7 +33,7 @@ public class RegionController {
             (HttpStatus.CONFLICT, "Name already exists!");
 
     @Autowired
-    public RegionController(RegionService regionService, CountryService countryService) {
+    public RegionController(IRegionService regionService, ICountryService countryService) {
         this.regionService = regionService;
         this.countryService = countryService;
     }

@@ -2,6 +2,6 @@ package org.foi.diplomski.msakac.odmaralica.service;
 
 import org.foi.diplomski.msakac.odmaralica.model.Reservation;
 
-public interface ReservationService {
+public interface IReservationService {
     Reservation createReservation(Reservation reservation);
 }

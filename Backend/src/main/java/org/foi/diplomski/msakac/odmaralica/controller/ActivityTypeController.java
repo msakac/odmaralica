@@ -1,7 +1,7 @@
 package org.foi.diplomski.msakac.odmaralica.controller;
 
 import org.foi.diplomski.msakac.odmaralica.model.ActivityType;
-import org.foi.diplomski.msakac.odmaralica.service.ActivityTypeService;
+import org.foi.diplomski.msakac.odmaralica.service.IActivityTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/activity-types")
 public class ActivityTypeController {
 
-    private final ActivityTypeService activityTypeService;
+    private final IActivityTypeService activityTypeService;
 
     @Autowired
-    public ActivityTypeController(ActivityTypeService activityTypeService) {
+    public ActivityTypeController(IActivityTypeService activityTypeService) {
         this.activityTypeService = activityTypeService;
     }
 

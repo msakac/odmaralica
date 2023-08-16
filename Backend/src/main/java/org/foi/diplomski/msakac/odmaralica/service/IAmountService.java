@@ -7,7 +7,7 @@ import org.foi.diplomski.msakac.odmaralica.model.Amount;
 
 import java.util.List;
 
-public interface AmountService {
+public interface IAmountService {
     Amount convertPost(AmountPostDTO entityPost);
 
     Amount convertPut(AmountPutDTO entityPut);

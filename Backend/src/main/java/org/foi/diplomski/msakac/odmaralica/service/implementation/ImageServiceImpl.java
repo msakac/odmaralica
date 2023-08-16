@@ -2,7 +2,7 @@ package org.foi.diplomski.msakac.odmaralica.service.implementation;
 
 import org.foi.diplomski.msakac.odmaralica.model.Image;
 import org.foi.diplomski.msakac.odmaralica.repository.ImageRepository;
-import org.foi.diplomski.msakac.odmaralica.service.ImageService;
+import org.foi.diplomski.msakac.odmaralica.service.IImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @Service
-public class ImageServiceImpl implements ImageService {
+public class ImageServiceImpl implements IImageService {
 
     private final ImageRepository imageRepository;
 

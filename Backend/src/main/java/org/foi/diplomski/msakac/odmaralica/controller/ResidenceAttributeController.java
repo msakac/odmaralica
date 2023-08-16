@@ -1,7 +1,7 @@
 package org.foi.diplomski.msakac.odmaralica.controller;
 
 import org.foi.diplomski.msakac.odmaralica.model.ResidenceAttribute;
-import org.foi.diplomski.msakac.odmaralica.service.ResidenceAttributeService;
+import org.foi.diplomski.msakac.odmaralica.service.IResidenceAttributeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/residence-attributes")
 public class ResidenceAttributeController {
 
-    private final ResidenceAttributeService residenceAttributeService;
+    private final IResidenceAttributeService residenceAttributeService;
 
     @Autowired
-    public ResidenceAttributeController(ResidenceAttributeService residenceAttributeService) {
+    public ResidenceAttributeController(IResidenceAttributeService residenceAttributeService) {
         this.residenceAttributeService = residenceAttributeService;
     }
 

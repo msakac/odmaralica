@@ -5,7 +5,7 @@ import org.foi.diplomski.msakac.odmaralica.model.Country;
 
 import java.util.List;
 
-public interface CountryService {
+public interface ICountryService {
     Country create(CountryPostDTO country);
 
     Country findByName(String name);

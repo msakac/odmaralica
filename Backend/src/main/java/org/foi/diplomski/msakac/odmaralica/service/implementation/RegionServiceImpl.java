@@ -5,7 +5,7 @@ import org.foi.diplomski.msakac.odmaralica.dto.put.RegionPutDTO;
 import org.foi.diplomski.msakac.odmaralica.mapper.RegionMapper;
 import org.foi.diplomski.msakac.odmaralica.model.Region;
 import org.foi.diplomski.msakac.odmaralica.repository.RegionRepository;
-import org.foi.diplomski.msakac.odmaralica.service.RegionService;
+import org.foi.diplomski.msakac.odmaralica.service.IRegionService;
 import org.foi.diplomski.msakac.odmaralica.utils.QueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 @Service
-public class RegionServiceImpl implements RegionService {
+public class RegionServiceImpl implements IRegionService {
 
     private final RegionRepository regionRepository;
     private final RegionMapper regionMapper;

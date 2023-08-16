@@ -1,7 +1,7 @@
 package org.foi.diplomski.msakac.odmaralica.controller;
 
 import org.foi.diplomski.msakac.odmaralica.model.Image;
-import org.foi.diplomski.msakac.odmaralica.service.ImageService;
+import org.foi.diplomski.msakac.odmaralica.service.IImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,10 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/api/images")
 public class ImageController {
 
-    private final ImageService imageService;
+    private final IImageService imageService;
 
     @Autowired
-    public ImageController(ImageService imageService) {
+    public ImageController(IImageService imageService) {
         this.imageService = imageService;
     }
 

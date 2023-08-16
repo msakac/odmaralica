@@ -2,12 +2,12 @@ package org.foi.diplomski.msakac.odmaralica.service.implementation;
 
 import org.foi.diplomski.msakac.odmaralica.model.AccommodationUnitImage;
 import org.foi.diplomski.msakac.odmaralica.repository.AccommodationUnitImageRepository;
-import org.foi.diplomski.msakac.odmaralica.service.AccommodationUnitImageService;
+import org.foi.diplomski.msakac.odmaralica.service.IAccommodationUnitImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AccommodationUnitImageServiceImpl implements AccommodationUnitImageService {
+public class AccommodationUnitImageServiceImpl implements IAccommodationUnitImageService {
 
     private final AccommodationUnitImageRepository accommodationUnitImageRepository;
 

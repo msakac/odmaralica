@@ -7,7 +7,7 @@ import org.foi.diplomski.msakac.odmaralica.dto.post.AccommodationUnitPostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.AccommodationUnitPutDTO;
 import org.foi.diplomski.msakac.odmaralica.model.AccommodationUnit;
 
-public interface AccommodationUnitService {
+public interface IAccommodationUnitService {
     AccommodationUnit convertPost(AccommodationUnitPostDTO entityPost);
 
     AccommodationUnit convertPut(AccommodationUnitPutDTO entityPut);

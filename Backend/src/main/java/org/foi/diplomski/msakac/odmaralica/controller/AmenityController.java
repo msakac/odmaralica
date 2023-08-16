@@ -1,7 +1,7 @@
 package org.foi.diplomski.msakac.odmaralica.controller;
 
 import org.foi.diplomski.msakac.odmaralica.model.Amenity;
-import org.foi.diplomski.msakac.odmaralica.service.AmenityService;
+import org.foi.diplomski.msakac.odmaralica.service.IAmenityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/amenities")
 public class AmenityController {
 
-    private final AmenityService amenityService;
+    private final IAmenityService amenityService;
 
     @Autowired
-    public AmenityController(AmenityService amenityService) {
+    public AmenityController(IAmenityService amenityService) {
         this.amenityService = amenityService;
     }
 

@@ -6,7 +6,7 @@ import org.foi.diplomski.msakac.odmaralica.dto.put.AccommodationUnitPutDTO;
 import org.foi.diplomski.msakac.odmaralica.mapper.AccommodationUnitMapper;
 import org.foi.diplomski.msakac.odmaralica.model.AccommodationUnit;
 import org.foi.diplomski.msakac.odmaralica.repository.AccommodationUnitRepository;
-import org.foi.diplomski.msakac.odmaralica.service.AccommodationUnitService;
+import org.foi.diplomski.msakac.odmaralica.service.IAccommodationUnitService;
 import org.foi.diplomski.msakac.odmaralica.service.base.AbstractBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 
 @Service
-public class AccommodationUnitServiceImpl extends AbstractBaseService<AccommodationUnit, AccommodationUnitRepository, AccommodationUnitMapper, AccommodationUnitGetDTO, AccommodationUnitPostDTO, AccommodationUnitPutDTO> implements AccommodationUnitService {
+public class AccommodationUnitServiceImpl extends AbstractBaseService<AccommodationUnit, AccommodationUnitRepository, AccommodationUnitMapper, AccommodationUnitGetDTO, AccommodationUnitPostDTO, AccommodationUnitPutDTO> implements IAccommodationUnitService {
 
     @Autowired
     public AccommodationUnitServiceImpl(AccommodationUnitRepository repository, AccommodationUnitMapper mapper, EntityManager entityManager) {

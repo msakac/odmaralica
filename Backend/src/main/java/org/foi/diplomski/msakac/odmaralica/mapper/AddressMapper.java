@@ -8,8 +8,8 @@ import org.foi.diplomski.msakac.odmaralica.dto.put.AddressPutDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Address;
 import org.foi.diplomski.msakac.odmaralica.model.City;
 import org.foi.diplomski.msakac.odmaralica.model.Residence;
-import org.foi.diplomski.msakac.odmaralica.service.CityService;
-import org.foi.diplomski.msakac.odmaralica.service.ResidenceService;
+import org.foi.diplomski.msakac.odmaralica.service.ICityService;
+import org.foi.diplomski.msakac.odmaralica.service.IResidenceService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
@@ -19,9 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public abstract class AddressMapper {
     @Autowired
-    protected ResidenceService residenceService;
+    protected IResidenceService residenceService;
     @Autowired
-    protected CityService cityService;
+    protected ICityService cityService;
     protected CityMapper cityMapper = Mappers.getMapper(CityMapper.class);
     protected ResidenceMapper residenceMapper = Mappers.getMapper(ResidenceMapper.class);
 

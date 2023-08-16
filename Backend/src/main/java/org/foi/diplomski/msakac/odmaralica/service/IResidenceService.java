@@ -7,7 +7,7 @@ import org.foi.diplomski.msakac.odmaralica.dto.post.ResidencePostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.ResidencePutDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Residence;
 
-public interface ResidenceService {
+public interface IResidenceService {
     Residence convertPost(ResidencePostDTO entityPost);
 
     Residence convertPut(ResidencePutDTO entityPut);

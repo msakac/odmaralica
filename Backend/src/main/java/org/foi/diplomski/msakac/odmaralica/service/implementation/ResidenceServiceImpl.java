@@ -7,13 +7,13 @@ import org.foi.diplomski.msakac.odmaralica.dto.put.ResidencePutDTO;
 import org.foi.diplomski.msakac.odmaralica.mapper.ResidenceMapper;
 import org.foi.diplomski.msakac.odmaralica.model.Residence;
 import org.foi.diplomski.msakac.odmaralica.repository.ResidenceRepository;
-import org.foi.diplomski.msakac.odmaralica.service.ResidenceService;
+import org.foi.diplomski.msakac.odmaralica.service.IResidenceService;
 import org.foi.diplomski.msakac.odmaralica.service.base.AbstractBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ResidenceServiceImpl extends AbstractBaseService<Residence, ResidenceRepository, ResidenceMapper, ResidenceGetDTO, ResidencePostDTO, ResidencePutDTO> implements ResidenceService {
+public class ResidenceServiceImpl extends AbstractBaseService<Residence, ResidenceRepository, ResidenceMapper, ResidenceGetDTO, ResidencePostDTO, ResidencePutDTO> implements IResidenceService {
     //FIXME: vlasnik apartmana nebre biti korisnik koji nije iznajmljivac
     @Autowired
     public ResidenceServiceImpl(ResidenceRepository repository, ResidenceMapper mapper, EntityManager entityManager) {

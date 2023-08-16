@@ -1,7 +1,7 @@
 package org.foi.diplomski.msakac.odmaralica.controller;
 
 import org.foi.diplomski.msakac.odmaralica.model.AccommodationUnitImage;
-import org.foi.diplomski.msakac.odmaralica.service.AccommodationUnitImageService;
+import org.foi.diplomski.msakac.odmaralica.service.IAccommodationUnitImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/accommodation-unit-images")
 public class AccommodationUnitImageController {
 
-    private final AccommodationUnitImageService accommodationUnitImageService;
+    private final IAccommodationUnitImageService accommodationUnitImageService;
 
     @Autowired
-    public AccommodationUnitImageController(AccommodationUnitImageService accommodationUnitImageService) {
+    public AccommodationUnitImageController(IAccommodationUnitImageService accommodationUnitImageService) {
         this.accommodationUnitImageService = accommodationUnitImageService;
     }
 

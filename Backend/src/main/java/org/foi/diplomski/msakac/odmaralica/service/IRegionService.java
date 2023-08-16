@@ -6,7 +6,7 @@ import org.foi.diplomski.msakac.odmaralica.model.Region;
 
 import java.util.List;
 
-public interface RegionService {
+public interface IRegionService {
     Region create(RegionPostDTO region);
 
     Region findByName(String name);

@@ -5,7 +5,7 @@ import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.CountryPostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.CountryPutDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Country;
-import org.foi.diplomski.msakac.odmaralica.service.CountryService;
+import org.foi.diplomski.msakac.odmaralica.service.ICountryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/country")
 public class CountryController {
-    private final CountryService countryService;
+    private final ICountryService countryService;
     private final CreateResponseDTO<Country> notFoundResponse = new CreateResponseDTO<Country>
             (HttpStatus.NOT_FOUND, "Country not found");
     private final CreateResponseDTO<Country> conflictResponse = new CreateResponseDTO<Country>

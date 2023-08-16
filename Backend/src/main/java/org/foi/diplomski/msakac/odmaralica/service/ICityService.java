@@ -7,7 +7,7 @@ import org.foi.diplomski.msakac.odmaralica.model.City;
 
 import java.util.List;
 
-public interface CityService {
+public interface ICityService {
     City convertPost(CityPostDTO entityPost);
 
     City convertPut(CityPutDTO entityPut);
