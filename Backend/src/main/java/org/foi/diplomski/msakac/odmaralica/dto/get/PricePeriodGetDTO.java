@@ -10,7 +10,6 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-
 public class PricePeriodGetDTO {
     private Long id;
     private Date startAt;

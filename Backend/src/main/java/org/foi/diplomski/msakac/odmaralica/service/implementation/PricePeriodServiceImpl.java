@@ -25,19 +25,16 @@ public class PricePeriodServiceImpl extends AbstractBaseService<PricePeriod, Pri
 
     @Override
     public PricePeriodGetDTO create(PricePeriodPostDTO entityPost){
-        // Check if start date is after end date
-        if(entityPost.getStartAt().compareTo(entityPost.getEndAt()) > 0) {
-            throw new IllegalArgumentException("Start date cannot be after end date");
-        }
-
-        List<PricePeriod> pricePeriods = repository.findByAccommodationUnitId(entityPost.getAccommodationUnitId());
-        for (PricePeriod pricePeriod : pricePeriods) {
-            // Check if dates overlap
-            if (pricePeriod.getStartAt().compareTo(entityPost.getStartAt()) <= 0 && pricePeriod.getEndAt().compareTo(entityPost.getStartAt()) >= 0) {
-                throw new RuntimeException("Price period overlaps with existing price period");
-            }
-        }
+        PricePeriod period = convertPost(entityPost);
+        this.validate(period);
         return super.create(entityPost);
+    }
+
+    @Override
+    public PricePeriodGetDTO update(PricePeriodPutDTO entityPut) {
+        PricePeriod period = convertPut(entityPut);
+        this.validate(period);
+        return super.update(entityPut);
     }
 
     @Override
@@ -57,5 +54,20 @@ public class PricePeriodServiceImpl extends AbstractBaseService<PricePeriod, Pri
 
     public Class<PricePeriod> getEntityClass() {
         return PricePeriod.class;
+    }
+
+    private void validate(PricePeriod entity){
+        // Check if start date is after end date
+        if(entity.getStartAt().compareTo(entity.getEndAt()) > 0) {
+            throw new IllegalArgumentException("Start date cannot be after end date");
+        }
+
+        List<PricePeriod> pricePeriods = repository.findByAccommodationUnitId(entity.getAccommodationUnit().getId());
+        for (PricePeriod pricePeriod : pricePeriods) {
+            // Check if dates overlap
+            if (pricePeriod.getStartAt().compareTo(entity.getStartAt()) <= 0 && pricePeriod.getEndAt().compareTo(entity.getStartAt()) >= 0) {
+                throw new RuntimeException("Price period overlaps with existing price period");
+            }
+        }
     }
 }

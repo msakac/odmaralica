@@ -7,8 +7,6 @@ import lombok.ToString;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
-
-
 @Getter
 @Setter
 @ToString
