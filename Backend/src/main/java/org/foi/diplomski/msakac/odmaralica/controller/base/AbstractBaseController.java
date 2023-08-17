@@ -2,13 +2,14 @@ package org.foi.diplomski.msakac.odmaralica.controller.base;
 
 import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
 import org.foi.diplomski.msakac.odmaralica.service.base.AbstractBaseService;
+import org.foi.diplomski.msakac.odmaralica.exceptions.InvalidRequestResponseBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-//FIXME: Conflict exception da ima lepsi ispis
+//TODO: Conflict exception da ima lepsi ispis
 public abstract class AbstractBaseController<T, GetDTO, PostDTO, PutDTO, ServiceType extends AbstractBaseService<T, ?, ?, GetDTO, PostDTO, PutDTO>> implements IBaseController<T, GetDTO, PostDTO, PutDTO> {
 
     protected final ServiceType service;
@@ -23,7 +24,7 @@ public abstract class AbstractBaseController<T, GetDTO, PostDTO, PutDTO, Service
             GetDTO createdEntity = service.create(dto);
             return ResponseEntity.ok(new CreateResponseDTO<GetDTO>(createdEntity, HttpStatus.OK));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new CreateResponseDTO<T>(HttpStatus.CONFLICT, e.getMessage()));
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(InvalidRequestResponseBuilder.createResponse(e));
         }
     }
 
@@ -50,7 +51,7 @@ public abstract class AbstractBaseController<T, GetDTO, PostDTO, PutDTO, Service
             GetDTO updatedEntity = service.update(dto);
             return ResponseEntity.ok(new CreateResponseDTO<GetDTO>(updatedEntity, HttpStatus.OK));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new CreateResponseDTO<T>(HttpStatus.CONFLICT, e.getMessage()));
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(InvalidRequestResponseBuilder.createResponse(e));
         }
     }
 
@@ -66,7 +67,7 @@ public abstract class AbstractBaseController<T, GetDTO, PostDTO, PutDTO, Service
             service.delete(id);
             return ResponseEntity.ok(new CreateResponseDTO<T>(HttpStatus.OK, "Entity deleted"));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new CreateResponseDTO<T>(HttpStatus.CONFLICT, e.getMessage()));
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(InvalidRequestResponseBuilder.createResponse(e));
         }
     }
 
@@ -80,7 +81,7 @@ public abstract class AbstractBaseController<T, GetDTO, PostDTO, PutDTO, Service
             }
             return ResponseEntity.ok(new CreateResponseDTO<List<GetDTO>>(entities, HttpStatus.OK));
         } catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CreateResponseDTO<T>(HttpStatus.BAD_REQUEST, e.getMessage()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(InvalidRequestResponseBuilder.createResponse(e));
         }
 
 

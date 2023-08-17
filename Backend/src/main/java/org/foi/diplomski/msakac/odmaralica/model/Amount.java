@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Entity
@@ -21,4 +22,8 @@ public class Amount implements Serializable {
 
     @Column(name = "currency", length = 3, nullable = false)
     private String currency;
+
+    //TODO: Na ovaj nacin brisem sve pricePeriods koji su vezani za ovaj amount
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "amount")
+    private List<PricePeriod> pricePeriods;
 }
