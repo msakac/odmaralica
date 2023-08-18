@@ -37,10 +37,10 @@ public class SecurityConfiguration {
 
 		return http.cors().and().csrf().disable()
 				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-				//.authorizeRequests()
-				//.antMatchers("/register", "/login","/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/actuator/**").permitAll()
-				//.antMatchers("/role").hasAuthority("admin")
-				//.anyRequest().authenticated().and()
+				// .authorizeRequests()
+				// .antMatchers("/register", "/login","/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/actuator/**", "/city").permitAll()
+				// .antMatchers("/role", "/log", "/activity-type").hasAuthority("admin")
+				// .anyRequest().authenticated().and()
 				.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and().build();

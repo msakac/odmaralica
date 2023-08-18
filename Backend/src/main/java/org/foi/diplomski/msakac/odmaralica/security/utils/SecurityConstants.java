@@ -1,5 +1,9 @@
 package org.foi.diplomski.msakac.odmaralica.security.utils;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.foi.diplomski.msakac.odmaralica.security.model.CustomUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -51,11 +55,33 @@ public class SecurityConstants {
      * @return authenticated username from Security Context
      */
     public static String getAuthenticatedUsername() {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                UserDetails userDetails = (UserDetails) principal;
+                return userDetails.getUsername();
+            }
+        }
+        return ""; // Return empty string if UserDetails is not available or principal is not of expected type
+    }
+
+
+    public static String getAuthenticatedUserRole() {
 
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         final UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        List<String> roles = userDetails.getAuthorities().stream().map(Object::toString).collect(Collectors.toList());
+        return roles.get(0);
+    }
 
-        return userDetails.getUsername();
+    public static Long getAuthenticatedUserId() {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+            CustomUser userDetails = (CustomUser) authentication.getPrincipal();
+            return userDetails.getId();
+        }
+        return null;
     }
 
 }
