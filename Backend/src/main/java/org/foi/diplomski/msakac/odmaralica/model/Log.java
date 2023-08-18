@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 @Data
 @Entity
@@ -17,7 +18,7 @@ public class Log implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
@@ -26,4 +27,22 @@ public class Log implements Serializable {
 
     @Column(name = "log_message", nullable = false)
     private String logMessage;
+
+    @Column(name = "created_at", nullable = false)
+    private Timestamp createdAt;
+
+    @Column(name = "http_method", nullable = false)
+    private String httpMethod;
+
+    @Column(name = "endpoint", nullable = false)
+    private String endpoint;
+
+    @Column(name = "status_code", nullable = false)
+    private String statusCode;
+
+    @Column(name = "ip_address", nullable = false)
+    private String ipAddress;
+
+    @Column(name = "response_time", nullable = false)
+    private String responseTime;
 }

@@ -48,4 +48,15 @@ public class ActivityTypeServiceImpl extends AbstractBaseService<ActivityType, A
     public Class<ActivityType> getEntityClass() {
         return ActivityType.class;
     }
+
+    @Override
+    public ActivityType findByName(String name) {
+        return repository.findByName(name);
+    }
+
+    @Override
+    public ActivityTypeGetDTO update(ActivityTypePutDTO entityPut) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    }
 }

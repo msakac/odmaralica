@@ -17,6 +17,8 @@ public interface IActivityTypeService {
 
     ActivityTypeGetDTO findById(Long id);
 
+    ActivityType findByName(String name);
+
     List<ActivityTypeGetDTO> findAll();
 
     ActivityTypeGetDTO update(ActivityTypePutDTO entityPut);

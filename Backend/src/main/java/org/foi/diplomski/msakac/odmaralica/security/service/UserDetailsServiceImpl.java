@@ -3,8 +3,8 @@ package org.foi.diplomski.msakac.odmaralica.security.service;
 import lombok.RequiredArgsConstructor;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
 import org.foi.diplomski.msakac.odmaralica.security.dto.AuthenticatedUserDto;
+import org.foi.diplomski.msakac.odmaralica.security.model.CustomUser;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -33,9 +33,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         final String authenticatedEmail = authenticatedUser.getEmail();
         final String authenticatedPassword = authenticatedUser.getPassword();
+        final Long authenticatedId = authenticatedUser.getId();
         final Role userRole = authenticatedUser.getRole();
         final SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(userRole.getRole());
 
-        return new User(authenticatedEmail, authenticatedPassword, Collections.singletonList(grantedAuthority));
+        //TODO dodati za aktivaciju korisnickog racuna
+        return new CustomUser(authenticatedEmail, authenticatedPassword, Collections.singletonList(grantedAuthority), authenticatedId);
     }
 }

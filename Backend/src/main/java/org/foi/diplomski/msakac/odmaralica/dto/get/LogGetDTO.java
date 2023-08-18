@@ -10,6 +10,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class LogGetDTO {
+    //TODO vrnuti sve atribute
     private Long id;
     private UserGetDTO user;
     private ActivityTypeGetDTO activityType;

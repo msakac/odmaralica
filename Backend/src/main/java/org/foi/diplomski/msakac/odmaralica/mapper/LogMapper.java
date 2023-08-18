@@ -35,6 +35,9 @@ public abstract class LogMapper {
     public abstract LogGetDTO convert(Log log);
 
     protected User mapToUser(Long userId) {
+        if (userId == null) {
+            return null;
+        }
         return userService.findById(userId);
     }
 
