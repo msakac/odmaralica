@@ -48,8 +48,6 @@ public class LoggingAspect {
         " || within(@org.springframework.web.bind.annotation.RestController *)")
     public void springBeanPointcut() {}
 
-   // @Pointcut("within(org.foi.diplomski.msakac.odmaralica.controller..*)" +
-    //    " || within(org.foi.diplomski.msakac.odmaralica.service..*)")
    @Pointcut("within(org.foi.diplomski.msakac.odmaralica.controller..*)")
     public void applicationPackagePointcut() {}
 

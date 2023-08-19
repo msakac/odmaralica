@@ -12,7 +12,6 @@ import org.foi.diplomski.msakac.odmaralica.security.dto.RegistrationRequest;
 import org.foi.diplomski.msakac.odmaralica.security.dto.RegistrationResponse;
 import org.foi.diplomski.msakac.odmaralica.security.mapper.UserMapper;
 import org.foi.diplomski.msakac.odmaralica.service.implementation.UserValidationService;
-import org.foi.diplomski.msakac.odmaralica.utils.GeneralMessageAccessor;
 import org.foi.diplomski.msakac.odmaralica.utils.GenericRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,8 +33,6 @@ public class UserServiceImpl implements UserService {
 
     private final UserValidationService userValidationService;
 
-    private final GeneralMessageAccessor generalMessageAccessor;
-
     @Override
     public RegistrationResponse registration(RegistrationRequest registrationRequest) {
 
@@ -55,11 +52,9 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         final String username = registrationRequest.getEmail();
-        final String registrationSuccessMessage = generalMessageAccessor.getMessage(REGISTRATION_SUCCESSFUL, username);
-
         log.info("{} registered successfully!", username);
 
-        return new RegistrationResponse(registrationSuccessMessage);
+        return new RegistrationResponse("{} registered successfully!");
     }
 
     @Override

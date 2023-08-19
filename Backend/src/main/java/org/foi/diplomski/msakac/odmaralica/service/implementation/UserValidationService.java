@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.foi.diplomski.msakac.odmaralica.exceptions.CommonException;
 import org.foi.diplomski.msakac.odmaralica.repository.UserRepository;
 import org.foi.diplomski.msakac.odmaralica.security.dto.RegistrationRequest;
-import org.foi.diplomski.msakac.odmaralica.utils.ExceptionMessageAccessor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +14,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserValidationService {
 
-    private static final String EMAIL_ALREADY_EXISTS = "email_already_exists";
+    private static final String EMAIL_ALREADY_EXISTS = "Email already exists";
 
     private final UserRepository userRepository;
 
-    private final ExceptionMessageAccessor exceptionMessageAccessor;
 
     public void validateUser(RegistrationRequest registrationRequest) {
 
@@ -36,8 +34,7 @@ public class UserValidationService {
 
             log.warn("{} is already being used!", email);
 
-            final String existsEmail = exceptionMessageAccessor.getMessage(EMAIL_ALREADY_EXISTS);
-            throw new CommonException(existsEmail, HttpStatus.CONFLICT);
+            throw new CommonException(EMAIL_ALREADY_EXISTS, HttpStatus.CONFLICT);
         }
     }
 
