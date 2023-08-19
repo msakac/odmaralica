@@ -1055,7 +1055,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": 1,\r\n    \"activityTypeId\": 1,\r\n    \"logMessage\": \"Created bla bla\"\r\n}",
+							"raw": "{\r\n    \"userId\": 152,\r\n    \"activityTypeId\": 2,\r\n    \"logMessage\": \"Created bla bla\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
