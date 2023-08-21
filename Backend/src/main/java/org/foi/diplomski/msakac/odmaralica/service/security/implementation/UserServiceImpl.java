@@ -6,12 +6,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterResponseDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.security.UserGetDTO;
+import org.foi.diplomski.msakac.odmaralica.exceptions.EmailAlreadyExistException;
+import org.foi.diplomski.msakac.odmaralica.exceptions.InvalidPasswordFormatException;
 import org.foi.diplomski.msakac.odmaralica.mapper.security.UserMapper;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
 import org.foi.diplomski.msakac.odmaralica.model.User;
 import org.foi.diplomski.msakac.odmaralica.repository.RoleRepository;
 import org.foi.diplomski.msakac.odmaralica.repository.UserRepository;
-import org.foi.diplomski.msakac.odmaralica.service.implementation.UserValidationService;
 import org.foi.diplomski.msakac.odmaralica.service.security.IUserService;
 import org.foi.diplomski.msakac.odmaralica.utils.GenericRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,8 +24,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserServiceImpl implements IUserService {
 
-    private static final String REGISTRATION_SUCCESSFUL = "registration_successful";
-
     private static final String REGISTRATION_ROLE = "user";
 
     private final UserRepository userRepository;
@@ -32,30 +32,20 @@ public class UserServiceImpl implements IUserService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    private final UserValidationService userValidationService;
-
     @Override
-    public RegisterResponseDTO registration(RegisterRequestDTO registrationRequest) {
+    public User registration(RegisterRequestDTO registrationRequest) {
+        checkRegisterRequest(registrationRequest);
 
-        userValidationService.validateUser(registrationRequest);
-
-        final User user = UserMapper.INSTANCE.convertToUser(registrationRequest);
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setActivated(true);
-        Role role = roleRepository.findByRole(REGISTRATION_ROLE);
-
-        if (role == null) {
-            role = new Role();
-            role.setRole(REGISTRATION_ROLE);
-            roleRepository.save(role);
-        }
-        user.setRole(role);
+        final User user = User.builder()
+            .name(registrationRequest.getName())
+            .surname(registrationRequest.getSurname())
+            .password(bCryptPasswordEncoder.encode(registrationRequest.getPassword()))
+            .email(registrationRequest.getEmail())
+            .role(getRole())
+            .activated(false).build();
         userRepository.save(user);
 
-        final String username = registrationRequest.getEmail();
-        log.info("{} registered successfully!", username);
-
-        return new RegisterResponseDTO("{} registered successfully!");
+        return user;
     }
 
     @Override
@@ -71,4 +61,27 @@ public class UserServiceImpl implements IUserService {
     public User findById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
+
+    private void checkRegisterRequest(RegisterRequestDTO registrationRequest) {
+        final String email = registrationRequest.getEmail();
+        final boolean existsByEmail = userRepository.existsByEmail(email);
+        if (existsByEmail) {
+            throw new EmailAlreadyExistException(email);
+        }
+        final String password = registrationRequest.getPassword();
+        if (password.length() < 8) {
+            throw new InvalidPasswordFormatException();
+        }
+    }
+
+    private Role getRole() {
+        Role role = roleRepository.findByRole(REGISTRATION_ROLE);
+        if (role == null) {
+            role = new Role();
+            role.setRole(REGISTRATION_ROLE);
+            roleRepository.save(role);
+        }
+        return role;
+    }
+
 }

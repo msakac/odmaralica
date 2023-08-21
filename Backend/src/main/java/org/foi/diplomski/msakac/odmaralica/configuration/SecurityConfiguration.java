@@ -39,7 +39,7 @@ public class SecurityConfiguration {
 		return http.cors().and().csrf().disable()
 				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 				.authorizeRequests()
-				.antMatchers("/register", "/auth/login","/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/actuator/**", "/city").permitAll()
+				.antMatchers("/auth/register", "/auth/login","/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/actuator/**", "/city").permitAll()
 				.antMatchers("/role", "/log", "/activity-type").hasAuthority("admin")
 				.anyRequest().authenticated().and()
 				.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()

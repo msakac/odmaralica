@@ -20,6 +20,12 @@ public final class InvalidRequestResponseBuilder {
         else if (e instanceof BadCredentialsException){
             return new CreateResponseDTO<Object>(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
+        else if (e instanceof RegistrationException){
+            if(e instanceof EmailAlreadyExistException)
+                return new CreateResponseDTO<Object>(HttpStatus.CONFLICT, e.getMessage());
+            else if(e instanceof InvalidPasswordFormatException)
+                return new CreateResponseDTO<Object>(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
         //TODO: RuntimeException zamijeniti sa svojim exceptionom
         else if (e instanceof RuntimeException){
             return new CreateResponseDTO<Object>(HttpStatus.CONFLICT, e.getMessage());

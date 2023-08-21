@@ -5,6 +5,9 @@ import javax.validation.Valid;
 import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.LoginRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.LoginResponseDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterRequestDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterResponseDTO;
+import org.foi.diplomski.msakac.odmaralica.exceptions.EmailAlreadyExistException;
 import org.foi.diplomski.msakac.odmaralica.exceptions.InvalidRequestResponseBuilder;
 import org.foi.diplomski.msakac.odmaralica.service.security.IAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,27 +34,25 @@ public class AuthController {
     public ResponseEntity<Object> login(@Valid @RequestBody LoginRequestDTO loginRequest) {
         try {
             LoginResponseDTO response = authService.login(loginRequest);
-            CreateResponseDTO<LoginResponseDTO> createResponse = new CreateResponseDTO<LoginResponseDTO>(response, HttpStatus.OK);
-            return ResponseEntity.ok(createResponse);
+            CreateResponseDTO<LoginResponseDTO> loginResponse = new CreateResponseDTO<LoginResponseDTO>(response, HttpStatus.OK);
+            return ResponseEntity.ok(loginResponse);
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(InvalidRequestResponseBuilder.createResponse(e));
         }
     }
 
-    // @PostMapping("/register")
-    // public ResponseEntity<String> register(@RequestBody RegisterRequestDTO registrationRequest) {
-    //     // Call authentication service to process user registration
-    //     authService.register(registrationRequest);
-    //     return ResponseEntity.ok("User registered successfully.");
-    // }
-
-    // @PostMapping("/refresh")
-    // public ResponseEntity<AuthenticationResponse> refresh(@RequestBody RefreshTokenRequest refreshTokenRequest) {
-    //     // Call authentication service to refresh token
-    //     AuthenticationResponse response = authService.refreshToken(refreshTokenRequest);
-    //     return ResponseEntity.ok(response);
-    // }
-
-    // // Other endpoints for logout, password reset, etc.
+    @PostMapping("/register")
+    public ResponseEntity<Object> register(@Valid @RequestBody RegisterRequestDTO registerRequest) {
+        try{
+            RegisterResponseDTO response = authService.register(registerRequest);
+            CreateResponseDTO<RegisterResponseDTO> regResponse = new CreateResponseDTO<RegisterResponseDTO>(response, HttpStatus.OK);
+            return ResponseEntity.ok(regResponse);
+        } catch(Exception e){
+            if(e instanceof EmailAlreadyExistException){
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(InvalidRequestResponseBuilder.createResponse(e));
+            }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(InvalidRequestResponseBuilder.createResponse(e));
+        }
+    }
 
 }

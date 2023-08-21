@@ -12,10 +12,10 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 public class LoginRequestDTO {
 
-    @NotEmpty(message = "{login_email_not_empty}")
+    @NotEmpty(message = "Email cannot be empty")
     private String email;
 
-    @NotEmpty(message = "{login_password_not_empty}")
+    @NotEmpty(message = "Password cannot be empty")
     private String password;
 
 }

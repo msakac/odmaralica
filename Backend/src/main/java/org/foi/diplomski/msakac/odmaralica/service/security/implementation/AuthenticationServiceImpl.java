@@ -5,8 +5,11 @@ import org.foi.diplomski.msakac.odmaralica.dto.security.LoginRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.LoginResponseDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterResponseDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.security.UserGetDTO;
 import org.foi.diplomski.msakac.odmaralica.mapper.security.UserMapper;
 import org.foi.diplomski.msakac.odmaralica.model.User;
+import org.foi.diplomski.msakac.odmaralica.model.security.TokenType;
+import org.foi.diplomski.msakac.odmaralica.model.security.UserToken;
 import org.foi.diplomski.msakac.odmaralica.security.jwt.JwtTokenManager;
 import org.foi.diplomski.msakac.odmaralica.service.security.IAuthenticationService;
 import org.foi.diplomski.msakac.odmaralica.service.security.IUserService;
@@ -44,6 +47,11 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
     }
 
     public RegisterResponseDTO register(RegisterRequestDTO registerRequestDTO) {
-        return null;
+        User registeredUser = userService.registration(registerRequestDTO);
+        UserToken activationToken = new UserToken(registeredUser, TokenType.Activation);
+        UserGetDTO userGetDTO = UserMapper.INSTANCE.convertToUserGetDTO(registeredUser);
+        //TODO send email with activation token
+        //TODO save activation token to database
+        return new RegisterResponseDTO(userGetDTO, activationToken.getToken());
     }
 }

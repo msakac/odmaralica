@@ -20,7 +20,7 @@ public class HelloController {
     public ResponseEntity<Object> sayHello(HttpServletRequest request) {
         String token = extractToken(request.getHeader("Authorization"));
         String username = SecurityConstants.getAuthenticatedUsername();
-        CreateResponseDTO<String> createResponse = new CreateResponseDTO<String>("bok", HttpStatus.OK);
+        CreateResponseDTO<String> createResponse = new CreateResponseDTO<String>("bok" + username + token, HttpStatus.OK);
         return ResponseEntity.ok(createResponse);
     }
 
