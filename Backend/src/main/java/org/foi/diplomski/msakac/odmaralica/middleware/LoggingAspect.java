@@ -91,14 +91,13 @@ public class LoggingAspect {
 
             CreateResponseDTO<Object> body = (CreateResponseDTO<Object>) result.getBody();
             if (response != null && body != null) {
-                int status = result.getStatusCodeValue();
                 String code = result.getStatusCode().toString();
                 String resMessage = body.getMessage();
                 if (resMessage == null) {
                     resMessage = "Request successful";
                 }
-                String responseInfo = String.format("Res | Status: %d %s, Time: %d ms, Message: %s\n",
-                        status, code, duration, resMessage);
+                String responseInfo = String.format("Res | Status: %s, Time: %d ms, Message: %s\n",
+                        code, duration, resMessage);
 
                 log.info(requestInfo);
                 log.info(responseInfo);
@@ -109,9 +108,9 @@ public class LoggingAspect {
                     .logMessage(resMessage)
                     .httpMethod(httpMethod)
                     .endpoint(endpoint)
-                    .statusCode(String.valueOf(status))
+                    .statusCode(String.valueOf(code))
                     .ipAddress(request.getRemoteAddr())
-                    .responseTime(String.valueOf(duration))
+                    .responseTime(String.valueOf(duration) + " ms")
                     .createdAt(Timestamp.from(new Date().toInstant()))
                     .build();
                 logService.create(logPostDTO);

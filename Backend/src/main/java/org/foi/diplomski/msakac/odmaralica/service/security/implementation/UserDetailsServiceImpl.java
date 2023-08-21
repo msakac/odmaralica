@@ -1,10 +1,11 @@
-package org.foi.diplomski.msakac.odmaralica.service.security;
+package org.foi.diplomski.msakac.odmaralica.service.security.implementation;
 
 import lombok.RequiredArgsConstructor;
 
-import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDto;
+import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
 import org.foi.diplomski.msakac.odmaralica.model.security.CustomUser;
+import org.foi.diplomski.msakac.odmaralica.service.security.IUserService;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,12 +22,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private static final String EMAIL_OR_PASSWORD_INVALID = "Invalid email or password.";
 
-    private final UserService userService;
+    private final IUserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String email) {
 
-        final AuthenticatedUserDto authenticatedUser = userService.findAuthenticatedUserByEmail(email);
+        final AuthenticatedUserDTO authenticatedUser = userService.findAuthenticatedUserByEmail(email);
 
         if (Objects.isNull(authenticatedUser)) {
             throw new UsernameNotFoundException(EMAIL_OR_PASSWORD_INVALID);

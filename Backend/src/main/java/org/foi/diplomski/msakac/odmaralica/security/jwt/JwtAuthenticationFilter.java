@@ -3,7 +3,9 @@ package org.foi.diplomski.msakac.odmaralica.security.jwt;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.foi.diplomski.msakac.odmaralica.service.security.UserDetailsServiceImpl;
+import org.foi.diplomski.msakac.odmaralica.model.User;
+import org.foi.diplomski.msakac.odmaralica.service.security.implementation.UserDetailsServiceImpl;
+import org.foi.diplomski.msakac.odmaralica.service.security.implementation.UserServiceImpl;
 import org.foi.diplomski.msakac.odmaralica.utils.SecurityConstants;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
@@ -30,6 +32,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final UserDetailsServiceImpl userDetailsService;
 
+    private final UserServiceImpl userService;
+
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
 
@@ -41,13 +45,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         final String header = req.getHeader(SecurityConstants.HEADER_STRING);
-        String email = null;
+        Long id = null;
         String authToken = null;
         if (Objects.nonNull(header) && header.startsWith(SecurityConstants.TOKEN_PREFIX)) {
 
             authToken = header.replace(SecurityConstants.TOKEN_PREFIX, StringUtils.EMPTY);
             try {
-                email = jwtTokenManager.getEmailFromToken(authToken);
+                id = jwtTokenManager.getUserIdFromToken(authToken);
             } catch (Exception e) {
                 log.error("Authentication Exception : {}", e.getMessage());
             }
@@ -55,15 +59,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         final SecurityContext securityContext = SecurityContextHolder.getContext();
 
-        if (Objects.nonNull(email) && Objects.isNull(securityContext.getAuthentication())) {
-
-            final UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+        if (Objects.nonNull(id) && Objects.isNull(securityContext.getAuthentication())) {
+            final User user = userService.findById(id);
+            final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
 
             if (jwtTokenManager.validateToken(authToken, userDetails.getUsername())) {
 
                 final UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
-                log.info("Authentication successful. Logged in email : {} ", email);
+                log.info("Authentication successful. Logged in email : {} ", user.getEmail());
                 securityContext.setAuthentication(authentication);
             }
         }

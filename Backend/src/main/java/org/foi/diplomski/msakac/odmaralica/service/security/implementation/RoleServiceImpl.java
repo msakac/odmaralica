@@ -1,4 +1,4 @@
-package org.foi.diplomski.msakac.odmaralica.service.security;
+package org.foi.diplomski.msakac.odmaralica.service.security.implementation;
 
 import lombok.RequiredArgsConstructor;
 
@@ -6,11 +6,12 @@ import org.foi.diplomski.msakac.odmaralica.dto.security.RoleRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.mapper.security.RoleMapper;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
 import org.foi.diplomski.msakac.odmaralica.repository.RoleRepository;
+import org.foi.diplomski.msakac.odmaralica.service.security.IRoleService;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class RoleServiceImpl implements RoleService {
+public class RoleServiceImpl implements IRoleService {
     private final RoleRepository roleRepository;
 
     public Role save(RoleRequestDTO roleRequest) {

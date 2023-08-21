@@ -3,6 +3,7 @@ package org.foi.diplomski.msakac.odmaralica.exceptions;
 import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.BadCredentialsException;
 
 public final class InvalidRequestResponseBuilder {
     public String message;
@@ -12,10 +13,12 @@ public final class InvalidRequestResponseBuilder {
             String message = buildDataIntegrityViolationExceptionMessage((DataIntegrityViolationException) e);
             return new CreateResponseDTO<Object>(HttpStatus.BAD_REQUEST, message);
         }
-
         else if(e instanceof IllegalArgumentException){
             String message = buildIllegalArgumentExceptionMessage((IllegalArgumentException) e);
             return new CreateResponseDTO<Object>(HttpStatus.BAD_REQUEST, message);
+        }
+        else if (e instanceof BadCredentialsException){
+            return new CreateResponseDTO<Object>(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
         //TODO: RuntimeException zamijeniti sa svojim exceptionom
         else if (e instanceof RuntimeException){

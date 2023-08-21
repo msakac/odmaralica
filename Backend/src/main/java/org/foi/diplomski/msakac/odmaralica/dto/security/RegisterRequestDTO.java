@@ -13,7 +13,7 @@ import javax.validation.constraints.NotEmpty;
 @Setter
 @ToString
 @AllArgsConstructor
-public class RegistrationRequest {
+public class RegisterRequestDTO {
 
     @NotEmpty(message = "{registration_name_not_empty}")
     private String name;

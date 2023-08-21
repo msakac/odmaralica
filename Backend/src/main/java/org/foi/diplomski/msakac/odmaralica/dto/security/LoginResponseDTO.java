@@ -8,8 +8,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class LoginResponse {
+public class LoginResponseDTO {
 
-    private String token;
+    private String accessToken;
+    private String refreshToken;
 
 }

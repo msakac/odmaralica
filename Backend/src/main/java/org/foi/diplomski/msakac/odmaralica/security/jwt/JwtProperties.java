@@ -18,4 +18,8 @@ public class JwtProperties {
 
     private long expirationMinute;
 
+    private long refreshExpirationMinute;
+
+    private String refreshSecretKey;
+
 }

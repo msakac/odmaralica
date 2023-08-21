@@ -1,6 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.exceptions;
 
-import org.foi.diplomski.msakac.odmaralica.controller.security.LoginController;
+import org.foi.diplomski.msakac.odmaralica.controller.security.AuthController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.time.LocalDateTime;
 
 
-@RestControllerAdvice(basePackageClasses = LoginController.class)
+@RestControllerAdvice(basePackageClasses = AuthController.class)
 public class LoginControllerAdvice {
 
     @ExceptionHandler(BadCredentialsException.class)

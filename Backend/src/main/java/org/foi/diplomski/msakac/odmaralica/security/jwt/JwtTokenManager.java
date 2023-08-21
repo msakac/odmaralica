@@ -7,8 +7,12 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.RequiredArgsConstructor;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
 import org.foi.diplomski.msakac.odmaralica.model.User;
+import org.foi.diplomski.msakac.odmaralica.model.security.RefreshToken;
+import org.foi.diplomski.msakac.odmaralica.service.security.implementation.RefreshTokenServiceImpl;
+import org.foi.diplomski.msakac.odmaralica.service.security.implementation.UserServiceImpl;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -17,35 +21,58 @@ import java.util.Date;
 public class JwtTokenManager {
 
     private final JwtProperties jwtProperties;
-
+    private final UserServiceImpl userService;
+    private final RefreshTokenServiceImpl refreshTokenService;
     public String generateToken(User user) {
 
-        final String email = user.getEmail();
+        final Long id = user.getId();
         final Role userRole = user.getRole();
 
-        //@formatter:off
 		return JWT.create()
-				.withSubject(email)
+				.withSubject(Long.toString(id))
 				.withIssuer(jwtProperties.getIssuer())
 				.withClaim("role", userRole.getRole())
 				.withIssuedAt(new Date())
 				.withExpiresAt(new Date(System.currentTimeMillis() + jwtProperties.getExpirationMinute() * 60 * 1000))
 				.sign(Algorithm.HMAC256(jwtProperties.getSecretKey().getBytes()));
-		//@formatter:on
     }
 
-    public String getEmailFromToken(String token) {
+    public String generateRefreshToken(User user) {
+        final Long id = user.getId();
+        final long expiresAt = System.currentTimeMillis() + jwtProperties.getRefreshExpirationMinute() * 60 * 1000;
+        String token = JWT.create()
+                .withSubject(Long.toString(id))
+                .withClaim("refreshToken", true)
+                .withIssuer(jwtProperties.getIssuer())
+                .withIssuedAt(new Date())
+                .withExpiresAt(new Date(expiresAt))
+                .sign(Algorithm.HMAC256(jwtProperties.getRefreshSecretKey().getBytes()));
+
+        RefreshToken refreshToken = RefreshToken.builder()
+                .token(token)
+                .user(user)
+                .expiresAt(new Timestamp(expiresAt))
+                .createdAt(new Timestamp(System.currentTimeMillis()))
+                .isExpired(false)
+                .build();
+
+        refreshTokenService.create(refreshToken);
+        return token;
+    }
+
+
+    public Long getUserIdFromToken(String token) {
 
         final DecodedJWT decodedJWT = getDecodedJWT(token);
 
-        return decodedJWT.getSubject();
+        return Long.parseLong(decodedJWT.getSubject());
     }
 
     public boolean validateToken(String token, String authenticatedEmail) {
 
-        final String emailFromToken = getEmailFromToken(token);
-
-        final boolean equalsEmail = emailFromToken.equals(authenticatedEmail);
+        final Long idFromToken = getUserIdFromToken(token);
+        final User user = userService.findById(idFromToken);
+        final boolean equalsEmail = authenticatedEmail.equals(user.getEmail());
         final boolean tokenExpired = isTokenExpired(token);
 
         return equalsEmail && !tokenExpired;

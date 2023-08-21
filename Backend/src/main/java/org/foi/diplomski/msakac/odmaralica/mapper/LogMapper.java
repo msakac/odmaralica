@@ -8,7 +8,7 @@ import org.foi.diplomski.msakac.odmaralica.model.Log;
 import org.foi.diplomski.msakac.odmaralica.model.User;
 import org.foi.diplomski.msakac.odmaralica.dto.post.LogPostDTO;
 import org.foi.diplomski.msakac.odmaralica.service.IActivityTypeService;
-import org.foi.diplomski.msakac.odmaralica.service.security.UserServiceImpl;
+import org.foi.diplomski.msakac.odmaralica.service.security.implementation.UserServiceImpl;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;

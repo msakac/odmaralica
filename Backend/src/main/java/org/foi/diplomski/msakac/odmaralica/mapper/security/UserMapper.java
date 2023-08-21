@@ -1,7 +1,7 @@
 package org.foi.diplomski.msakac.odmaralica.mapper.security;
 
-import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDto;
-import org.foi.diplomski.msakac.odmaralica.dto.security.RegistrationRequest;
+import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.UserGetDTO;
 import org.foi.diplomski.msakac.odmaralica.model.User;
 import org.mapstruct.Mapper;
@@ -14,11 +14,11 @@ public interface UserMapper {
 
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    User convertToUser(RegistrationRequest registrationRequest);
+    User convertToUser(RegisterRequestDTO registrationRequest);
 
-    AuthenticatedUserDto convertToAuthenticatedUserDto(User user);
+    AuthenticatedUserDTO convertToAuthenticatedUserDto(User user);
 
-    User convertToUser(AuthenticatedUserDto authenticatedUserDto);
+    User convertToUser(AuthenticatedUserDTO authenticatedUserDto);
 
     UserGetDTO convertToUserGetDTO(User user);
 

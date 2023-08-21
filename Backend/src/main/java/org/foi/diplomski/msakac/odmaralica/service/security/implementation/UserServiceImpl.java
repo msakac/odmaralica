@@ -1,17 +1,18 @@
-package org.foi.diplomski.msakac.odmaralica.service.security;
+package org.foi.diplomski.msakac.odmaralica.service.security.implementation;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDto;
-import org.foi.diplomski.msakac.odmaralica.dto.security.RegistrationRequest;
-import org.foi.diplomski.msakac.odmaralica.dto.security.RegistrationResponse;
+import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterRequestDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterResponseDTO;
 import org.foi.diplomski.msakac.odmaralica.mapper.security.UserMapper;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
 import org.foi.diplomski.msakac.odmaralica.model.User;
 import org.foi.diplomski.msakac.odmaralica.repository.RoleRepository;
 import org.foi.diplomski.msakac.odmaralica.repository.UserRepository;
 import org.foi.diplomski.msakac.odmaralica.service.implementation.UserValidationService;
+import org.foi.diplomski.msakac.odmaralica.service.security.IUserService;
 import org.foi.diplomski.msakac.odmaralica.utils.GenericRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
 
     private static final String REGISTRATION_SUCCESSFUL = "registration_successful";
 
@@ -34,7 +35,7 @@ public class UserServiceImpl implements UserService {
     private final UserValidationService userValidationService;
 
     @Override
-    public RegistrationResponse registration(RegistrationRequest registrationRequest) {
+    public RegisterResponseDTO registration(RegisterRequestDTO registrationRequest) {
 
         userValidationService.validateUser(registrationRequest);
 
@@ -54,11 +55,11 @@ public class UserServiceImpl implements UserService {
         final String username = registrationRequest.getEmail();
         log.info("{} registered successfully!", username);
 
-        return new RegistrationResponse("{} registered successfully!");
+        return new RegisterResponseDTO("{} registered successfully!");
     }
 
     @Override
-    public AuthenticatedUserDto findAuthenticatedUserByEmail(String email) {
+    public AuthenticatedUserDTO findAuthenticatedUserByEmail(String email) {
         User exampleUser = new User();
         exampleUser.setEmail(email);
 

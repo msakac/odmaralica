@@ -9,7 +9,7 @@ import org.foi.diplomski.msakac.odmaralica.model.Role;
 @Getter
 @Setter
 @NoArgsConstructor
-public class AuthenticatedUserDto {
+public class AuthenticatedUserDTO {
     //TODO dodati za aktivaciju korisnickog racuna
 
 

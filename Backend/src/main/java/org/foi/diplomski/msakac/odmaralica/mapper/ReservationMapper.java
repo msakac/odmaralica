@@ -12,7 +12,7 @@ import org.foi.diplomski.msakac.odmaralica.model.AccommodationUnit;
 import org.foi.diplomski.msakac.odmaralica.model.Reservation;
 import org.foi.diplomski.msakac.odmaralica.model.User;
 import org.foi.diplomski.msakac.odmaralica.service.IAccommodationUnitService;
-import org.foi.diplomski.msakac.odmaralica.service.security.UserServiceImpl;
+import org.foi.diplomski.msakac.odmaralica.service.security.implementation.UserServiceImpl;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;

@@ -10,7 +10,7 @@ import javax.validation.constraints.NotEmpty;
 @Getter
 @Setter
 @AllArgsConstructor
-public class LoginRequest {
+public class LoginRequestDTO {
 
     @NotEmpty(message = "{login_email_not_empty}")
     private String email;
