@@ -12,9 +12,8 @@ import org.foi.diplomski.msakac.odmaralica.model.Role;
 public class AuthenticatedUserDTO {
     //TODO dodati za aktivaciju korisnickog racuna
 
-
     private Long id;
-
+    
     private String name;
 
     private String surname;

@@ -1,5 +1,7 @@
 package org.foi.diplomski.msakac.odmaralica.service.security.implementation;
 
+import javax.validation.constraints.Email;
+
 import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.LoginRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.LoginResponseDTO;
@@ -11,8 +13,10 @@ import org.foi.diplomski.msakac.odmaralica.model.User;
 import org.foi.diplomski.msakac.odmaralica.model.security.TokenType;
 import org.foi.diplomski.msakac.odmaralica.model.security.UserToken;
 import org.foi.diplomski.msakac.odmaralica.security.jwt.JwtTokenManager;
+import org.foi.diplomski.msakac.odmaralica.service.EmailSenderService;
 import org.foi.diplomski.msakac.odmaralica.service.security.IAuthenticationService;
 import org.foi.diplomski.msakac.odmaralica.service.security.IUserService;
+import org.foi.diplomski.msakac.odmaralica.service.security.IUserTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,12 +28,17 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenManager jwtTokenManager;
     private final IUserService userService;
+    private final IUserTokenService userTokenService;
+    private final EmailSenderService emailSenderService;
 
     @Autowired
-    public AuthenticationServiceImpl(AuthenticationManager authenticationManager, IUserService userService, JwtTokenManager jwtTokenManager) {
+    public AuthenticationServiceImpl(AuthenticationManager authenticationManager, IUserService userService, 
+            JwtTokenManager jwtTokenManager, IUserTokenService userTokenService, EmailSenderService emailSenderService) {
         this.authenticationManager = authenticationManager;
         this.userService = userService;
         this.jwtTokenManager = jwtTokenManager;
+        this.userTokenService = userTokenService;
+        this.emailSenderService = emailSenderService;
     }
 
     public LoginResponseDTO login(LoginRequestDTO loginRequestDTO) {
@@ -48,10 +57,11 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
 
     public RegisterResponseDTO register(RegisterRequestDTO registerRequestDTO) {
         User registeredUser = userService.registration(registerRequestDTO);
-        UserToken activationToken = new UserToken(registeredUser, TokenType.Activation);
+        UserToken activationToken = new UserToken(registeredUser, TokenType.PasswordReset);
         UserGetDTO userGetDTO = UserMapper.INSTANCE.convertToUserGetDTO(registeredUser);
+        userTokenService.create(activationToken);
+        emailSenderService.sendSimpleEmail("azroditus@gmail.com", "Activation token", activationToken.getToken());
         //TODO send email with activation token
-        //TODO save activation token to database
         return new RegisterResponseDTO(userGetDTO, activationToken.getToken());
     }
 }
