@@ -321,20 +321,32 @@
 				{
 					"name": "City GET",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsInJvbGUiOiJSZW50ZXIiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiZXhwIjoxNjkyMzYyNTI2LCJpYXQiOjE2OTIzNjE5MjZ9.0u0ZB2sGec_8ci4UcO3Ra7350V1INYSMBQR4yk5DjsM"
+							}
+						},
 						"method": "GET",
 						"header": [],
-						"url": "http://localhost:8080/city/5"
+						"url": "http://localhost:8080/city"
 					},
 					"response": []
 				},
 				{
 					"name": "City POST",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsInJvbGUiOiJSZW50ZXIiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiZXhwIjoxNjkyMzU2MjIxLCJpYXQiOjE2OTIzNTU2MjF9.wE_xFLgWKku2GiJYl6pBJCb12dcfCFb35U9hSnN1mHM"
+							}
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Blabla\",\r\n    \"zip\":432204,\r\n    \"regionId\": 2\r\n}",
+							"raw": "{\r\n    \"name\":\"Zagreb\",\r\n    \"zip\":40000,\r\n    \"regionId\": 2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -386,7 +398,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/city/61245215"
+						"url": "http://localhost:8080/city/41"
 					},
 					"response": []
 				},
@@ -396,7 +408,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/city/find?q=region.country.id=3",
+							"raw": "http://localhost:8080/city/find?q=region.country.id=31",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -409,7 +421,7 @@
 							"query": [
 								{
 									"key": "q",
-									"value": "region.country.id=3"
+									"value": "region.country.id=31"
 								}
 							]
 						}
@@ -540,7 +552,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"residenceId\": 3,\r\n    \"street\": \"Kucica 16\",\r\n    \"cityId\": 2\r\n}",
+							"raw": "{\r\n    \"residenceId\": 4,\r\n    \"street\": \"Kucica 16\",\r\n    \"cityId\": 2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -939,6 +951,12 @@
 				{
 					"name": "Activity Type GET",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsInJvbGUiOiJSZW50ZXIiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiZXhwIjoxNjkyMzYwOTU4LCJpYXQiOjE2OTIzNjAzNTh9.FcZRrWOzAoXFx0ZH9S0bzYvexa8B84xYf-UHh_mhuUQ"
+							}
+						},
 						"method": "GET",
 						"header": [],
 						"url": "http://localhost:8080/activity-type"
@@ -1143,24 +1161,6 @@
 			"name": "SECURITY",
 			"item": [
 				{
-					"name": "Register",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"User\",\r\n    \"surname\":\"Userovic\",\r\n    \"email\":\"user@gmail.com\",\r\n    \"password\":\"user\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:8080/register"
-					},
-					"response": []
-				},
-				{
 					"name": "Role",
 					"request": {
 						"auth": {
@@ -1186,6 +1186,38 @@
 				},
 				{
 					"name": "Login",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJlbnRlciIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3QiLCJleHAiOjE2OTI2MjM1MzksImlhdCI6MTY5MjYxNjMzOX0._OqfyKq2GGQgfeYQjK8tXTwr239GIEt1K0Ha7yZy2qo"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/hello"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AUTHENTICATION",
+			"item": [
+				{
+					"name": "Login",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -1198,7 +1230,25 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/login"
+						"url": "http://localhost:8080/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Joza\",\r\n    \"surname\":\"Jozic\",\r\n    \"email\":\"joza@gmail.com\",\r\n    \"password\":\"user1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/auth/register"
 					},
 					"response": []
 				}
