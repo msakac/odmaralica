@@ -1,16 +1,16 @@
-package org.foi.diplomski.msakac.odmaralica.security.service;
+package org.foi.diplomski.msakac.odmaralica.service.security;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDto;
+import org.foi.diplomski.msakac.odmaralica.dto.security.RegistrationRequest;
+import org.foi.diplomski.msakac.odmaralica.dto.security.RegistrationResponse;
+import org.foi.diplomski.msakac.odmaralica.mapper.security.UserMapper;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
 import org.foi.diplomski.msakac.odmaralica.model.User;
 import org.foi.diplomski.msakac.odmaralica.repository.RoleRepository;
 import org.foi.diplomski.msakac.odmaralica.repository.UserRepository;
-import org.foi.diplomski.msakac.odmaralica.security.dto.AuthenticatedUserDto;
-import org.foi.diplomski.msakac.odmaralica.security.dto.RegistrationRequest;
-import org.foi.diplomski.msakac.odmaralica.security.dto.RegistrationResponse;
-import org.foi.diplomski.msakac.odmaralica.security.mapper.UserMapper;
 import org.foi.diplomski.msakac.odmaralica.service.implementation.UserValidationService;
 import org.foi.diplomski.msakac.odmaralica.utils.GenericRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

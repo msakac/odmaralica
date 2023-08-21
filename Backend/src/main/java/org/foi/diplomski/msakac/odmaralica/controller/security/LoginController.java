@@ -1,8 +1,9 @@
-package org.foi.diplomski.msakac.odmaralica.controller;
+package org.foi.diplomski.msakac.odmaralica.controller.security;
 
 import lombok.RequiredArgsConstructor;
-import org.foi.diplomski.msakac.odmaralica.security.dto.LoginRequest;
-import org.foi.diplomski.msakac.odmaralica.security.dto.LoginResponse;
+
+import org.foi.diplomski.msakac.odmaralica.dto.security.LoginRequest;
+import org.foi.diplomski.msakac.odmaralica.dto.security.LoginResponse;
 import org.foi.diplomski.msakac.odmaralica.security.jwt.JwtTokenService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

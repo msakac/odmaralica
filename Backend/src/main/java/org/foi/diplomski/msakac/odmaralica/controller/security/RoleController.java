@@ -1,10 +1,10 @@
-package org.foi.diplomski.msakac.odmaralica.controller;
+package org.foi.diplomski.msakac.odmaralica.controller.security;
 
 import lombok.RequiredArgsConstructor;
 import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.security.RoleRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
-import org.foi.diplomski.msakac.odmaralica.security.dto.RoleRequestDTO;
-import org.foi.diplomski.msakac.odmaralica.security.service.RoleService;
+import org.foi.diplomski.msakac.odmaralica.service.security.RoleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

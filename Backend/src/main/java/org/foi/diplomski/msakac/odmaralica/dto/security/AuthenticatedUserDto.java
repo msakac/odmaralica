@@ -1,4 +1,4 @@
-package org.foi.diplomski.msakac.odmaralica.security.dto;
+package org.foi.diplomski.msakac.odmaralica.dto.security;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,7 +1,7 @@
-package org.foi.diplomski.msakac.odmaralica.security.mapper;
+package org.foi.diplomski.msakac.odmaralica.mapper.security;
 
+import org.foi.diplomski.msakac.odmaralica.dto.security.RoleRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
-import org.foi.diplomski.msakac.odmaralica.security.dto.RoleRequestDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;

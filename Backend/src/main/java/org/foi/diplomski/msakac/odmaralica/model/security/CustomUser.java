@@ -1,4 +1,4 @@
-package org.foi.diplomski.msakac.odmaralica.security.model;
+package org.foi.diplomski.msakac.odmaralica.model.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;

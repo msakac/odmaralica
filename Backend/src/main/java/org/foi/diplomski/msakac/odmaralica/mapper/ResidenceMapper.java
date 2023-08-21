@@ -5,7 +5,7 @@ import org.foi.diplomski.msakac.odmaralica.dto.post.ResidencePostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.ResidencePutDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Residence;
 import org.foi.diplomski.msakac.odmaralica.model.User;
-import org.foi.diplomski.msakac.odmaralica.security.service.UserServiceImpl;
+import org.foi.diplomski.msakac.odmaralica.service.security.UserServiceImpl;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;

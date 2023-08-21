@@ -1,9 +1,10 @@
-package org.foi.diplomski.msakac.odmaralica.security.service;
+package org.foi.diplomski.msakac.odmaralica.service.security;
 
 import lombok.RequiredArgsConstructor;
+
+import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDto;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
-import org.foi.diplomski.msakac.odmaralica.security.dto.AuthenticatedUserDto;
-import org.foi.diplomski.msakac.odmaralica.security.model.CustomUser;
+import org.foi.diplomski.msakac.odmaralica.model.security.CustomUser;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

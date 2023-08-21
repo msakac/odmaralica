@@ -1,6 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.dto.get;
 
-import org.foi.diplomski.msakac.odmaralica.security.dto.UserGetDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.security.UserGetDTO;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

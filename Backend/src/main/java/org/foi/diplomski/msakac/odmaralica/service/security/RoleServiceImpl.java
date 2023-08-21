@@ -1,10 +1,11 @@
-package org.foi.diplomski.msakac.odmaralica.security.service;
+package org.foi.diplomski.msakac.odmaralica.service.security;
 
 import lombok.RequiredArgsConstructor;
+
+import org.foi.diplomski.msakac.odmaralica.dto.security.RoleRequestDTO;
+import org.foi.diplomski.msakac.odmaralica.mapper.security.RoleMapper;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
 import org.foi.diplomski.msakac.odmaralica.repository.RoleRepository;
-import org.foi.diplomski.msakac.odmaralica.security.dto.RoleRequestDTO;
-import org.foi.diplomski.msakac.odmaralica.security.mapper.RoleMapper;
 import org.springframework.stereotype.Service;
 
 @Service

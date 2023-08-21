@@ -1,9 +1,9 @@
-package org.foi.diplomski.msakac.odmaralica.security.utils;
+package org.foi.diplomski.msakac.odmaralica.utils;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.foi.diplomski.msakac.odmaralica.security.model.CustomUser;
+import org.foi.diplomski.msakac.odmaralica.model.security.CustomUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

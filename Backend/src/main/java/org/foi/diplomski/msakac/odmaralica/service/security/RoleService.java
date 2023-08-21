@@ -1,7 +1,7 @@
-package org.foi.diplomski.msakac.odmaralica.security.service;
+package org.foi.diplomski.msakac.odmaralica.service.security;
 
+import org.foi.diplomski.msakac.odmaralica.dto.security.RoleRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
-import org.foi.diplomski.msakac.odmaralica.security.dto.RoleRequestDTO;
 
 public interface RoleService {
     Role save(RoleRequestDTO roleRequest);

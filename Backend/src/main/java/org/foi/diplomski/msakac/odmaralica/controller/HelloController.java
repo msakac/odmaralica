@@ -2,7 +2,7 @@ package org.foi.diplomski.msakac.odmaralica.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.foi.diplomski.msakac.odmaralica.security.utils.SecurityConstants;
+import org.foi.diplomski.msakac.odmaralica.utils.SecurityConstants;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -2,12 +2,13 @@ package org.foi.diplomski.msakac.odmaralica.security.jwt;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDto;
+import org.foi.diplomski.msakac.odmaralica.dto.security.LoginRequest;
+import org.foi.diplomski.msakac.odmaralica.dto.security.LoginResponse;
+import org.foi.diplomski.msakac.odmaralica.mapper.security.UserMapper;
 import org.foi.diplomski.msakac.odmaralica.model.User;
-import org.foi.diplomski.msakac.odmaralica.security.dto.AuthenticatedUserDto;
-import org.foi.diplomski.msakac.odmaralica.security.dto.LoginRequest;
-import org.foi.diplomski.msakac.odmaralica.security.dto.LoginResponse;
-import org.foi.diplomski.msakac.odmaralica.security.mapper.UserMapper;
-import org.foi.diplomski.msakac.odmaralica.security.service.UserService;
+import org.foi.diplomski.msakac.odmaralica.service.security.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
