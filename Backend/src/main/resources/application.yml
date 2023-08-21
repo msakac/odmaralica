@@ -3,6 +3,13 @@ spring:
     url: jdbc:postgresql://ep-billowing-sound-02425339.eu-central-1.aws.neon.tech/odmaralica
     username: 
     password: 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: 
+    password: 
+    properties.mail.smtp.auth: true
+    properties.mail.smtp.starttls.enable: true
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
