@@ -12,6 +12,8 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "user_token")
 public class UserToken implements Serializable {
     private static final long serialVersionUID = 1L;

@@ -41,6 +41,7 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
     }
 
     public LoginResponseDTO login(LoginRequestDTO loginRequestDTO) {
+        //Authenticate user
         final UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
             loginRequestDTO.getEmail(), loginRequestDTO.getPassword());
 
@@ -49,11 +50,25 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
 
         final User user = UserMapper.INSTANCE.convertToUser(authenticatedUserDTO);
 
+        //Check if user is activated
         if(user.getActivated() == false) {
-            throw new AccountNotActivatedException(user.getEmail());
-            //TODO if activation token is older than 12h, send new activation email and delete old token
+
+            UserToken activationToken = new UserToken(user, TokenType.Activation);
+            // If there is no valid token, create new one and return true.
+            boolean isCreated = userTokenService.deactivateAndCreateActivationToken(activationToken);
+
+            if(isCreated){
+                 UserGetDTO userGetDTO = UserMapper.INSTANCE.convertToUserGetDTO(user);
+                emailSenderService.sendActivationEmail(userGetDTO, activationToken);
+                throw new AccountNotActivatedException("Account with email '" + user.getEmail()
+                + "' is not activated. New activation token is being sent to your email.");
+            }
+
+            throw new AccountNotActivatedException("Account with email '" + user.getEmail()
+                + "' is not activated. Please check your email for activation token.");
         }
 
+        //Create tokens and return them in response
         final String accessToken = jwtTokenManager.generateToken(user);
         final String refreshToken = jwtTokenManager.generateRefreshToken(user);
 
@@ -62,7 +77,7 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
 
     public RegisterResponseDTO register(RegisterRequestDTO registerRequestDTO) {
         User registeredUser = userService.registration(registerRequestDTO);
-        UserToken activationToken = new UserToken(registeredUser, TokenType.PasswordReset);
+        UserToken activationToken = new UserToken(registeredUser, TokenType.Activation);
         UserGetDTO userGetDTO = UserMapper.INSTANCE.convertToUserGetDTO(registeredUser);
         userTokenService.create(activationToken);
         emailSenderService.sendActivationEmail(userGetDTO, activationToken);
