@@ -2,8 +2,13 @@ package org.foi.diplomski.msakac.odmaralica.model;
 
 import lombok.*;
 
+import java.util.List;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
+import org.foi.diplomski.msakac.odmaralica.model.security.RefreshToken;
+import org.foi.diplomski.msakac.odmaralica.model.security.UserToken;
 
 @Getter
 @Setter
@@ -45,4 +50,10 @@ public class User {
     private String description;
 
     private String phoneNumber;
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+    private List<RefreshToken> refreshTokens;
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+    private List<UserToken> userTokens;
 }

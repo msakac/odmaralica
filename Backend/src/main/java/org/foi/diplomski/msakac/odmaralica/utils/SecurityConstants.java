@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class SecurityConstants {
 
     public static final Long ACTIVATION_TOKEN_EXPIRATION_TIME = 24 * 60 * 60 * 1000L; // 24 hours
-    
+
     public static final Long PASSWORD_RESET_TOKEN_EXPIRATION_TIME = 20 * 60 * 1000L; // 20 minutes
 
     public static final String TOKEN_PREFIX = "Bearer ";

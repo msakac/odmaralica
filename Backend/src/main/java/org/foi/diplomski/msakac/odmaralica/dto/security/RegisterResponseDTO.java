@@ -11,8 +11,5 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegisterResponseDTO {
-
     private UserGetDTO user;
-    private String token;
-
 }

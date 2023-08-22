@@ -1,7 +1,5 @@
 package org.foi.diplomski.msakac.odmaralica.service.security.implementation;
 
-import javax.validation.constraints.Email;
-
 import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.LoginRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.LoginResponseDTO;
@@ -13,7 +11,7 @@ import org.foi.diplomski.msakac.odmaralica.model.User;
 import org.foi.diplomski.msakac.odmaralica.model.security.TokenType;
 import org.foi.diplomski.msakac.odmaralica.model.security.UserToken;
 import org.foi.diplomski.msakac.odmaralica.security.jwt.JwtTokenManager;
-import org.foi.diplomski.msakac.odmaralica.service.EmailSenderService;
+import org.foi.diplomski.msakac.odmaralica.service.implementation.EmailSenderService;
 import org.foi.diplomski.msakac.odmaralica.service.security.IAuthenticationService;
 import org.foi.diplomski.msakac.odmaralica.service.security.IUserService;
 import org.foi.diplomski.msakac.odmaralica.service.security.IUserTokenService;
@@ -60,8 +58,8 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
         UserToken activationToken = new UserToken(registeredUser, TokenType.PasswordReset);
         UserGetDTO userGetDTO = UserMapper.INSTANCE.convertToUserGetDTO(registeredUser);
         userTokenService.create(activationToken);
-        emailSenderService.sendSimpleEmail("azroditus@gmail.com", "Activation token", activationToken.getToken());
-        //TODO send email with activation token
-        return new RegisterResponseDTO(userGetDTO, activationToken.getToken());
+        emailSenderService.sendActivationEmail(userGetDTO, activationToken);
+        return new RegisterResponseDTO(userGetDTO);
     }
+
 }
