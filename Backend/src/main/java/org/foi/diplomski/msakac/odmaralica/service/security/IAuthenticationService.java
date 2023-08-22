@@ -9,4 +9,6 @@ public interface IAuthenticationService {
     LoginResponseDTO login(LoginRequestDTO loginRequestDTO);
 
     RegisterResponseDTO register(RegisterRequestDTO registerRequestDTO);
+
+    void activateAccount(String token);
 }

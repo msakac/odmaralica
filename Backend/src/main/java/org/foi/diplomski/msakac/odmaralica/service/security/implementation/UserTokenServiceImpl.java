@@ -41,4 +41,8 @@ public class UserTokenServiceImpl implements IUserTokenService {
         return false;
     }
 
+    public UserToken findByToken(String token) {
+        return userTokenRepository.findByToken(token);
+    }
+
 }

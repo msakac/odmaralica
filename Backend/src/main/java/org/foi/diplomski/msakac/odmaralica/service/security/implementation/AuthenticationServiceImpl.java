@@ -1,5 +1,7 @@
 package org.foi.diplomski.msakac.odmaralica.service.security.implementation;
 
+import java.sql.Timestamp;
+
 import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.LoginRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.LoginResponseDTO;
@@ -7,6 +9,7 @@ import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterResponseDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.UserGetDTO;
 import org.foi.diplomski.msakac.odmaralica.exceptions.AccountNotActivatedException;
+import org.foi.diplomski.msakac.odmaralica.exceptions.InvalidActivationTokenException;
 import org.foi.diplomski.msakac.odmaralica.mapper.security.UserMapper;
 import org.foi.diplomski.msakac.odmaralica.model.User;
 import org.foi.diplomski.msakac.odmaralica.model.security.TokenType;
@@ -82,6 +85,31 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
         userTokenService.create(activationToken);
         emailSenderService.sendActivationEmail(userGetDTO, activationToken);
         return new RegisterResponseDTO(userGetDTO);
+    }
+
+    public void activateAccount(String token) {
+
+        Timestamp current = new Timestamp(System.currentTimeMillis());
+        UserToken activationToken = userTokenService.findByToken(token);
+
+        // Check validity of token
+        if(activationToken == null || activationToken.isUsed()
+            || activationToken.getType() != TokenType.Activation
+            || current.after(activationToken.getExpiresAt())) {
+
+            throw new InvalidActivationTokenException("Invalid activation token.");
+        }
+
+        // Activate user
+        User user = activationToken.getUser();
+        user.setActivated(true);
+        userService.update(user);
+
+        // Set token as used
+        activationToken.setUsed(true);
+        userTokenService.update(activationToken);
+
+        emailSenderService.sendActivationSuccessEmail(UserMapper.INSTANCE.convertToUserGetDTO(user));
     }
 
 }

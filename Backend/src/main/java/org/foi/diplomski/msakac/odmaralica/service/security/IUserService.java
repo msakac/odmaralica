@@ -11,4 +11,6 @@ public interface IUserService {
 
     AuthenticatedUserDTO findAuthenticatedUserByEmail(String email);
 
+    User update(User user);
+
 }

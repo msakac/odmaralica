@@ -40,6 +40,11 @@ public final class InvalidRequestResponseBuilder {
             return new CreateResponseDTO<Object>(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
 
+        // Custom invalid activation token exception
+        else if(e instanceof InvalidActivationTokenException){
+            return new CreateResponseDTO<Object>(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
         // All other exceptions
         else if (e instanceof RuntimeException){
             return new CreateResponseDTO<Object>(HttpStatus.CONFLICT, e.getMessage());

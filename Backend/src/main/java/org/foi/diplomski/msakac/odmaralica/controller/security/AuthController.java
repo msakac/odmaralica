@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -54,5 +55,17 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(InvalidRequestResponseBuilder.createResponse(e));
         }
     }
+
+    @PostMapping("/activate")
+    public ResponseEntity<Object> activateAccount(@Valid @RequestParam String token) {
+        try {
+            authService.activateAccount(token);
+            CreateResponseDTO<String> activationResponse = new CreateResponseDTO<String>(HttpStatus.OK, "Account activated successfully. You can now login.");
+            return ResponseEntity.ok(activationResponse);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(InvalidRequestResponseBuilder.createResponse(e));
+        }
+    }
+
 
 }

@@ -79,4 +79,9 @@ public class UserServiceImpl implements IUserService {
         return role;
     }
 
+    @Override
+    public User update(User user) {
+        return userRepository.save(user);
+    }
+
 }
