@@ -56,4 +56,8 @@ public class User {
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
     private List<UserToken> userTokens;
+
+    @OneToMany(cascade = CascadeType.DETACH, mappedBy = "user")
+    private List<Log> logs;
+
 }

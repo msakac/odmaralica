@@ -15,7 +15,6 @@ import org.foi.diplomski.msakac.odmaralica.model.User;
 import org.foi.diplomski.msakac.odmaralica.repository.RoleRepository;
 import org.foi.diplomski.msakac.odmaralica.repository.UserRepository;
 import org.foi.diplomski.msakac.odmaralica.service.security.IUserService;
-import org.foi.diplomski.msakac.odmaralica.utils.GenericRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -53,7 +52,7 @@ public class UserServiceImpl implements IUserService {
         User exampleUser = new User();
         exampleUser.setEmail(email);
 
-        final User user = GenericRepository.findOneByExample(exampleUser, userRepository);
+        final User user = userRepository.findByEmail(email);
 
         return UserMapper.INSTANCE.convertToAuthenticatedUserDto(user);
     }

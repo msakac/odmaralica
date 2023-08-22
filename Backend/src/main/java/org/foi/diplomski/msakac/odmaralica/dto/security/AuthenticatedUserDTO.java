@@ -24,4 +24,6 @@ public class AuthenticatedUserDTO {
 
     private Role role;
 
+    private boolean activated;
+
 }

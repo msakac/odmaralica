@@ -9,24 +9,38 @@ public final class InvalidRequestResponseBuilder {
     public String message;
 
     public static CreateResponseDTO<Object> createResponse(Exception e) {
+
+        // PSQL DataIntegrityViolationException
         if (e instanceof DataIntegrityViolationException){
             String message = buildDataIntegrityViolationExceptionMessage((DataIntegrityViolationException) e);
             return new CreateResponseDTO<Object>(HttpStatus.BAD_REQUEST, message);
         }
+
+        // PSQL IllegalArgumentException
         else if(e instanceof IllegalArgumentException){
             String message = buildIllegalArgumentExceptionMessage((IllegalArgumentException) e);
             return new CreateResponseDTO<Object>(HttpStatus.BAD_REQUEST, message);
         }
+
+        // Spring Security BadCredentialsException
         else if (e instanceof BadCredentialsException){
             return new CreateResponseDTO<Object>(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
+
+        // Custom Registration exceptions
         else if (e instanceof RegistrationException){
             if(e instanceof EmailAlreadyExistException)
                 return new CreateResponseDTO<Object>(HttpStatus.CONFLICT, e.getMessage());
             else if(e instanceof InvalidPasswordFormatException)
                 return new CreateResponseDTO<Object>(HttpStatus.BAD_REQUEST, e.getMessage());
         }
-        //TODO: RuntimeException zamijeniti sa svojim exceptionom
+
+        // Custom Login exception
+        else if(e instanceof AccountNotActivatedException){
+            return new CreateResponseDTO<Object>(HttpStatus.UNAUTHORIZED, e.getMessage());
+        }
+
+        // All other exceptions
         else if (e instanceof RuntimeException){
             return new CreateResponseDTO<Object>(HttpStatus.CONFLICT, e.getMessage());
         }

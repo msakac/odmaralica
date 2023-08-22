@@ -6,6 +6,7 @@ import org.foi.diplomski.msakac.odmaralica.dto.security.LoginResponseDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterResponseDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.UserGetDTO;
+import org.foi.diplomski.msakac.odmaralica.exceptions.AccountNotActivatedException;
 import org.foi.diplomski.msakac.odmaralica.mapper.security.UserMapper;
 import org.foi.diplomski.msakac.odmaralica.model.User;
 import org.foi.diplomski.msakac.odmaralica.model.security.TokenType;
@@ -47,6 +48,12 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
         final AuthenticatedUserDTO authenticatedUserDTO = userService.findAuthenticatedUserByEmail(loginRequestDTO.getEmail());
 
         final User user = UserMapper.INSTANCE.convertToUser(authenticatedUserDTO);
+
+        if(user.getActivated() == false) {
+            throw new AccountNotActivatedException(user.getEmail());
+            //TODO if activation token is older than 12h, send new activation email and delete old token
+        }
+
         final String accessToken = jwtTokenManager.generateToken(user);
         final String refreshToken = jwtTokenManager.generateRefreshToken(user);
 
