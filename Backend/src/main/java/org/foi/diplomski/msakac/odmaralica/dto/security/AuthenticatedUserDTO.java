@@ -13,7 +13,7 @@ public class AuthenticatedUserDTO {
     //TODO dodati za aktivaciju korisnickog racuna
 
     private Long id;
-    
+
     private String name;
 
     private String surname;
