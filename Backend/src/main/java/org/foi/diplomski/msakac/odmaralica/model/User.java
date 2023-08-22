@@ -51,13 +51,24 @@ public class User {
 
     private String phoneNumber;
 
+    // If user is deleted so are all refresh_tokens
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
     private List<RefreshToken> refreshTokens;
 
+    // If user is deleted so are all user_tokens
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
     private List<UserToken> userTokens;
 
+    // If user is deleted logs are detached
     @OneToMany(cascade = CascadeType.DETACH, mappedBy = "user")
     private List<Log> logs;
+
+    // If user is deleted so are all reservations of user
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+    private List<Reservation> reservations;
+
+    // If user is deleted so are all residences of user
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "owner")
+    private List<Residence> residences;
 
 }

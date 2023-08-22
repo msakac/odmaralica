@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,4 +30,8 @@ public class City implements Serializable {
     @ManyToOne
     @JoinColumn(name = "region_id", referencedColumnName = "id", nullable = false)
     private Region region;
+
+    // If city is deleted so are all addresses
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "city")
+    private List<Address> addresses;
 }

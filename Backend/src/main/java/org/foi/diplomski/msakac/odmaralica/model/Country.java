@@ -2,6 +2,8 @@ package org.foi.diplomski.msakac.odmaralica.model;
 
 import lombok.*;
 
+import java.util.List;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,4 +28,8 @@ public class Country {
     @NotNull
     @Size(min = 2, max = 2, message = "Country code must be exactly 2 characters long")
     private String countryCode;
+
+    // If country is deleted so are all regions
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "country")
+    private List<Region> regions;
 }

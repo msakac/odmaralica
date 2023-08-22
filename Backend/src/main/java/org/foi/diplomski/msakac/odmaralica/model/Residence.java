@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
@@ -33,4 +34,20 @@ public class Residence implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
+
+    // If residence is deleted so are all addresses
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "residence")
+    private List<Address> addresses;
+
+    // If residence is deleted so are all residence_attributes
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "residence")
+    private List<ResidenceAttribute> residenceAttributes;
+
+    // If residence is deleted so are all accommodation_units
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "residence")
+    private List<AccommodationUnit> accommodationUnits;
+
+    // If residence is deleted so are all residence_images
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "residence")
+    private List<ResidenceImage> residenceImages;
 }

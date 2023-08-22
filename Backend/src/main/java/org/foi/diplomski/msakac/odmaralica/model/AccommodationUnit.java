@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,4 +30,20 @@ public class AccommodationUnit implements Serializable {
 
     @Column(name = "description", nullable = false)
     private String description;
+
+    // If accommodation unit is deleted so are all accommodation_unit_images
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "accommodationUnit")
+    private List<AccommodationUnitImage> accommodationUnitImages;
+
+    // If accommodation unit is deleted so are all reservations
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "accommodationUnit")
+    private List<Reservation> reservations;
+
+    // If accommodation unit is deleted so are price periods
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "accommodationUnit")
+    private List<PricePeriod> pricePeriods;
+
+    // If accommodation unit is deleted so are amenities
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "accommodationUnit")
+    private List<Amenity> amenities;
 }
