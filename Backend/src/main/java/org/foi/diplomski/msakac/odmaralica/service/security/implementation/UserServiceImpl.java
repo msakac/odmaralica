@@ -1,12 +1,9 @@
 package org.foi.diplomski.msakac.odmaralica.service.security.implementation;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterRequestDTO;
-import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterResponseDTO;
-import org.foi.diplomski.msakac.odmaralica.dto.security.UserGetDTO;
 import org.foi.diplomski.msakac.odmaralica.exceptions.EmailAlreadyExistException;
 import org.foi.diplomski.msakac.odmaralica.exceptions.InvalidPasswordFormatException;
 import org.foi.diplomski.msakac.odmaralica.mapper.security.UserMapper;
@@ -18,7 +15,6 @@ import org.foi.diplomski.msakac.odmaralica.service.security.IUserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements IUserService {

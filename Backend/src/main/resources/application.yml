@@ -1,13 +1,13 @@
 spring:
   datasource:
     url: jdbc:postgresql://ep-billowing-sound-02425339.eu-central-1.aws.neon.tech/odmaralica
-    username: 
-    password: 
+    username: msakac
+    password: DMgAFOEUVH18
   mail:
     host: smtp.gmail.com
     port: 587
-    username: 
-    password: 
+    username: msakac98@gmail.com
+    password: bkujgxymiwndgjwo
     properties.mail.smtp.auth: true
     properties.mail.smtp.starttls.enable: true
 
