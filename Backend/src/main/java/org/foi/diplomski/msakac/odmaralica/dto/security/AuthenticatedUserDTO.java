@@ -20,6 +20,7 @@ public class AuthenticatedUserDTO {
 
     private String email;
 
+    private String password;
 
     private Role role;
 

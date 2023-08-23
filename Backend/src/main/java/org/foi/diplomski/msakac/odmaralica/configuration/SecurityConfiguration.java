@@ -1,6 +1,9 @@
 package org.foi.diplomski.msakac.odmaralica.configuration;
 
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+
 import org.foi.diplomski.msakac.odmaralica.security.jwt.JwtAuthenticationEntryPoint;
 import org.foi.diplomski.msakac.odmaralica.security.jwt.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 
 
 @Configuration
@@ -33,7 +37,6 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
         //@formatter:off
 
 		return http.cors().and().csrf().disable()
