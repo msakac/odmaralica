@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterRequestDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.security.UserGetDTO;
 import org.foi.diplomski.msakac.odmaralica.exceptions.EmailAlreadyExistException;
 import org.foi.diplomski.msakac.odmaralica.exceptions.InvalidPasswordFormatException;
 import org.foi.diplomski.msakac.odmaralica.mapper.security.UserMapper;
@@ -12,6 +13,7 @@ import org.foi.diplomski.msakac.odmaralica.model.User;
 import org.foi.diplomski.msakac.odmaralica.repository.RoleRepository;
 import org.foi.diplomski.msakac.odmaralica.repository.UserRepository;
 import org.foi.diplomski.msakac.odmaralica.service.security.IUserService;
+import org.foi.diplomski.msakac.odmaralica.utils.SecurityConstants;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -82,6 +84,23 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User update(User user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public AuthenticatedUserDTO getAuthenticatedUser(Long id) {
+        if(id == SecurityConstants.getAuthenticatedUserId()){
+            User user = findById(id);
+            AuthenticatedUserDTO authenticatedUserDTO = UserMapper.INSTANCE.convertToAuthenticatedUserDto(user);
+            return authenticatedUserDTO;
+        }
+        return null;
+    }
+
+    @Override
+    public UserGetDTO findByIdDTO(Long id) {
+        User user = findById(id);
+        UserGetDTO userGetDTO = UserMapper.INSTANCE.convertToUserGetDTO(user);
+        return userGetDTO;
     }
 
 }

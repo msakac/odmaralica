@@ -23,6 +23,7 @@ public class JwtTokenManager {
     private final JwtProperties jwtProperties;
     private final UserServiceImpl userService;
     private final RefreshTokenServiceImpl refreshTokenService;
+
     public String generateToken(User user) {
 
         final Long id = user.getId();

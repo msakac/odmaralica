@@ -1158,62 +1158,6 @@
 			]
 		},
 		{
-			"name": "SECURITY",
-			"item": [
-				{
-					"name": "Role",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {
-								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3QiLCJleHAiOjE2OTE1ODUyNDQsImlhdCI6MTY5MTU4NDY0NH0.E7DwQxXYerIn71K7fGHrWVul1d8wRaKdFQVfwFK0r3Q"
-							}
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"role\": \"Renter\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:8080/role"
-					},
-					"response": []
-				},
-				{
-					"name": "Login",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {
-								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJlbnRlciIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3QiLCJleHAiOjE2OTI2MjM1MzksImlhdCI6MTY5MjYxNjMzOX0._OqfyKq2GGQgfeYQjK8tXTwr239GIEt1K0Ha7yZy2qo"
-							}
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:8080/hello"
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "AUTHENTICATION",
 			"item": [
 				{
@@ -1223,7 +1167,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"user@gmail.com\",\r\n    \"password\":\"user\"\r\n}",
+							"raw": "{\r\n    \"email\":\"sakidotexe2@gmail.com\",\r\n    \"password\":\"user1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1241,7 +1185,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Joza\",\r\n    \"surname\":\"Jozic\",\r\n    \"email\":\"joza@gmail.com\",\r\n    \"password\":\"user1234\"\r\n}",
+							"raw": "{\r\n    \"name\":\"Azra\",\r\n    \"surname\":\"Sakac\",\r\n    \"email\":\"sakidotexe2@gmail.com\",\r\n    \"password\":\"user1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1249,6 +1193,59 @@
 							}
 						},
 						"url": "http://localhost:8080/auth/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Account Activation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"sakidotexe@gmail.com\",\r\n    \"password\":\"user1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/activate?token=82b11090-8933-4cd5-a25b-f6b04ab11b57",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"activate"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "82b11090-8933-4cd5-a25b-f6b04ab11b57"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Role TODO",
+			"item": []
+		},
+		{
+			"name": "User TODO",
+			"item": [
+				{
+					"name": "User GET {id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/user/11"
 					},
 					"response": []
 				}
