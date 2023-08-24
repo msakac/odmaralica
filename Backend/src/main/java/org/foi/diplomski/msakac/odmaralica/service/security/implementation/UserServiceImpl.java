@@ -47,11 +47,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public AuthenticatedUserDTO findAuthenticatedUserByEmail(String email) {
-        User exampleUser = new User();
-        exampleUser.setEmail(email);
-
         final User user = userRepository.findByEmail(email);
-
         return UserMapper.INSTANCE.convertToAuthenticatedUserDto(user);
     }
 
@@ -101,6 +97,11 @@ public class UserServiceImpl implements IUserService {
         User user = findById(id);
         UserGetDTO userGetDTO = UserMapper.INSTANCE.convertToUserGetDTO(user);
         return userGetDTO;
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
 }

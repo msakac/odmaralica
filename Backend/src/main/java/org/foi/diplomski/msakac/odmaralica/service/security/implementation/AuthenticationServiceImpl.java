@@ -75,7 +75,7 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
         final String accessToken = jwtTokenManager.generateToken(user);
         final String refreshToken = jwtTokenManager.generateRefreshToken(user);
 
-        return new LoginResponseDTO(accessToken, refreshToken);
+        return new LoginResponseDTO(accessToken, refreshToken, authenticatedUserDTO);
     }
 
     public RegisterResponseDTO register(RegisterRequestDTO registerRequestDTO) {

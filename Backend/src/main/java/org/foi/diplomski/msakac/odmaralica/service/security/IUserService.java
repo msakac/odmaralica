@@ -18,6 +18,8 @@ public interface IUserService {
 
     User findById(Long id);
 
+    User findByEmail(String email);
+
     UserGetDTO findByIdDTO(Long id);
 
 }
