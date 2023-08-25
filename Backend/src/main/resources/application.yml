@@ -1,13 +1,13 @@
 spring:
   datasource:
     url: jdbc:postgresql://ep-billowing-sound-02425339.eu-central-1.aws.neon.tech/odmaralica
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    username: 
+    password: 
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${MAIL_USERNAME}
-    password: ${MAIL_PASSWORD}
+    username: 
+    password: 
     properties.mail.smtp.auth: true
     properties.mail.smtp.starttls.enable: true
 
@@ -47,6 +47,8 @@ jwt:
   secretKey: secret
   issuer: http://localhost
   expirationMinute: 10
+  refreshExpirationMinute: 10
+  refreshSecretKey: secretrefresh
 
 swagger:
   app-name: Odmaralica
