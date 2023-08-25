@@ -13,25 +13,7 @@ public class OAuth2Config {
 
     @Bean
     public ClientRegistrationRepository clientRegistrationRepository() {
-        ClientRegistration clientRegistration = ClientRegistration.withRegistrationId("google")
-                .clientId("782962192518-d1ahu0uhpqvrd202infhmnabg6hk78r5.apps.googleusercontent.com")
-                .clientSecret("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")
-                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .redirectUri("http://localhost:3000/oauth2/callback/google")
-                .scope("email", "profile")
-                .authorizationUri("https://accounts.google.com/o/oauth2/v2/auth")
-                .tokenUri("https://www.googleapis.com/oauth2/v4/token")
-                .userInfoUri("https://www.googleapis.com/oauth2/v3/userinfo")
-                .userNameAttributeName("id")
-                .clientName("Google")
-                .build();
 
-        InMemoryClientRegistrationRepository clientRegistrationRepository = new InMemoryClientRegistrationRepository(clientRegistration);
-
-        System.out.println(clientRegistrationRepository);
-
-        return new InMemoryClientRegistrationRepository(clientRegistration);
     }
 }
 
