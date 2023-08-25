@@ -19,7 +19,7 @@ public class EmailSenderService {
 
     public void sendActivationEmail(UserGetDTO user, UserToken activationToken) {
         String subject = "Welcome to Odmaralica - Activate Your Account";
-        String activationLink = "http://localhost:8069/auth/activate?token=" + activationToken.getToken();
+        String activationLink = "http://localhost:3000/activate-account?token=" + activationToken.getToken();
         String emailContent = this.getActivationEmailContent(activationLink);
         this.sendMimeMail(user.getEmail(), subject, emailContent);
     }

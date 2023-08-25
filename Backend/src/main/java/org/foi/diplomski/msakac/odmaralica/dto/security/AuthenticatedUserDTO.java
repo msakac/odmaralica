@@ -3,6 +3,8 @@ package org.foi.diplomski.msakac.odmaralica.dto.security;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import org.foi.diplomski.msakac.odmaralica.model.Image;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
 
 
@@ -23,5 +25,11 @@ public class AuthenticatedUserDTO {
     private Role role;
 
     private boolean activated;
+
+    private String description;
+
+    private String phoneNumber;
+
+    private Image image;
 
 }

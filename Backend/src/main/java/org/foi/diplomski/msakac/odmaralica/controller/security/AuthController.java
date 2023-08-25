@@ -67,5 +67,13 @@ public class AuthController {
         }
     }
 
+    //TODO dodati /log-out tako da morem deaktivirati refresh token
+
+    //TODO dodati /reset-password da mogu resetirati lozinku korisnika
+
+    //TODO dodati /forgot-password da mogu poslati korisniku link za resetiranje lozinke
+
+    //TODO dodati /refresh-token da mogu refreshati access token
+
 
 }
