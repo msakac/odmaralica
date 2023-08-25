@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1130e346-5a50-4765-8e74-dd90b15fd3c7",
+		"_postman_id": "680c9ac5-8bc5-49e5-a0a2-a8d683f4a6fd",
 		"name": "Odmaralica API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "28955474"
@@ -1235,7 +1235,26 @@
 		},
 		{
 			"name": "Role TODO",
-			"item": []
+			"item": [
+				{
+					"name": "Role POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/role"
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "User TODO",
