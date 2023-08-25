@@ -1,15 +1,26 @@
 spring:
   datasource:
     url: jdbc:postgresql://ep-billowing-sound-02425339.eu-central-1.aws.neon.tech/odmaralica
-    username: 
-    password: 
+    username:
+    password:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: 
-    password: 
+    username:
+    password:
     properties.mail.smtp.auth: true
     properties.mail.smtp.starttls.enable: true
+    security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId:
+            clientSecret:
+            redirectUri: "http://localhost:3000/oauth2/callback/google"
+            scope:
+              - email
+              - profile
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
@@ -49,6 +60,10 @@ jwt:
   expirationMinute: 10
   refreshExpirationMinute: 10
   refreshSecretKey: secretrefresh
+
+app:
+  authorizedRedirectUris:
+    - http://localhost:3000/oauth2/redirect
 
 swagger:
   app-name: Odmaralica

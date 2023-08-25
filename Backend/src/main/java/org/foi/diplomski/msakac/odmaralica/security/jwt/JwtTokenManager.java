@@ -7,9 +7,11 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.RequiredArgsConstructor;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
 import org.foi.diplomski.msakac.odmaralica.model.User;
+import org.foi.diplomski.msakac.odmaralica.model.security.CustomUser;
 import org.foi.diplomski.msakac.odmaralica.model.security.RefreshToken;
 import org.foi.diplomski.msakac.odmaralica.service.security.implementation.RefreshTokenServiceImpl;
 import org.foi.diplomski.msakac.odmaralica.service.security.implementation.UserServiceImpl;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
@@ -27,6 +29,22 @@ public class JwtTokenManager {
     public String generateToken(User user) {
 
         final Long id = user.getId();
+        final Role userRole = user.getRole();
+
+		return JWT.create()
+				.withSubject(Long.toString(id))
+				.withIssuer(jwtProperties.getIssuer())
+				.withClaim("role", userRole.getRole())
+				.withIssuedAt(new Date())
+				.withExpiresAt(new Date(System.currentTimeMillis() + jwtProperties.getExpirationMinute() * 60 * 1000))
+				.sign(Algorithm.HMAC256(jwtProperties.getSecretKey().getBytes()));
+    }
+
+    public String generateToken(Authentication authentication) {
+
+        CustomUser customUser =(CustomUser) authentication.getPrincipal();
+        final Long id = customUser.getId();
+        final User user = userService.findById(id);
         final Role userRole = user.getRole();
 
 		return JWT.create()
