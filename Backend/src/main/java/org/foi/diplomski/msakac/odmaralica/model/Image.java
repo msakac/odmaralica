@@ -1,13 +1,18 @@
 package org.foi.diplomski.msakac.odmaralica.model;
+import lombok.*;
 
-import lombok.Data;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-@Data
+import javax.persistence.*;
+
+
+@Getter
+@Setter
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "image")
 public class Image implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -16,10 +21,7 @@ public class Image implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
-    @Column(name = "name", nullable = false)
-    private String name;
-
+    
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
