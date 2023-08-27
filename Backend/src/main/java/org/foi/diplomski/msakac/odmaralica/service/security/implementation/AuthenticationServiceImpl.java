@@ -78,6 +78,17 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
         return new LoginResponseDTO(accessToken, refreshToken, authenticatedUserDTO);
     }
 
+    @Override
+    public LoginResponseDTO loginOpenAuth(String token) {
+        Long userId = jwtTokenManager.getUserIdFromToken(token);
+        User user = userService.findById(userId);
+        AuthenticatedUserDTO authenticatedUserDTO = UserMapper.INSTANCE.convertToAuthenticatedUserDto(user);
+        final String refreshToken = jwtTokenManager.generateRefreshToken(user);
+
+        return new LoginResponseDTO(token, refreshToken, authenticatedUserDTO);
+    }
+
+
     public RegisterResponseDTO register(RegisterRequestDTO registerRequestDTO) {
         User registeredUser = userService.registration(registerRequestDTO);
         UserToken activationToken = new UserToken(registeredUser, TokenType.Activation);

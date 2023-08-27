@@ -30,7 +30,6 @@ public class Residence implements Serializable {
     @Column(name = "description", nullable = false)
     private String description;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
@@ -47,7 +46,7 @@ public class Residence implements Serializable {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "residence")
     private List<AccommodationUnit> accommodationUnits;
 
-    // If residence is deleted so are all residence_images
+    // residence is deleted so are images
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "residence")
-    private List<ResidenceImage> residenceImages;
+    private List<Image> images;
 }

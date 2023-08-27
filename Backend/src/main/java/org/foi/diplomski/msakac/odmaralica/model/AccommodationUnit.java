@@ -31,10 +31,6 @@ public class AccommodationUnit implements Serializable {
     @Column(name = "description", nullable = false)
     private String description;
 
-    // If accommodation unit is deleted so are all accommodation_unit_images
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "accommodationUnit")
-    private List<AccommodationUnitImage> accommodationUnitImages;
-
     // If accommodation unit is deleted so are all reservations
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "accommodationUnit")
     private List<Reservation> reservations;
@@ -46,4 +42,8 @@ public class AccommodationUnit implements Serializable {
     // If accommodation unit is deleted so are amenities
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "accommodationUnit")
     private List<Amenity> amenities;
+
+    // If accommodation unit is deleted so are images
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "accommodationUnit")
+    private List<Image> images;
 }

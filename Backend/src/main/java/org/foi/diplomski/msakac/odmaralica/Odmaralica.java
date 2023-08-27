@@ -17,17 +17,17 @@ public class Odmaralica {
         SpringApplication.run(Odmaralica.class, args);
     }
 
-    @Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**")
-				.allowedOrigins("http://localhost:3000", "http://192.168.1.11:3000")
-				.allowedMethods("GET", "POST", "PUT", "DELETE") // Add allowed methods
-				.allowCredentials(true) // If you need to send cookies or authentication headers
-				.maxAge(3600);
-			}
-		};
-	}
+    // @Bean
+	// public WebMvcConfigurer corsConfigurer() {
+	// 	return new WebMvcConfigurer() {
+	// 		@Override
+	// 		public void addCorsMappings(CorsRegistry registry) {
+	// 			registry.addMapping("/**")
+	// 			.allowedOrigins("http://localhost:3000", "http://192.168.1.11:3000")
+	// 			.allowedMethods("GET", "POST", "PUT", "DELETE") // Add allowed methods
+	// 			.allowCredentials(true) // If you need to send cookies or authentication headers
+	// 			.maxAge(3600);
+	// 		}
+	// 	};
+	// }
 }

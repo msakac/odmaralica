@@ -19,5 +19,13 @@ public class RefreshTokenServiceImpl implements IRefreshTokenService {
     public RefreshToken update(RefreshToken refreshToken) {
         return refreshTokenRepository.save(refreshToken);
     }
+
+    public void deactivateOldToken(Long userId) {
+        RefreshToken refreshToken = refreshTokenRepository.findByUserIdAndIsExpiredFalse(userId);
+        if (refreshToken != null) {
+            refreshToken.setExpired(true);
+            refreshTokenRepository.save(refreshToken);
+        }
+    }
 }
 

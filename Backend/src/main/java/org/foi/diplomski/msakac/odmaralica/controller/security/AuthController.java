@@ -3,6 +3,7 @@ package org.foi.diplomski.msakac.odmaralica.controller.security;
 import javax.validation.Valid;
 
 import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.security.LoginOpenAuthRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.LoginRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.LoginResponseDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterRequestDTO;
@@ -35,6 +36,17 @@ public class AuthController {
     public ResponseEntity<Object> login(@Valid @RequestBody LoginRequestDTO loginRequest) {
         try {
             LoginResponseDTO response = authService.login(loginRequest);
+            CreateResponseDTO<LoginResponseDTO> loginResponse = new CreateResponseDTO<LoginResponseDTO>(response, HttpStatus.OK);
+            return ResponseEntity.ok(loginResponse);
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(InvalidRequestResponseBuilder.createResponse(e));
+        }
+    }
+
+    @PostMapping("/login-open-auth")
+    public ResponseEntity<Object> loginOpenAuth(@Valid @RequestBody LoginOpenAuthRequestDTO request) {
+        try {
+            LoginResponseDTO response = authService.loginOpenAuth(request.getToken());
             CreateResponseDTO<LoginResponseDTO> loginResponse = new CreateResponseDTO<LoginResponseDTO>(response, HttpStatus.OK);
             return ResponseEntity.ok(loginResponse);
         }catch(Exception e){

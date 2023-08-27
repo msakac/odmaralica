@@ -18,6 +18,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 
 @Configuration
@@ -37,12 +41,28 @@ public class SecurityConfiguration {
     @Bean
     public AuthenticationManager authenticationManager(final AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
-    }
+}
 
     @Bean
     public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
         return new HttpCookieOAuth2AuthorizationRequestRepository();
     }
+
+    // @Bean
+    // public CorsFilter corsFilter() {
+    //     CorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    //     CorsConfiguration config = new CorsConfiguration();
+    //     config.setAllowCredentials(true);
+    //     config.addAllowedOrigin("*");
+    //     config.addAllowedHeader("*");
+    //     config.addAllowedMethod("OPTIONS");
+    //     config.addAllowedMethod("GET");
+    //     config.addAllowedMethod("POST");
+    //     config.addAllowedMethod("PUT");
+    //     config.addAllowedMethod("DELETE");
+    //     ((UrlBasedCorsConfigurationSource) source).registerCorsConfiguration("/**", config);
+    //     return new CorsFilter(source);
+    // }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

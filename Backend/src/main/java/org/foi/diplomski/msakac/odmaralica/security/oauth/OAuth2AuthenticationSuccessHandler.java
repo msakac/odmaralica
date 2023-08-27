@@ -51,7 +51,8 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         String targetUrl = redirectUri.orElse(getDefaultTargetUrl());
 
         String token = jwtTokenManager.generateToken(authentication);
-
+        //ovo je lokacije na koju se salje zahtjev prema frontendu odnosno to bi trebalo biti na
+        // --> http://localhost:3000/oauth2/redirect
         return UriComponentsBuilder.fromUriString(targetUrl)
                 .queryParam("token", token)
                 .build().toUriString();

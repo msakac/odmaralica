@@ -71,4 +71,12 @@ public class User {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "owner")
     private List<Residence> residences;
 
+    // If creator is deleted so are images
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "createdBy")
+    private List<Image> images;
+
+    // If user is deleted so are images
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+    private List<Image> imagesOwner;
+
 }

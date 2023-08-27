@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 @Data
 @Entity
@@ -16,8 +17,25 @@ public class Image implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Lob
-    @Column(name = "image", nullable = false)
-    private byte[] image;
+    @Column(name = "name", nullable = false)
+    private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "accommodation_unit_id")
+    private AccommodationUnit accommodationUnit;
+
+    @ManyToOne
+    @JoinColumn(name = "residence_id")
+    private Residence residence;
+
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    private User createdBy;
+
+    @Column(name = "created_at", nullable = false)
+    private Timestamp createdAt;
 }

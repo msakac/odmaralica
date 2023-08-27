@@ -74,11 +74,10 @@ public class JwtTokenManager {
                 .createdAt(new Timestamp(System.currentTimeMillis()))
                 .isExpired(false)
                 .build();
-
+        refreshTokenService.deactivateOldToken(id);
         refreshTokenService.create(refreshToken);
         return token;
     }
-
 
     public Long getUserIdFromToken(String token) {
 

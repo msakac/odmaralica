@@ -2,9 +2,11 @@ package org.foi.diplomski.msakac.odmaralica.service.security.implementation;
 
 import lombok.RequiredArgsConstructor;
 
+import org.foi.diplomski.msakac.odmaralica.model.Role;
 import org.foi.diplomski.msakac.odmaralica.model.User;
 import org.foi.diplomski.msakac.odmaralica.model.security.CustomUser;
 import org.foi.diplomski.msakac.odmaralica.model.security.OAuth2UserInfo;
+import org.foi.diplomski.msakac.odmaralica.repository.RoleRepository;
 import org.foi.diplomski.msakac.odmaralica.repository.UserRepository;
 import org.foi.diplomski.msakac.odmaralica.security.oauth.OAuth2AuthenticationProcessingException;
 import org.foi.diplomski.msakac.odmaralica.security.oauth.OAuth2UserInfoFactory;
@@ -21,6 +23,8 @@ import org.springframework.stereotype.Service;
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private static final String REGISTRATION_ROLE = "user";
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
@@ -58,13 +62,17 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     }
 
     private User registerNewUser(OAuth2UserRequest oAuth2UserRequest, OAuth2UserInfo oAuth2UserInfo) {
+        //TODO na era modelu deti kruzice na one2many
+        //TODO slika korisnika
         User user = new User();
-
-        // user.setProvider(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()));
-        // user.setProviderId(oAuth2UserInfo.getId());
-        user.setName(oAuth2UserInfo.getName());
+        String name = oAuth2UserInfo.getName();
+        String[] parts = name.split(" ");
+        user.setName(parts[0]);
         user.setEmail(oAuth2UserInfo.getEmail());
-        // user.setImageUrl(oAuth2UserInfo.getImageUrl());
+        user.setRole(getRole());
+        user.setPassword("no-password");
+        user.setActivated(true);
+        user.setSurname(parts[1]);
         return userRepository.save(user);
     }
 
@@ -72,6 +80,16 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         existingUser.setName(oAuth2UserInfo.getName());
         // existingUser.setImageUrl(oAuth2UserInfo.getImageUrl());
         return userRepository.save(existingUser);
+    }
+
+    private Role getRole() {
+        Role role = roleRepository.findByRole(REGISTRATION_ROLE);
+        if (role == null) {
+            role = new Role();
+            role.setRole(REGISTRATION_ROLE);
+            roleRepository.save(role);
+        }
+        return role;
     }
 
 }

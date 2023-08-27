@@ -80,9 +80,13 @@ public class LoggingAspect {
     }
 
     private void logData(long startTime, String className, String methodName, ResponseEntity<CreateResponseDTO<Object>> result) {
+
         long duration = (System.currentTimeMillis() - startTime);
         String httpMethod = request.getMethod();
         String endpoint = request.getRequestURI();
+        if(endpoint.contains("image")) {
+            return;
+        }
         String activityType = getActivityType(httpMethod, endpoint);
         if (request != null) {
             String requestInfo = String.format("Req | Method: %s, URI: %s, IP: %s, Class: %s, ClassMethod: %s",
