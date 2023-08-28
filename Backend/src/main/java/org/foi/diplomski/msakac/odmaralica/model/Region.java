@@ -25,7 +25,7 @@ public class Region implements Serializable {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "country_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 
     // If Region is deleted so are all cities

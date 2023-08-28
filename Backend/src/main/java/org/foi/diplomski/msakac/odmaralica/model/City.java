@@ -28,7 +28,7 @@ public class City implements Serializable {
     private String zip;
 
     @ManyToOne
-    @JoinColumn(name = "region_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "region_id", nullable = false)
     private Region region;
 
     // If city is deleted so are all addresses

@@ -8,6 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Getter
 @Setter
 @Entity
@@ -30,6 +32,7 @@ public class Country {
     private String countryCode;
 
     // If country is deleted so are all regions
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "country")
     private List<Region> regions;
 }
