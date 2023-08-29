@@ -10,6 +10,7 @@ import org.foi.diplomski.msakac.odmaralica.security.oauth.OAuth2AuthenticationSu
 import org.foi.diplomski.msakac.odmaralica.service.security.implementation.CustomOAuth2UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -72,12 +73,37 @@ public class SecurityConfiguration {
                         .csrf()
                         .disable()
 				        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                        // .authorizeRequests()
-                        // .antMatchers("/auth/register", "/auth/login",
-                        // "/auth/activate","/v3/api-docs/**", "/swagger-ui/**",
-                        // "/swagger-ui.html", "/actuator/**", "/city", "/user/**").permitAll()
-                        // .antMatchers("/role", "/log", "/activity-type", "/user").hasAuthority("admin")
-                        // .anyRequest().authenticated().and()
+                        .authorizeRequests()
+                        // Pristup svima (GET, POST, PUT, DELETE)
+                        .antMatchers(
+                            "/auth/register", 
+                            "/auth/login",
+                            "/auth/login-open-auth",
+                            "/auth/activate", 
+                            "/swagger-ui/**",
+                            "/swagger-ui.html")
+                            .permitAll()
+                        // Pristup svima (GET)
+                        .antMatchers(HttpMethod.GET, 
+                            "/city/**", 
+                            "/user/**",
+                            "/region/**",
+                            "/country/**")
+                            .permitAll()
+                        // Pristup samo adminu (GET, POST, PUT, DELETE)
+                        .antMatchers(
+                            "/role", 
+                            "/log", 
+                            "/activity-type", 
+                            "/user", 
+                            "/country")
+                            .hasAuthority("admin")
+                        // .antMatchers(HttpMethod.PUT, "/country/**").hasAuthority("admin")
+                        // .antMatchers(HttpMethod.DELETE, "/country/**").hasAuthority("admin")
+                        // .antMatchers(HttpMethod.POST, "/country").hasAuthority("admin")
+                        .anyRequest()
+                        .authenticated()
+                        .and()
                         .exceptionHandling()
                         .authenticationEntryPoint(unauthorizedHandler).and()
                         .sessionManagement()
