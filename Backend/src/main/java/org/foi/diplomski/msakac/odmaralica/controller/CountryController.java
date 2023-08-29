@@ -2,6 +2,7 @@ package org.foi.diplomski.msakac.odmaralica.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.custom.CountryRegionCityGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.CountryPostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.CountryPutDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Country;
@@ -54,6 +55,13 @@ public class CountryController {
     public ResponseEntity<Object> getAllCountries() {
         List<Country> countries = countryService.findAll();
         CreateResponseDTO<List<Country>> response = new CreateResponseDTO<List<Country>>(countries, HttpStatus.OK);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/with-regions-and-cities")
+    public ResponseEntity<Object> getAllCountriesWithRegionsAndCities() {
+        List<CountryRegionCityGetDTO> countries = countryService.findAllWithRegionsAndCities();
+        CreateResponseDTO<List<CountryRegionCityGetDTO>> response = new CreateResponseDTO<List<CountryRegionCityGetDTO>>(countries, HttpStatus.OK);
         return ResponseEntity.ok(response);
     }
 

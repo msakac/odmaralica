@@ -3,6 +3,9 @@ package org.foi.diplomski.msakac.odmaralica.model;
 import lombok.*;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -29,6 +32,7 @@ public class Region implements Serializable {
     private Country country;
 
     // If Region is deleted so are all cities
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "region")
     private List<City> cities;
 }
