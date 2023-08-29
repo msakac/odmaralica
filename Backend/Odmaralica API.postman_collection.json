@@ -37,6 +37,15 @@
 					"response": []
 				},
 				{
+					"name": "Country \\w Region Cities GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/country/with-regions-and-cities"
+					},
+					"response": []
+				},
+				{
 					"name": "Country GET{id}",
 					"request": {
 						"method": "GET",
@@ -1055,6 +1064,115 @@
 			]
 		},
 		{
+			"name": "Image",
+			"item": [
+				{
+					"name": "Activity Type GET",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsInJvbGUiOiJSZW50ZXIiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiZXhwIjoxNjkyMzYwOTU4LCJpYXQiOjE2OTIzNjAzNTh9.FcZRrWOzAoXFx0ZH9S0bzYvexa8B84xYf-UHh_mhuUQ"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/activity-type"
+					},
+					"response": []
+				},
+				{
+					"name": "Image POST",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Create\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/activity-type"
+					},
+					"response": []
+				},
+				{
+					"name": "Activity Type GET{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/activity-type/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Activity Type PUT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Create\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/activity-type"
+					},
+					"response": []
+				},
+				{
+					"name": "Activity Type DEL",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hrvatska\",\r\n    \"countryCode\": \"HR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/activity-type/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Activity Type FIND",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/activity-type/find?q=name=Create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"activity-type",
+								"find"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "name=Create"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Log",
 			"item": [
 				{
@@ -1162,6 +1280,24 @@
 			"item": [
 				{
 					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"sakidotexe2@gmail.com\",\r\n    \"password\":\"user1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Login OAuth",
 					"request": {
 						"method": "POST",
 						"header": [],
