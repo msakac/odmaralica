@@ -37,9 +37,9 @@ public class RoleController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Role>> roleGet() {
+    public ResponseEntity<Object> roleGet() {
         List<Role> roles = roleService.findAll();
-        return ResponseEntity.status(HttpStatus.OK).body(roles);
+        return ResponseEntity.ok(new CreateResponseDTO<List<Role>>(roles, HttpStatus.OK));
     }
 }
 

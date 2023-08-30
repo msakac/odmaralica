@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -72,10 +73,9 @@ public class UserController {
         }
     }
 
-        @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable Long id) {
         User user = userService.findById(id);
-
         if (user == null) {
             CreateResponseDTO<User> response = new CreateResponseDTO<User>(HttpStatus.NOT_FOUND, "Entity not found");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
@@ -88,4 +88,17 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(InvalidRequestResponseBuilder.createResponse(e));
         }
     }
+
+    @PutMapping()
+    public ResponseEntity<Object> update(@Valid @RequestBody User dto) {
+        try {
+            User updatedEntity = userService.update(dto);
+            return ResponseEntity.ok(new CreateResponseDTO<User>(updatedEntity, HttpStatus.OK));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(InvalidRequestResponseBuilder.createResponse(e));
+        }
+    }
+
+
+    //Za put saljem cijeli objekt, doputam mijenjanje lozinke, ako je lozinka identicna ko u bazi onda lozinku ne diraj inace kriptiraj i zamijeni
 }

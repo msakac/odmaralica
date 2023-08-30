@@ -27,4 +27,6 @@ public class ResidencePutDTO {
 
     @NotNull(message = "Owner ID cannot be empty")
     private Long ownerId;
+
+    private Boolean isPublished;
 }

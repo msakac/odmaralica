@@ -1,5 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.service.implementation;
 
+import org.foi.diplomski.msakac.odmaralica.dto.get.RegionGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.RegionPostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.RegionPutDTO;
 import org.foi.diplomski.msakac.odmaralica.mapper.RegionMapper;
@@ -14,6 +15,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -42,13 +45,19 @@ public class RegionServiceImpl implements IRegionService {
     }
 
     @Override
-    public Region findById(Long id) {
-        return regionRepository.findById(id).orElse(null);
+    public RegionGetDTO findById(Long id) {
+        Region region = regionRepository.findById(id).orElse(null);
+        return regionMapper.convertToRegionGetDTO(region);
     }
 
     @Override
-    public List<Region> findAll() {
-        return regionRepository.findAll();
+    public List<RegionGetDTO> findAll() {
+        List<Region> regions = regionRepository.findAll();
+        List<RegionGetDTO> getRegions = new ArrayList<>();
+        for (Region region : regions) {
+            getRegions.add(regionMapper.convertToRegionGetDTO(region));
+        }
+        return getRegions;
     }
 
     @Override

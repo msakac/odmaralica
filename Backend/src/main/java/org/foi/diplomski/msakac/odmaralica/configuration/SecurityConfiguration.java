@@ -97,7 +97,9 @@ public class SecurityConfiguration {
                             "/log", 
                             "/activity-type", 
                             "/user", 
-                            "/country")
+                            "/country",
+                            "/city",
+                            "/region")
                             .hasAuthority("admin")
                         // .antMatchers(HttpMethod.PUT, "/country/**").hasAuthority("admin")
                         // .antMatchers(HttpMethod.DELETE, "/country/**").hasAuthority("admin")

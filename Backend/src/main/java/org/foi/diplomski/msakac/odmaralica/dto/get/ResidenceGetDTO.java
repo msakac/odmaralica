@@ -16,4 +16,5 @@ public class ResidenceGetDTO {
     private String type;
     private String description;
     private UserGetDTO owner;
+    private Boolean isPublished;
 }

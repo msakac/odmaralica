@@ -1,5 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.service;
 
+import org.foi.diplomski.msakac.odmaralica.dto.get.RegionGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.RegionPostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.RegionPutDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Region;
@@ -11,9 +12,9 @@ public interface IRegionService {
 
     Region findByName(String name);
 
-    Region findById(Long id);
+    RegionGetDTO findById(Long id);
 
-    List<Region> findAll();
+    List<RegionGetDTO> findAll();
 
     Region update(RegionPutDTO region);
 

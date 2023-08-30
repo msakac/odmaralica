@@ -1,6 +1,7 @@
 package org.foi.diplomski.msakac.odmaralica.controller;
 
 import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.get.RegionGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.RegionPostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.RegionPutDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Country;
@@ -57,20 +58,20 @@ public class RegionController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getRegionById(@PathVariable Long id) {
-        Region region = regionService.findById(id);
+        RegionGetDTO region = regionService.findById(id);
 
         if (region == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(notFoundResponse);
         }
 
-        CreateResponseDTO<Region> response = new CreateResponseDTO<Region>(region, HttpStatus.OK);
+        CreateResponseDTO<RegionGetDTO> response = new CreateResponseDTO<RegionGetDTO>(region, HttpStatus.OK);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping
     public ResponseEntity<Object> getAllRegions() {
-        List<Region> regions = regionService.findAll();
-        CreateResponseDTO<List<Region>> response = new CreateResponseDTO<List<Region>>(regions, HttpStatus.OK);
+        List<RegionGetDTO> regions = regionService.findAll();
+        CreateResponseDTO<List<RegionGetDTO>> response = new CreateResponseDTO<List<RegionGetDTO>>(regions, HttpStatus.OK);
         return ResponseEntity.ok(response);
     }
 
@@ -94,7 +95,7 @@ public class RegionController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteRegion(@PathVariable Long id) {
-        Region existingRegion = regionService.findById(id);
+        RegionGetDTO existingRegion = regionService.findById(id);
 
         if (existingRegion == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(notFoundResponse);

@@ -100,6 +100,11 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User update(User user) {
+        //check if password is the same as in database, if not encode it
+        User samePasswordUser = userRepository.findById(user.getId()).orElse(null);
+        if(!samePasswordUser.getPassword().equals(user.getPassword())){
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        }
         return userRepository.save(user);
     }
 

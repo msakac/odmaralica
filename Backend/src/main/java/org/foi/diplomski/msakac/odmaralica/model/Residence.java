@@ -3,6 +3,8 @@ package org.foi.diplomski.msakac.odmaralica.model;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -33,6 +35,9 @@ public class Residence implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
+
+    @NotNull
+    private Boolean isPublished;
 
     // If residence is deleted so are all addresses
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "residence")
