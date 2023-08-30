@@ -1,15 +1,24 @@
 package org.foi.diplomski.msakac.odmaralica.controller.security;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.UserGetDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.security.UserPostDTO;
+import org.foi.diplomski.msakac.odmaralica.exceptions.InvalidRequestResponseBuilder;
 import org.foi.diplomski.msakac.odmaralica.model.User;
 import org.foi.diplomski.msakac.odmaralica.service.security.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,5 +53,39 @@ public class UserController {
 
         CreateResponseDTO<UserGetDTO> response = new CreateResponseDTO<UserGetDTO>(user, HttpStatus.OK);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping
+    public ResponseEntity<Object> getAllUsers() {
+        List<User> users = userService.findAll();
+        CreateResponseDTO<List<User>> response = new CreateResponseDTO<List<User>>(users, HttpStatus.OK);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping
+    public ResponseEntity<Object> userPost(@Valid @RequestBody UserPostDTO userRequest) {
+        try {
+            User createdEntity = userService.createUser(userRequest);
+            return ResponseEntity.ok(new CreateResponseDTO<User>(createdEntity, HttpStatus.OK));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(InvalidRequestResponseBuilder.createResponse(e));
+        }
+    }
+
+        @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(@PathVariable Long id) {
+        User user = userService.findById(id);
+
+        if (user == null) {
+            CreateResponseDTO<User> response = new CreateResponseDTO<User>(HttpStatus.NOT_FOUND, "Entity not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+
+        try {
+            userService.delete(id);
+            return ResponseEntity.ok(new CreateResponseDTO<User>(HttpStatus.OK, "Entity deleted"));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(InvalidRequestResponseBuilder.createResponse(e));
+        }
     }
 }

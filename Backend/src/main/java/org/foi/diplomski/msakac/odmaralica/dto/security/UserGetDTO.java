@@ -15,4 +15,5 @@ public class UserGetDTO {
     //TODO mozda meknuti email
     private String email;
     private String description;
+    private String phoneNumber;
 }

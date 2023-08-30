@@ -1,8 +1,11 @@
 package org.foi.diplomski.msakac.odmaralica.service.security;
 
+import java.util.List;
+
 import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.UserGetDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.security.UserPostDTO;
 import org.foi.diplomski.msakac.odmaralica.model.User;
 
 
@@ -22,4 +25,9 @@ public interface IUserService {
 
     UserGetDTO findByIdDTO(Long id);
 
+    List<User> findAll();
+
+    User createUser(UserPostDTO user);
+
+    void delete(Long id);
 }

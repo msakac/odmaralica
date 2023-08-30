@@ -7,10 +7,13 @@ import org.foi.diplomski.msakac.odmaralica.model.Role;
 import org.foi.diplomski.msakac.odmaralica.service.security.IRoleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -31,6 +34,12 @@ public class RoleController {
         CreateResponseDTO<Role> response = new CreateResponseDTO<Role>(roleResponse, HttpStatus.OK);
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Role>> roleGet() {
+        List<Role> roles = roleService.findAll();
+        return ResponseEntity.status(HttpStatus.OK).body(roles);
     }
 }
 

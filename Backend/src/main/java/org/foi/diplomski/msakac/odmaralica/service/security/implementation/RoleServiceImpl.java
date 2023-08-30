@@ -2,6 +2,8 @@ package org.foi.diplomski.msakac.odmaralica.service.security.implementation;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 import org.foi.diplomski.msakac.odmaralica.dto.security.RoleRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.mapper.security.RoleMapper;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
@@ -21,6 +23,14 @@ public class RoleServiceImpl implements IRoleService {
 
     public Role find(String name) {
         return roleRepository.findByRole(name);
+    }
+
+    public Role findById(Long id) {
+        return roleRepository.findById(id).orElse(null);
+    }
+
+    public List<Role> findAll() {
+        return roleRepository.findAll();
     }
 }
 

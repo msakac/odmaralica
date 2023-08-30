@@ -2,21 +2,33 @@ package org.foi.diplomski.msakac.odmaralica.mapper.security;
 
 import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.UserGetDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.security.UserPostDTO;
+import org.foi.diplomski.msakac.odmaralica.model.Role;
 import org.foi.diplomski.msakac.odmaralica.model.User;
+import org.foi.diplomski.msakac.odmaralica.service.security.IRoleService;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
-import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface UserMapper {
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public abstract class UserMapper {
 
-    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
+    @Autowired
+    protected IRoleService roleService;
 
-    AuthenticatedUserDTO convertToAuthenticatedUserDto(User user);
+    public abstract AuthenticatedUserDTO convertToAuthenticatedUserDto(User user);
 
-    User convertToUser(AuthenticatedUserDTO authenticatedUserDto);
+    public abstract User convertToUser(AuthenticatedUserDTO authenticatedUserDto);
 
-    UserGetDTO convertToUserGetDTO(User user);
+    public abstract UserGetDTO convertToUserGetDTO(User user);
+
+    @Mapping(source = "userPostDTO.roleId", target = "role")
+    public abstract User convertToUser(UserPostDTO userPostDTO);
+
+    protected Role mapToRole(Long roleId) {
+        return roleService.findById(roleId);
+    }
 
 }

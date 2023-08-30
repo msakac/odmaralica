@@ -86,9 +86,10 @@ public class SecurityConfiguration {
                         // Pristup svima (GET)
                         .antMatchers(HttpMethod.GET, 
                             "/city/**", 
-                            "/user/**",
+                            "/user/{id}",
                             "/region/**",
-                            "/country/**")
+                            "/country/**",
+                            "/image/**")
                             .permitAll()
                         // Pristup samo adminu (GET, POST, PUT, DELETE)
                         .antMatchers(
