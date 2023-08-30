@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "680c9ac5-8bc5-49e5-a0a2-a8d683f4a6fd",
+		"_postman_id": "1130e346-5a50-4765-8e74-dd90b15fd3c7",
 		"name": "Odmaralica API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "28955474"
@@ -33,15 +33,6 @@
 						"method": "GET",
 						"header": [],
 						"url": "http://localhost:8080/country"
-					},
-					"response": []
-				},
-				{
-					"name": "Country \\w Region Cities GET",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:8080/country/with-regions-and-cities"
 					},
 					"response": []
 				},
@@ -1064,115 +1055,6 @@
 			]
 		},
 		{
-			"name": "Image",
-			"item": [
-				{
-					"name": "Activity Type GET",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": {
-								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsInJvbGUiOiJSZW50ZXIiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiZXhwIjoxNjkyMzYwOTU4LCJpYXQiOjE2OTIzNjAzNTh9.FcZRrWOzAoXFx0ZH9S0bzYvexa8B84xYf-UHh_mhuUQ"
-							}
-						},
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:8080/activity-type"
-					},
-					"response": []
-				},
-				{
-					"name": "Image POST",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Create\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:8080/activity-type"
-					},
-					"response": []
-				},
-				{
-					"name": "Activity Type GET{id}",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:8080/activity-type/1"
-					},
-					"response": []
-				},
-				{
-					"name": "Activity Type PUT",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Create\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:8080/activity-type"
-					},
-					"response": []
-				},
-				{
-					"name": "Activity Type DEL",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Hrvatska\",\r\n    \"countryCode\": \"HR\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:8080/activity-type/1"
-					},
-					"response": []
-				},
-				{
-					"name": "Activity Type FIND",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/activity-type/find?q=name=Create",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"activity-type",
-								"find"
-							],
-							"query": [
-								{
-									"key": "q",
-									"value": "name=Create"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "Log",
 			"item": [
 				{
@@ -1285,25 +1167,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"sakidotexe2@gmail.com\",\r\n    \"password\":\"user1234\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:8080/auth/login"
-					},
-					"response": []
-				},
-				{
-					"name": "Login OAuth",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"sakidotexe2@gmail.com\",\r\n    \"password\":\"user1234\"\r\n}",
+							"raw": "{\r\n    \"email\":\"sakidotexe@gmail.com\",\r\n    \"password\":\"user1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1373,19 +1237,16 @@
 			"name": "Role TODO",
 			"item": [
 				{
-					"name": "Role POST",
+					"name": "Role GET",
 					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"role\": \"admin\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInJvbGUiOiJhZG1pbiIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3QiLCJleHAiOjE2OTM0MDUwODQsImlhdCI6MTY5MzQwNDQ4NH0.Kwi8fkYJ5tvP0HWHozBrJtn5Zd1-yftO5MIjrEMZO9Q"
 							}
 						},
+						"method": "GET",
+						"header": [],
 						"url": "http://localhost:8080/role"
 					},
 					"response": []
@@ -1401,6 +1262,21 @@
 						"method": "GET",
 						"header": [],
 						"url": "http://localhost:8080/user/11"
+					},
+					"response": []
+				},
+				{
+					"name": "User GET",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMSIsInJvbGUiOiJhZG1pbiIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3QiLCJleHAiOjE2OTM0MDUwODQsImlhdCI6MTY5MzQwNDQ4NH0.Kwi8fkYJ5tvP0HWHozBrJtn5Zd1-yftO5MIjrEMZO9Q"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/user"
 					},
 					"response": []
 				}
