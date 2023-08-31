@@ -89,7 +89,9 @@ public class SecurityConfiguration {
                             "/user/{id}",
                             "/region/**",
                             "/country/**",
-                            "/image/**")
+                            "/image/**",
+                            "/residence-type/**",
+                            "/residence/**")
                             .permitAll()
                         // Pristup samo adminu (GET, POST, PUT, DELETE)
                         .antMatchers(
@@ -99,7 +101,8 @@ public class SecurityConfiguration {
                             "/user", 
                             "/country",
                             "/city",
-                            "/region")
+                            "/region",
+                            "/residence-type")
                             .hasAuthority("admin")
                         // .antMatchers(HttpMethod.PUT, "/country/**").hasAuthority("admin")
                         // .antMatchers(HttpMethod.DELETE, "/country/**").hasAuthority("admin")

@@ -17,7 +17,7 @@ public class ResidencePostDTO {
     private String name;
 
     @NotEmpty(message = "Residence type cannot be empty")
-    private String type;
+    private Long residenceTypeId;
 
     @NotEmpty(message = "Residence description cannot be empty")
     private String description;

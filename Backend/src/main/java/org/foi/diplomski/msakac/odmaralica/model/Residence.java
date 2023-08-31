@@ -25,9 +25,10 @@ public class Residence implements Serializable {
 
     @Column(name = "name", nullable = false)
     private String name;
-    //FIXME: mozda bi tip trebal biti entitet
-    @Column(name = "type", nullable = false)
-    private String type;
+
+    @ManyToOne
+    @JoinColumn(name = "residence_type_id", nullable = false)
+    private ResidenceType residenceType;
 
     @Column(name = "description", nullable = false)
     private String description;
