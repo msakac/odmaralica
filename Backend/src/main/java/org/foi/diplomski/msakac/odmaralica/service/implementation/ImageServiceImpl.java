@@ -124,4 +124,59 @@ public class ImageServiceImpl implements IImageService {
         }
         return imageDirectory;
     }
+
+    @Override
+    public Image findById(Long id) {
+        return imageRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void delete(Long id) {
+        String imageNameToFind = id + "_";
+        try {
+            List<Path> matchingImagePaths = Files.list(Paths.get(imageDirectory))
+                    .filter(path -> path.getFileName().toString().startsWith(imageNameToFind))
+                    .collect(Collectors.toList());
+
+            if (matchingImagePaths.isEmpty()) {
+                return;
+            }
+            Files.delete(matchingImagePaths.get(0));
+        } catch(Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
+        imageRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteForType(String type, Long id) {
+        if(type.equals("accommodationUnit")) {
+            List<Image> images = imageRepository.findAllByAccommodationUnitId(id);
+            deleteImages(images);
+        } else if(type.equals("residence")) {
+            List<Image> images = imageRepository.findAllByResidenceId(id);
+            deleteImages(images);
+        } else if(type.equals("user")) {
+            List<Image> images = imageRepository.findAllByUserId(id);
+            deleteImages(images);
+        }
+    }
+
+    private void deleteImages(List<Image> images) {
+        for(Image image : images) {
+            String imageNameToFind = image.getId() + "_";
+            try {
+                List<Path> matchingImagePaths = Files.list(Paths.get(imageDirectory))
+                        .filter(path -> path.getFileName().toString().startsWith(imageNameToFind))
+                        .collect(Collectors.toList());
+
+                if (!matchingImagePaths.isEmpty()) {
+                    Files.delete(matchingImagePaths.get(0));
+                }
+                imageRepository.deleteById(image.getId());
+            } catch(Exception e){
+                throw new RuntimeException(e.getMessage());
+            }
+        }
+    }
 }

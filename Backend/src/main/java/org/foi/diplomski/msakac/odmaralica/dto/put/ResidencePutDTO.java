@@ -19,7 +19,7 @@ public class ResidencePutDTO {
     @NotEmpty(message = "Residence name cannot be empty")
     private String name;
 
-    @NotEmpty(message = "Residence type cannot be empty")
+    @NotNull(message = "Residence type cannot be empty")
     private Long typeId;
 
     @NotEmpty(message = "Residence description cannot be empty")

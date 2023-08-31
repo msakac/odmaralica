@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1130e346-5a50-4765-8e74-dd90b15fd3c7",
+		"_postman_id": "7545ad26-a97a-487c-97e1-c8c39910b255",
 		"name": "Odmaralica API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "28955474"
@@ -519,109 +519,6 @@
 							"port": "8080",
 							"path": [
 								"residence",
-								"find"
-							],
-							"query": [
-								{
-									"key": "q",
-									"value": "owner.id=1"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Residence Type",
-			"item": [
-				{
-					"name": "Residence Type GET",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:8080/residence-type"
-					},
-					"response": []
-				},
-				{
-					"name": "Residence Type POST",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Klet Sakac\",\r\n    \"type\": \"Vinograd\",\r\n    \"description\": \"Vine\",\r\n    \"ownerId\": 1\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:8080/residence-type"
-					},
-					"response": []
-				},
-				{
-					"name": "Residence Type GET{id}",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "http://localhost:8080/residence-type/4"
-					},
-					"response": []
-				},
-				{
-					"name": "Residence Type PUT",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": 4,\r\n    \"name\": \"nikaj\",\r\n    \"type\": \"nikaj\",\r\n    \"description\": \"nikaj\",\r\n    \"ownerId\": 1\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:8080/residence-type"
-					},
-					"response": []
-				},
-				{
-					"name": "Residence Type DEL",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Hrvatska\",\r\n    \"countryCode\": \"HR\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "http://localhost:8080/residence-type/6"
-					},
-					"response": []
-				},
-				{
-					"name": "Residence Type FIND",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/residence-type/find?q=owner.id=1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"residence-type",
 								"find"
 							],
 							"query": [
@@ -1380,37 +1277,6 @@
 						"method": "GET",
 						"header": [],
 						"url": "http://localhost:8080/user"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Image",
-			"item": [
-				{
-					"name": "Image FIND",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/image/find?q=residence.id=3",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"image",
-								"find"
-							],
-							"query": [
-								{
-									"key": "q",
-									"value": "residence.id=3"
-								}
-							]
-						}
 					},
 					"response": []
 				}

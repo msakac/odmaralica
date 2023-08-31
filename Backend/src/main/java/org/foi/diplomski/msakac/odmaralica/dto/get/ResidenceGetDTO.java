@@ -1,6 +1,7 @@
 package org.foi.diplomski.msakac.odmaralica.dto.get;
 
 import org.foi.diplomski.msakac.odmaralica.dto.security.UserGetDTO;
+import org.foi.diplomski.msakac.odmaralica.model.ResidenceType;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import lombok.ToString;
 public class ResidenceGetDTO {
     private Long id;
     private String name;
-    private ResidenceTypeGetDTO residenceType;
+    private ResidenceType type;
     private String description;
     private UserGetDTO owner;
     private Boolean isPublished;

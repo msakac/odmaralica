@@ -77,9 +77,6 @@ public abstract class AbstractBaseController<T, GetDTO, PostDTO, PutDTO, Service
         // FIXME: Osim q parametara trebam jos sort=, offset, limit
         try {
             List<GetDTO> entities = service.find(queryParams);
-            if (entities.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(getNotFoundResponse());
-            }
             return ResponseEntity.ok(new CreateResponseDTO<List<GetDTO>>(entities, HttpStatus.OK));
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(InvalidRequestResponseBuilder.createResponse(e));

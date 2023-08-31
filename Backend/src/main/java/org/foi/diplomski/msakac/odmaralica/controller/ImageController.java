@@ -7,11 +7,13 @@ import javax.validation.Valid;
 
 import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
 import org.foi.diplomski.msakac.odmaralica.exceptions.InvalidRequestResponseBuilder;
+import org.foi.diplomski.msakac.odmaralica.model.Image;
 import org.foi.diplomski.msakac.odmaralica.service.IImageService;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -66,16 +68,34 @@ public class ImageController {
         // FIXME: Osim q parametara trebam jos sort=, offset, limit
         try {
             List<Long> entities = imageService.findImageIds(queryParams);
-            if (entities.isEmpty()) {
-                CreateResponseDTO<Object> response = new CreateResponseDTO<Object>(HttpStatus.NOT_FOUND, "Entity not found");
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-            }
             return ResponseEntity.ok(new CreateResponseDTO<List<Long>>(entities, HttpStatus.OK));
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(InvalidRequestResponseBuilder.createResponse(e));
         }
-
-
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(@PathVariable Long id) {
+        Image existingEntity = imageService.findById(id);
+
+        if (existingEntity == null) {
+            CreateResponseDTO<Image> response = new CreateResponseDTO<Image>(HttpStatus.NOT_FOUND, "Entity not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+
+        try {
+            imageService.delete(id);
+            return ResponseEntity.ok(new CreateResponseDTO<Image>(HttpStatus.OK, "Entity deleted"));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(InvalidRequestResponseBuilder.createResponse(e));
+        }
+    }
+
+    @DeleteMapping("/{type}/{id}")
+    public ResponseEntity<Object> deleteByResidence(@PathVariable Long id, @PathVariable String type) {
+            imageService.deleteForType(type, id);
+            return ResponseEntity.ok(new CreateResponseDTO<Image>(HttpStatus.OK, "Entity deleted"));
+    }
+
 
 }
