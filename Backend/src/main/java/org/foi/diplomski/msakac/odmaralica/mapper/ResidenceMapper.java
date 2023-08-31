@@ -25,10 +25,10 @@ public abstract class ResidenceMapper {
     protected ResidenceTypeMapper residenceTypeMapper = Mappers.getMapper(ResidenceTypeMapper.class);
 
     @Mapping(source = "residencePostDTO.ownerId", target = "owner")
-    @Mapping(source = "residencePostDTO.residenceTypeId", target = "residenceType")
+    @Mapping(source = "residencePostDTO.typeId", target = "type")
     public abstract Residence convert(ResidencePostDTO residencePostDTO);
 
-    @Mapping(source = "residencePutDTO.residenceTypeId", target = "residenceType")
+    @Mapping(source = "residencePutDTO.typeId", target = "type")
     @Mapping(source = "residencePutDTO.ownerId", target = "owner")
     public abstract Residence convert(ResidencePutDTO residencePutDTO);
 

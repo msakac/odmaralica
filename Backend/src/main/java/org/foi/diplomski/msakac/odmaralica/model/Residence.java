@@ -28,7 +28,7 @@ public class Residence implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "residence_type_id", nullable = false)
-    private ResidenceType residenceType;
+    private ResidenceType type;
 
     @Column(name = "description", nullable = false)
     private String description;

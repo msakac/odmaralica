@@ -1,8 +1,12 @@
 package org.foi.diplomski.msakac.odmaralica.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.validation.Valid;
+
+import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
+import org.foi.diplomski.msakac.odmaralica.exceptions.InvalidRequestResponseBuilder;
 import org.foi.diplomski.msakac.odmaralica.service.IImageService;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
@@ -56,4 +60,22 @@ public class ImageController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @GetMapping("/find")
+    public ResponseEntity<Object> queryCountries(@RequestParam("q") String queryParams) {
+        // FIXME: Osim q parametara trebam jos sort=, offset, limit
+        try {
+            List<Long> entities = imageService.findImageIds(queryParams);
+            if (entities.isEmpty()) {
+                CreateResponseDTO<Object> response = new CreateResponseDTO<Object>(HttpStatus.NOT_FOUND, "Entity not found");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+            }
+            return ResponseEntity.ok(new CreateResponseDTO<List<Long>>(entities, HttpStatus.OK));
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(InvalidRequestResponseBuilder.createResponse(e));
+        }
+
+
+    }
+
 }

@@ -23,7 +23,7 @@ public class ResidenceServiceImpl extends AbstractBaseService<Residence, Residen
     @Override
     public ResidenceGetDTO create(ResidencePostDTO entityPost) {
         final Residence residence = this.convertPost(entityPost);
-        residence.setIsPublished(false);
+        entityPost.setIsPublished(false);
         if (residence.getOwner().getRole().getId() <= 1) {
             throw new RuntimeException("Owner must belong to the renter role");
         }
