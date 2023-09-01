@@ -76,29 +76,33 @@ public class SecurityConfiguration {
                         .authorizeRequests()
                         // Pristup svima (GET, POST, PUT, DELETE)
                         .antMatchers(
-                            "/auth/register", 
+                            "/auth/register",
                             "/auth/login",
                             "/auth/login-open-auth",
-                            "/auth/activate", 
+                            "/auth/activate",
                             "/swagger-ui/**",
                             "/swagger-ui.html")
                             .permitAll()
                         // Pristup svima (GET)
-                        .antMatchers(HttpMethod.GET, 
-                            "/city/**", 
+                        .antMatchers(HttpMethod.GET,
+                            "/city/**",
                             "/user/{id}",
                             "/region/**",
                             "/country/**",
                             "/image/**",
                             "/residence-type/**",
-                            "/residence/**")
+                            "/residence/**",
+                            "/address/**",
+                            "/accommodation-unit/**",
+                            "/price-period/**",
+                            "/reservation/**")
                             .permitAll()
                         // Pristup samo adminu (GET, POST, PUT, DELETE)
                         .antMatchers(
-                            "/role", 
-                            "/log", 
-                            "/activity-type", 
-                            "/user", 
+                            "/role",
+                            "/log",
+                            "/activity-type",
+                            "/user",
                             "/country",
                             "/city",
                             "/region",

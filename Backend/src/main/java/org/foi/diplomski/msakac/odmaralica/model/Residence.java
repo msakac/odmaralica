@@ -40,13 +40,23 @@ public class Residence implements Serializable {
     @NotNull
     private Boolean isPublished;
 
+    private Boolean isParkingFree;
+
+    private Boolean isWifiFree;
+
+    private Boolean isAirConFree;
+
+    private String distanceSea;
+
+    private String distanceStore;
+
+    private String distanceBeach;
+
+    private String distanceCenter;
+
     // If residence is deleted so are all addresses
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "residence")
     private List<Address> addresses;
-
-    // If residence is deleted so are all residence_attributes
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "residence")
-    private List<ResidenceAttribute> residenceAttributes;
 
     // If residence is deleted so are all accommodation_units
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "residence")

@@ -29,4 +29,18 @@ public class ResidencePutDTO {
     private Long ownerId;
 
     private Boolean isPublished;
+
+    private Boolean isParkingFree;
+
+    private Boolean isWifiFree;
+
+    private Boolean isAirConFree;
+
+    private String distanceSea;
+
+    private String distanceStore;
+
+    private String distanceBeach;
+
+    private String distanceCenter;
 }

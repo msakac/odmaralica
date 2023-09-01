@@ -18,4 +18,11 @@ public class ResidenceGetDTO {
     private String description;
     private UserGetDTO owner;
     private Boolean isPublished;
+    private Boolean isParkingFree;
+    private Boolean isWifiFree;
+    private Boolean isAirConFree;
+    private String distanceSea;
+    private String distanceStore;
+    private String distanceBeach;
+    private String distanceCenter;
 }
