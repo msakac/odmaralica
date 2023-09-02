@@ -59,11 +59,14 @@ public class PricePeriodServiceImpl extends AbstractBaseService<PricePeriod, Pri
     private void validate(PricePeriod entity){
         // Check if start date is after end date
         if(entity.getStartAt().compareTo(entity.getEndAt()) > 0) {
-            throw new IllegalArgumentException("Start date cannot be after end date");
+            throw new RuntimeException("Start date cannot be after end date");
         }
 
         List<PricePeriod> pricePeriods = repository.findByAccommodationUnitId(entity.getAccommodationUnit().getId());
         for (PricePeriod pricePeriod : pricePeriods) {
+            if(pricePeriod.getId().equals(entity.getId())){
+                continue;
+            }
             // Check if dates overlap
             if (pricePeriod.getStartAt().compareTo(entity.getStartAt()) <= 0 && pricePeriod.getEndAt().compareTo(entity.getStartAt()) >= 0) {
                 throw new RuntimeException("Price period overlaps with existing price period");

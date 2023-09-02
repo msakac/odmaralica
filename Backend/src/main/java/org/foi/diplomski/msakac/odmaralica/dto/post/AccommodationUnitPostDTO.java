@@ -20,4 +20,15 @@ public class AccommodationUnitPostDTO {
 
     @NotEmpty(message = "Accommodation unit description cannot be empty")
     private String description;
+    private String unitSize;
+    private String numOfGuests;
+    private String beds;
+    private Boolean privateKitchen;
+    private Boolean privateBathroom;
+    private Boolean terrace;
+    private Boolean seaView;
+    private Boolean tv;
+    private Boolean pets;
+    private Boolean smoking;
+
 }

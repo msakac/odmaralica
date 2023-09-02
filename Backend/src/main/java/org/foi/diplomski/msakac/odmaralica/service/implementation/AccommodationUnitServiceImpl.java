@@ -31,8 +31,8 @@ public class AccommodationUnitServiceImpl extends AbstractBaseService<Accommodat
     public AccommodationUnitGetDTO create(AccommodationUnitPostDTO entityPost) {
         //find if accommodation unit with same residenceId and name exists
         Residence residence = residenecRepository.findById(entityPost.getResidenceId()).orElse(null);
-        if(residence.getIsPublished() == false) {
-            throw new RuntimeException("Residence must be published");
+        if(residence == null) {
+            throw new RuntimeException("Residence does not exist");
         }
         AccommodationUnit existingAccommodationUnit = repository.findByResidenceIdAndName(entityPost.getResidenceId(), entityPost.getName());
         if (existingAccommodationUnit != null) {

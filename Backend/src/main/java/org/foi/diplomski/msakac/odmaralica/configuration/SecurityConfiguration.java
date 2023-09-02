@@ -95,8 +95,13 @@ public class SecurityConfiguration {
                             "/address/**",
                             "/accommodation-unit/**",
                             "/price-period/**",
-                            "/reservation/**")
+                            "/reservation/**",
+                            "/amount/**")
                             .permitAll()
+                            .antMatchers(HttpMethod.POST, "/residence", "/address", "/accommodation-unit", "/price-period", "/amount").hasAnyAuthority("renter", "moderator") 
+                            .antMatchers(HttpMethod.PUT, "/residence", "/address", "/accommodation-unit", "/price-period", "/amount").hasAnyAuthority("renter", "moderator") 
+                            .antMatchers(HttpMethod.DELETE, "/residence", "/address", "/accommodation-unit", "/price-period", "/amount").hasAnyAuthority("renter", "moderator") 
+
                         // Pristup samo adminu (GET, POST, PUT, DELETE)
                         .antMatchers(
                             "/role",
@@ -106,11 +111,14 @@ public class SecurityConfiguration {
                             "/country",
                             "/city",
                             "/region",
-                            "/residence-type")
+                            "/residence-type",
+                            "/price-period",
+                            "/amount",
+                            "/reservation",
+                            "/review",
+                            "/address",
+                            "/accommodation-unit")
                             .hasAuthority("admin")
-                        // .antMatchers(HttpMethod.PUT, "/country/**").hasAuthority("admin")
-                        // .antMatchers(HttpMethod.DELETE, "/country/**").hasAuthority("admin")
-                        // .antMatchers(HttpMethod.POST, "/country").hasAuthority("admin")
                         .anyRequest()
                         .authenticated()
                         .and()

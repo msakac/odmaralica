@@ -31,6 +31,17 @@ public class AccommodationUnit implements Serializable {
     @Column(name = "description", nullable = false)
     private String description;
 
+    private String unitSize;
+    private String numOfGuests;
+    private String beds;
+    private Boolean privateKitchen;
+    private Boolean privateBathroom;
+    private Boolean terrace;
+    private Boolean seaView;
+    private Boolean tv;
+    private Boolean pets;
+    private Boolean smoking;
+
     // If accommodation unit is deleted so are all reservations
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "accommodationUnit")
     private List<Reservation> reservations;

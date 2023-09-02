@@ -35,12 +35,7 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @NotNull
     private String password;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "image_id")
-    private Image image;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @NotNull
