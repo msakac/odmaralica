@@ -4,7 +4,6 @@ import org.foi.diplomski.msakac.odmaralica.dto.get.AccommodationUnitGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.AccommodationUnitPostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.AccommodationUnitPutDTO;
 import org.foi.diplomski.msakac.odmaralica.mapper.AccommodationUnitMapper;
-import org.foi.diplomski.msakac.odmaralica.mapper.ResidenceMapper;
 import org.foi.diplomski.msakac.odmaralica.model.AccommodationUnit;
 import org.foi.diplomski.msakac.odmaralica.model.Residence;
 import org.foi.diplomski.msakac.odmaralica.repository.AccommodationUnitRepository;

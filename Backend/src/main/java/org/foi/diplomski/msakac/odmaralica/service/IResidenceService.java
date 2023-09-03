@@ -2,6 +2,7 @@ package org.foi.diplomski.msakac.odmaralica.service;
 
 import java.util.List;
 
+import org.foi.diplomski.msakac.odmaralica.dto.custom.ResidenceAggregateDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.get.ResidenceGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.ResidencePostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.ResidencePutDTO;
@@ -25,6 +26,8 @@ public interface IResidenceService {
     void delete(Long id);
 
     List<ResidenceGetDTO> find(String queryParams);
+
+    List<ResidenceAggregateDTO> aggregateData();
 
     Class<Residence> getEntityClass();
 }

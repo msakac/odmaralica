@@ -98,9 +98,11 @@ public class SecurityConfiguration {
                             "/reservation/**",
                             "/amount/**")
                             .permitAll()
-                            .antMatchers(HttpMethod.POST, "/residence", "/address", "/accommodation-unit", "/price-period", "/amount").hasAnyAuthority("renter", "moderator") 
-                            .antMatchers(HttpMethod.PUT, "/residence", "/address", "/accommodation-unit", "/price-period", "/amount").hasAnyAuthority("renter", "moderator") 
-                            .antMatchers(HttpMethod.DELETE, "/residence", "/address", "/accommodation-unit", "/price-period", "/amount").hasAnyAuthority("renter", "moderator") 
+                            .antMatchers(HttpMethod.POST, "/reservation").hasAnyAuthority("user","renter", "moderator","admin")
+                            //FIXME Renter ve more apsolutno sve, treba rijesiti na razini servisa
+                            .antMatchers(HttpMethod.POST, "/residence", "/address", "/accommodation-unit", "/price-period", "/amount").hasAnyAuthority("renter", "moderator", "admin") 
+                            .antMatchers(HttpMethod.PUT, "/residence", "/address", "/accommodation-unit", "/price-period", "/amount").hasAnyAuthority("renter", "moderator", "admin") 
+                            .antMatchers(HttpMethod.DELETE, "/residence", "/address", "/accommodation-unit", "/price-period", "/amount").hasAnyAuthority("renter", "moderator", "admin") 
 
                         // Pristup samo adminu (GET, POST, PUT, DELETE)
                         .antMatchers(
@@ -112,12 +114,8 @@ public class SecurityConfiguration {
                             "/city",
                             "/region",
                             "/residence-type",
-                            "/price-period",
-                            "/amount",
                             "/reservation",
-                            "/review",
-                            "/address",
-                            "/accommodation-unit")
+                            "/review")
                             .hasAuthority("admin")
                         .anyRequest()
                         .authenticated()
