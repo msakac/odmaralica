@@ -119,7 +119,7 @@ public class ResidenceServiceImpl extends AbstractBaseService<Residence, Residen
         for(Residence r : residences) {
             UserGetDTO owner = userMapper.convertToUserGetDTO(r.getOwner());
             ResidenceTypeGetDTO type = residenceTypeMapper.convert(r.getType());
-            List<Long> imageIds = getImages(r.getId());
+            List<Long> imageIds = getResidenceImages(r.getId());
             if(imageIds.isEmpty()) {
                 continue;
             }
@@ -144,7 +144,7 @@ public class ResidenceServiceImpl extends AbstractBaseService<Residence, Residen
         return customAddress;
     }
 
-    private List<Long> getImages(Long id) {
+    private List<Long> getResidenceImages(Long id) {
         List<Image> images = imageRepository.findAllByResidenceId(id);
         //return only list of image ids
         List<Long> imageIds = new ArrayList<>();
@@ -166,14 +166,28 @@ public class ResidenceServiceImpl extends AbstractBaseService<Residence, Residen
             if(availableDates.isEmpty()) {
                 continue;
             }
+            List<Long> imageIds = getAccomUnitImages(u.getId());
+            if(imageIds.isEmpty()) {
+                continue;
+            }
             CustomAccommodationUnitDTO unit = new CustomAccommodationUnitDTO(
                 u.getId(), u.getName(), u.getDescription(), u.getUnitSize(), u.getNumOfGuests(), u.getBeds(),
                 u.getPrivateKitchen(), u.getPrivateBathroom(), u.getTerrace(), u.getSeaView(), u.getTv(), u.getPets(),
-                u.getSmoking(), pricePeriods, availableDates
+                u.getSmoking(), pricePeriods, availableDates, imageIds
             );
             customUnits.add(unit);
         }
         return customUnits;
+    }
+
+    private List<Long> getAccomUnitImages(Long id) {
+        List<Image> images = imageRepository.findAllByAccommodationUnitId(id);
+        //return only list of image ids
+        List<Long> imageIds = new ArrayList<>();
+        for(Image i : images) {
+            imageIds.add(i.getId());
+        }
+        return imageIds;
     }
 
     private List<CustomPricePeriodDTO> getPricePeriods(Long id) {

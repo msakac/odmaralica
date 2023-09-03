@@ -27,4 +27,5 @@ public class CustomAccommodationUnitDTO {
     private Boolean smoking;
     private List<CustomPricePeriodDTO> pricePeriods;
     private List<Date> availableDates;
+    private List<Long> imagesIds;
 }

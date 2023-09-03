@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.foi.diplomski.msakac.odmaralica.controller.base.AbstractBaseController;
 import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
-import org.foi.diplomski.msakac.odmaralica.dto.custom.CountryRegionCityGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.custom.ResidenceAggregateDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.get.ResidenceGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.ResidencePostDTO;
