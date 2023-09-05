@@ -29,9 +29,18 @@ public class ResidenceController extends AbstractBaseController<Residence, Resid
         return new CreateResponseDTO<Residence>(HttpStatus.NOT_FOUND, "Residence not found");
     }
     @GetMapping("/aggregate")
-    public ResponseEntity<Object> getAllCountriesWithRegionsAndCities() {
-        List<ResidenceAggregateDTO> countries = service.aggregateData();
-        CreateResponseDTO<List<ResidenceAggregateDTO>> response = new CreateResponseDTO<List<ResidenceAggregateDTO>>(countries, HttpStatus.OK);
+    public ResponseEntity<Object> getAllAgregateResidences() {
+        List<ResidenceAggregateDTO> residences = service.aggregateAllData();
+        CreateResponseDTO<List<ResidenceAggregateDTO>> response = new CreateResponseDTO<List<ResidenceAggregateDTO>>(residences, HttpStatus.OK);
+        return ResponseEntity.ok(response);
+    }
+    @GetMapping("/aggregate/{id}")
+    public ResponseEntity<Object> getAggregateResidence(@PathVariable Long id) {
+        ResidenceAggregateDTO aggregateResidence = service.aggregateData(id);
+        if (aggregateResidence == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(getNotFoundResponse());
+        }
+        CreateResponseDTO<ResidenceAggregateDTO> response = new CreateResponseDTO<ResidenceAggregateDTO>(aggregateResidence, HttpStatus.OK);
         return ResponseEntity.ok(response);
     }
 }

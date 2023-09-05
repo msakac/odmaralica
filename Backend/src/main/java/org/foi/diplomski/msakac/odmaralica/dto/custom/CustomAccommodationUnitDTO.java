@@ -26,6 +26,6 @@ public class CustomAccommodationUnitDTO {
     private Boolean pets;
     private Boolean smoking;
     private List<CustomPricePeriodDTO> pricePeriods;
-    private List<Date> availableDates;
+    private List<String> availableDates;
     private List<Long> imagesIds;
 }

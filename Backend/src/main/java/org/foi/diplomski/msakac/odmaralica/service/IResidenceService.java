@@ -27,7 +27,9 @@ public interface IResidenceService {
 
     List<ResidenceGetDTO> find(String queryParams);
 
-    List<ResidenceAggregateDTO> aggregateData();
+    List<ResidenceAggregateDTO> aggregateAllData();
+    
+    ResidenceAggregateDTO aggregateData(Long id);
 
     Class<Residence> getEntityClass();
 }

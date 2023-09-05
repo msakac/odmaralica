@@ -113,7 +113,33 @@ public class ResidenceServiceImpl extends AbstractBaseService<Residence, Residen
     }
 
     @Override
-    public List<ResidenceAggregateDTO> aggregateData() {
+    public ResidenceAggregateDTO aggregateData(Long id) {
+        Residence r = repository.findById(id).orElse(null);
+        if(r == null) {
+            return null;
+        }
+
+        UserGetDTO owner = userMapper.convertToUserGetDTO(r.getOwner());
+        ResidenceTypeGetDTO type = residenceTypeMapper.convert(r.getType());
+        List<Long> imageIds = getResidenceImages(r.getId());
+        if(imageIds.isEmpty()) {
+            return null;
+        }
+        List<CustomAccommodationUnitDTO> units = getCustomUnits(r.getId());
+        if(units.isEmpty()) {
+            return null;
+        }
+        ResidenceAggregateDTO agregate = new ResidenceAggregateDTO(
+            r.getId(),r.getName(),type, r.getDescription(), owner, r.getIsPublished(),
+            r.getIsParkingFree(), r.getIsWifiFree(), r.getIsAirConFree(), r.getDistanceBeach(),
+            r.getDistanceCenter(), r.getDistanceSea(), r.getDistanceStore(), imageIds, getCustomAddress(r), units
+        );
+
+        return agregate;
+    }
+
+    @Override
+    public List<ResidenceAggregateDTO> aggregateAllData() {
         List<Residence> residences = repository.findByIsPublishedTrue();
         List<ResidenceAggregateDTO> aggregate = new ArrayList<>();
         for(Residence r : residences) {
@@ -162,7 +188,7 @@ public class ResidenceServiceImpl extends AbstractBaseService<Residence, Residen
             if(pricePeriods.isEmpty()) {
                 continue;
             }
-            List<Date> availableDates = getAvailableDates(pricePeriods, u.getId());
+            List<String> availableDates = getAvailableDates(pricePeriods, u.getId());
             if(availableDates.isEmpty()) {
                 continue;
             }
@@ -205,7 +231,7 @@ public class ResidenceServiceImpl extends AbstractBaseService<Residence, Residen
         return customPricePeriods;
     }
     
-    private List<Date> getAvailableDates(List<CustomPricePeriodDTO> pricePeriods, Long id) {
+    private List<String> getAvailableDates(List<CustomPricePeriodDTO> pricePeriods, Long id) {
         List<Reservation> reservations = reservationRepository.findByAccommodationUnitIdAndCancelledFalse(id);
         /* Get all reserved dates */
         /* Ako je rezervacija od 13.09 do 23.09 to znaci da je apartman slobodni od x to 13.09 i od 23.09 do.
@@ -272,7 +298,12 @@ public class ResidenceServiceImpl extends AbstractBaseService<Residence, Residen
                 throw new RuntimeException("Error parsing date");
             }
         }
-        return availableDates;
+        List<String> availableDatesString = new ArrayList<>();
+        for(Date d : availableDates) {
+            String dateString = new SimpleDateFormat("yyyy-MM-dd").format(d);
+            availableDatesString.add(dateString);
+        }
+        return availableDatesString;
     }
 
     //End date mi je danas plus jedna godina
