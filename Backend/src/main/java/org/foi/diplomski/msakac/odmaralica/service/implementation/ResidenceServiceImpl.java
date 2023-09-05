@@ -238,7 +238,7 @@ public class ResidenceServiceImpl extends AbstractBaseService<Residence, Residen
         */
         List<Date> reservedDates = new ArrayList<>();
         for (Reservation reservation : reservations) {
-            Date reservationDate = new Date(reservation.getStartAt().getTime() + (24 * 60 * 60 * 1000)) ;
+            Date reservationDate = new Date(reservation.getStartAt().getTime()) ;
             Date reservationEndDate = new Date(reservation.getEndAt().getTime());
 
             while (reservationDate.before(reservationEndDate)) {

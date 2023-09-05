@@ -98,7 +98,11 @@ public class SecurityConfiguration {
                             "/reservation/**",
                             "/amount/**")
                             .permitAll()
-                            .antMatchers(HttpMethod.POST, "/reservation").hasAnyAuthority("user","renter", "moderator","admin")
+                            // Pristup korisniku (PUT)
+                            .antMatchers(HttpMethod.PUT, "/user").hasAnyAuthority("user", "renter", "moderator", "admin")
+                            // Pristup korisniku (POST)
+                            .antMatchers(HttpMethod.POST, "/reservation", "/image").hasAnyAuthority("user","renter", "moderator", "admin")
+                            .antMatchers(HttpMethod.DELETE, "/reservation", "/image").hasAnyAuthority("user","renter", "moderator", "admin")
                             //FIXME Renter ve more apsolutno sve, treba rijesiti na razini servisa
                             .antMatchers(HttpMethod.POST, "/residence", "/address", "/accommodation-unit", "/price-period", "/amount").hasAnyAuthority("renter", "moderator", "admin") 
                             .antMatchers(HttpMethod.PUT, "/residence", "/address", "/accommodation-unit", "/price-period", "/amount").hasAnyAuthority("renter", "moderator", "admin") 
