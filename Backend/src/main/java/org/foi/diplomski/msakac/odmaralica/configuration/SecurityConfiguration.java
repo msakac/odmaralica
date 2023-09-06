@@ -99,7 +99,7 @@ public class SecurityConfiguration {
                             "/amount/**")
                             .permitAll()
                             // Pristup korisniku (PUT)
-                            .antMatchers(HttpMethod.PUT, "/user").hasAnyAuthority("user", "renter", "moderator", "admin")
+                            .antMatchers(HttpMethod.PUT, "/user", "/reservation").hasAnyAuthority("user", "renter", "moderator", "admin")
                             // Pristup korisniku (POST)
                             .antMatchers(HttpMethod.POST, "/reservation", "/image").hasAnyAuthority("user","renter", "moderator", "admin")
                             .antMatchers(HttpMethod.DELETE, "/reservation", "/image").hasAnyAuthority("user","renter", "moderator", "admin")

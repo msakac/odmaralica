@@ -47,14 +47,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         }
 
         User user = userRepository.findByEmail(oAuth2UserInfo.getEmail());
-        if(user != null) {
-            // if(!user.getProvider().equals(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()))) {
-            //     throw new OAuth2AuthenticationProcessingException("Looks like you're signed up with " +
-            //             user.getProvider() + " account. Please use your " + user.getProvider() +
-            //             " account to login.");
-            // }
-            user = updateExistingUser(user, oAuth2UserInfo);
-        } else {
+        if(user == null) {
             user = registerNewUser(oAuth2UserRequest, oAuth2UserInfo);
         }
 
@@ -74,12 +67,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         user.setActivated(true);
         user.setSurname(parts[1]);
         return userRepository.save(user);
-    }
-
-    private User updateExistingUser(User existingUser, OAuth2UserInfo oAuth2UserInfo) {
-        existingUser.setName(oAuth2UserInfo.getName());
-        // existingUser.setImageUrl(oAuth2UserInfo.getImageUrl());
-        return userRepository.save(existingUser);
     }
 
     private Role getRole() {
