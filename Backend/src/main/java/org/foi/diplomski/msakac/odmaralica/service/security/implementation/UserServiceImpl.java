@@ -1,7 +1,5 @@
 package org.foi.diplomski.msakac.odmaralica.service.security.implementation;
 
-import lombok.RequiredArgsConstructor;
-
 import java.util.List;
 
 import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDTO;

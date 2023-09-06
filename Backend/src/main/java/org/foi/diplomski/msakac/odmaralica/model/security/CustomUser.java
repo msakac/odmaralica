@@ -5,7 +5,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import java.nio.file.attribute.UserPrincipal;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;

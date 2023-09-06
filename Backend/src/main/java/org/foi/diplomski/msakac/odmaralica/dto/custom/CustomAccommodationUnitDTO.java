@@ -1,5 +1,4 @@
 package org.foi.diplomski.msakac.odmaralica.dto.custom;
-import java.util.Date;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
