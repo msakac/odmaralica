@@ -30,3 +30,13 @@ public class UserPostDTO {
     @NotNull(message = "Activated cannot be empty")
     private Boolean activated;
 }
+
+
+//sto zasto i kako
+
+// korisnik prije bilo kakve rezervacije treba procitati politku privatnosti i
+// prihvatiti ju da ima
+// omoguciti povlacenje privole o sukladnosti o politiki privatnosti ali ako nema niti jednu aktivnu
+// ili upcoming rezervaciju ili mu odgotiti rezervacije
+
+// 
