@@ -14,7 +14,7 @@ public class ReservationPutDTO {
     private Long id;
 
     @NotNull(message = "User ID cannot be empty")
-    private Long userId;
+    private String userEmail;
 
     @NotNull(message = "Accommodation unit ID cannot be empty")
     private Long accommodationUnitId;

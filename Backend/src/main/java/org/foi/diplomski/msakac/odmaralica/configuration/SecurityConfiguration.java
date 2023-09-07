@@ -31,9 +31,7 @@ public class SecurityConfiguration {
     private final CustomOAuth2UserService customOAuth2UserService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
-
     private final OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
-
     private final JwtAuthenticationEntryPoint unauthorizedHandler;
 
     @Bean
@@ -45,22 +43,6 @@ public class SecurityConfiguration {
     public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
         return new HttpCookieOAuth2AuthorizationRequestRepository();
     }
-
-    // @Bean
-    // public CorsFilter corsFilter() {
-    //     CorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    //     CorsConfiguration config = new CorsConfiguration();
-    //     config.setAllowCredentials(true);
-    //     config.addAllowedOrigin("*");
-    //     config.addAllowedHeader("*");
-    //     config.addAllowedMethod("OPTIONS");
-    //     config.addAllowedMethod("GET");
-    //     config.addAllowedMethod("POST");
-    //     config.addAllowedMethod("PUT");
-    //     config.addAllowedMethod("DELETE");
-    //     ((UrlBasedCorsConfigurationSource) source).registerCorsConfiguration("/**", config);
-    //     return new CorsFilter(source);
-    // }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -93,18 +75,20 @@ public class SecurityConfiguration {
                             "/accommodation-unit/**",
                             "/price-period/**",
                             "/reservation/**",
-                            "/amount/**")
+                            "/amount/**",
+                            "/review/**")
                             .permitAll()
                             // Pristup korisniku (PUT)
                             .antMatchers(HttpMethod.PUT, "/user", "/reservation").hasAnyAuthority("user", "renter", "moderator", "admin")
                             // Pristup korisniku (POST)
-                            .antMatchers(HttpMethod.POST, "/reservation", "/image").hasAnyAuthority("user","renter", "moderator", "admin")
+                            .antMatchers(HttpMethod.POST, "/reservation", "/image", "/review").hasAnyAuthority("user","renter", "moderator", "admin")
                             .antMatchers(HttpMethod.DELETE, "/reservation", "/image").hasAnyAuthority("user","renter", "moderator", "admin")
                             //FIXME Renter ve more apsolutno sve, treba rijesiti na razini servisa
                             .antMatchers(HttpMethod.POST, "/residence", "/address", "/accommodation-unit", "/price-period", "/amount").hasAnyAuthority("renter", "moderator", "admin") 
                             .antMatchers(HttpMethod.PUT, "/residence", "/address", "/accommodation-unit", "/price-period", "/amount").hasAnyAuthority("renter", "moderator", "admin") 
                             .antMatchers(HttpMethod.DELETE, "/residence", "/address", "/accommodation-unit", "/price-period", "/amount").hasAnyAuthority("renter", "moderator", "admin") 
-
+                            // Pristup samo moderatoru (GET, POST, PUT, DELETE)
+                            .antMatchers("/review", "/user/**", "/user").hasAuthority("moderator")
                         // Pristup samo adminu (GET, POST, PUT, DELETE)
                         .antMatchers(
                             "/role",

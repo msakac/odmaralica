@@ -32,4 +32,5 @@ public class ResidenceAggregateDTO {
     private List<Long> imageIds;
     private CustomAddressDTO address;
     private List<CustomAccommodationUnitDTO> units;
+    private List<CustomReviewGetDTO> reviews;
 }

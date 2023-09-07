@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import org.foi.diplomski.msakac.odmaralica.dto.custom.CustomAccommodationUnitDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.custom.CustomAddressDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.custom.CustomPricePeriodDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.custom.CustomReviewGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.custom.ResidenceAggregateDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.get.AmountGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.get.CityGetDTO;
@@ -30,12 +31,14 @@ import org.foi.diplomski.msakac.odmaralica.model.Image;
 import org.foi.diplomski.msakac.odmaralica.model.PricePeriod;
 import org.foi.diplomski.msakac.odmaralica.model.Reservation;
 import org.foi.diplomski.msakac.odmaralica.model.Residence;
+import org.foi.diplomski.msakac.odmaralica.model.Review;
 import org.foi.diplomski.msakac.odmaralica.repository.AccommodationUnitRepository;
 import org.foi.diplomski.msakac.odmaralica.repository.AddressRepository;
 import org.foi.diplomski.msakac.odmaralica.repository.ImageRepository;
 import org.foi.diplomski.msakac.odmaralica.repository.PricePeriodRepository;
 import org.foi.diplomski.msakac.odmaralica.repository.ReservationRepository;
 import org.foi.diplomski.msakac.odmaralica.repository.ResidenceRepository;
+import org.foi.diplomski.msakac.odmaralica.repository.ReviewRepository;
 import org.foi.diplomski.msakac.odmaralica.service.IResidenceService;
 import org.foi.diplomski.msakac.odmaralica.service.base.AbstractBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +61,7 @@ public class ResidenceServiceImpl extends AbstractBaseService<Residence, Residen
     private final ResidenceTypeMapper residenceTypeMapper;
     private final AmountMapper amountMapper;
     private final ReservationRepository reservationRepository;
+    private final ReviewRepository reviewRepository;
     @Autowired
     public ResidenceServiceImpl(ResidenceRepository repository, 
                             ResidenceMapper mapper, EntityManager entityManager, 
@@ -69,7 +73,8 @@ public class ResidenceServiceImpl extends AbstractBaseService<Residence, Residen
                             UserMapper userMapper,
                             ResidenceTypeMapper residenceTypeMapper,
                             AmountMapper amountMapper,
-                            ReservationRepository reservationRepository
+                            ReservationRepository reservationRepository,
+                            ReviewRepository reviewRepository
                             ) {
         super(repository, mapper, entityManager);
         this.addressRepository = addressRepository;
@@ -81,6 +86,7 @@ public class ResidenceServiceImpl extends AbstractBaseService<Residence, Residen
         this.residenceTypeMapper = residenceTypeMapper;
         this.amountMapper = amountMapper;
         this.reservationRepository = reservationRepository;
+        this.reviewRepository = reviewRepository;
     }
 
     @Override
@@ -129,10 +135,12 @@ public class ResidenceServiceImpl extends AbstractBaseService<Residence, Residen
         if(units.isEmpty()) {
             return null;
         }
+
+        List<CustomReviewGetDTO> reviews = getCustomReviews(r.getId());
         ResidenceAggregateDTO agregate = new ResidenceAggregateDTO(
             r.getId(),r.getName(),type, r.getDescription(), owner, r.getIsPublished(),
             r.getIsParkingFree(), r.getIsWifiFree(), r.getIsAirConFree(), r.getDistanceBeach(),
-            r.getDistanceCenter(), r.getDistanceSea(), r.getDistanceStore(), imageIds, getCustomAddress(r), units
+            r.getDistanceCenter(), r.getDistanceSea(), r.getDistanceStore(), imageIds, getCustomAddress(r), units, reviews
         );
 
         return agregate;
@@ -153,10 +161,13 @@ public class ResidenceServiceImpl extends AbstractBaseService<Residence, Residen
             if(units.isEmpty()) {
                 continue;
             }
+
+            List<CustomReviewGetDTO> reviews = getCustomReviews(r.getId());
+
             ResidenceAggregateDTO dto = new ResidenceAggregateDTO(
                 r.getId(),r.getName(),type, r.getDescription(), owner, r.getIsPublished(),
                 r.getIsParkingFree(), r.getIsWifiFree(), r.getIsAirConFree(), r.getDistanceBeach(),
-                r.getDistanceCenter(), r.getDistanceSea(), r.getDistanceStore(), imageIds, getCustomAddress(r), units
+                r.getDistanceCenter(), r.getDistanceSea(), r.getDistanceStore(), imageIds, getCustomAddress(r), units, reviews
             );
             aggregate.add(dto);
         }
@@ -314,4 +325,16 @@ public class ResidenceServiceImpl extends AbstractBaseService<Residence, Residen
         long oneYearInMillis = 365 * 24 * 60 * 60 * 1000L;
         return new Date(System.currentTimeMillis() + oneYearInMillis);
     }
+
+    private List<CustomReviewGetDTO> getCustomReviews(Long id) {
+        List<Review> reviews = reviewRepository.findByResidenceId(id);
+        List<CustomReviewGetDTO> customReviews = new ArrayList<>();
+        for(Review r : reviews) {
+            UserGetDTO reviewer = userMapper.convertToUserGetDTO(r.getUser());
+            CustomReviewGetDTO review = new CustomReviewGetDTO(r.getId(), reviewer, r.getGrade(), r.getMessage());
+            customReviews.add(review);
+        }
+        return customReviews;
+    }
+
 }

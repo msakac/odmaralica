@@ -80,6 +80,9 @@ public class ReservationServiceImpl extends AbstractBaseService<Reservation, Res
         // Check if reservation overlaps with existing reservation
         List<Reservation> reservations = repository.findByAccommodationUnitIdAndCancelledFalse(entity.getAccommodationUnit().getId());
         for (Reservation reservation : reservations) {
+            if (reservation.getId().equals(entity.getId())) {
+                continue;
+            }
             if (reservation.getStartAt().compareTo(entity.getStartAt()) <= 0 && reservation.getEndAt().compareTo(entity.getStartAt()) >= 0) {
                 throw new RuntimeException("Reservation overlaps with existing reservation");
             }

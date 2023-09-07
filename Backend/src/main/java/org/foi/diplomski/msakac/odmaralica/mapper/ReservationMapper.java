@@ -35,7 +35,7 @@ public abstract class ReservationMapper {
     @Mapping(source="reservationPostDTO.createdAt", target="createdAt")
     public abstract Reservation convert(ReservationPostDTO reservationPostDTO);
 
-    @Mapping(source="reservationPutDTO.userId", target="user")
+    @Mapping(source="reservationPutDTO.userEmail", target="user")
     @Mapping(source="reservationPutDTO.accommodationUnitId", target="accommodationUnit")
     public abstract Reservation convert(ReservationPutDTO reservationPutDTO);
 
@@ -45,6 +45,10 @@ public abstract class ReservationMapper {
 
     protected User mapToUser(Long userId) {
         return userService.findById(userId);
+    }
+
+    protected User mapToUser(String email)  {
+        return userService.findByEmail(email);
     }
 
     protected AccommodationUnit mapToAccommodationUnit(Long accommodationUnitId) {

@@ -84,4 +84,9 @@ public class User {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
     private List<Image> imagesOwner;
 
+    // If user is deleted so are images
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
+    private List<Review> reviews;
+
 }

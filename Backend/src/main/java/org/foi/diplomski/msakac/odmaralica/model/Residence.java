@@ -65,4 +65,8 @@ public class Residence implements Serializable {
     // residence is deleted so are images
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "residence")
     private List<Image> images;
+
+    // residence is deleted so are reviews
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "residence")
+    private List<Review> reivews;
 }

@@ -11,7 +11,9 @@ import javax.validation.Valid;
 
 import java.util.List;
 //TODO: Conflict exception da ima lepsi ispis
-public abstract class AbstractBaseController<T, GetDTO, PostDTO, PutDTO, ServiceType extends AbstractBaseService<T, ?, ?, GetDTO, PostDTO, PutDTO>> implements IBaseController<T, GetDTO, PostDTO, PutDTO> {
+public abstract class AbstractBaseController<T, GetDTO, PostDTO, PutDTO, ServiceType 
+                    extends AbstractBaseService<T, ?, ?, GetDTO, PostDTO, PutDTO>> 
+                    implements IBaseController<T, GetDTO, PostDTO, PutDTO> {
 
     protected final ServiceType service;
 
@@ -36,7 +38,6 @@ public abstract class AbstractBaseController<T, GetDTO, PostDTO, PutDTO, Service
         if (entity == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(getNotFoundResponse());
         }
-
         return ResponseEntity.ok(new CreateResponseDTO<GetDTO>(entity, HttpStatus.OK));
     }
 
@@ -74,19 +75,15 @@ public abstract class AbstractBaseController<T, GetDTO, PostDTO, PutDTO, Service
 
     @GetMapping("/find")
     public ResponseEntity<Object> queryCountries(@RequestParam("q") String queryParams) {
-        // FIXME: Osim q parametara trebam jos sort=, offset, limit
         try {
             List<GetDTO> entities = service.find(queryParams);
             return ResponseEntity.ok(new CreateResponseDTO<List<GetDTO>>(entities, HttpStatus.OK));
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(InvalidRequestResponseBuilder.createResponse(e));
         }
-
-
     }
 
     public CreateResponseDTO<T> getNotFoundResponse() {
         return new CreateResponseDTO<T>(HttpStatus.NOT_FOUND, "Entity not found");
     }
-
 }
