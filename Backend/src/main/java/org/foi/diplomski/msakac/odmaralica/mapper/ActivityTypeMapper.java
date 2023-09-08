@@ -11,8 +11,12 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ActivityTypeMapper {
     ActivityTypeMapper INSTANCE = Mappers.getMapper(ActivityTypeMapper.class);
+
     ActivityType convert(ActivityTypePutDTO activityTypePutDTO);
+
     ActivityType convert(ActivityTypePostDTO activityTypePostDTO);
+
     ActivityTypeGetDTO convert(ActivityType activityType);
+
     ActivityType convert(ActivityTypeGetDTO activityTypeGetDTO);
 }

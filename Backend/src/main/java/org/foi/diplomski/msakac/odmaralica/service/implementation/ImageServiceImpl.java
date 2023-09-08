@@ -1,19 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.service.implementation;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-
+import lombok.RequiredArgsConstructor;
 import org.foi.diplomski.msakac.odmaralica.model.AccommodationUnit;
 import org.foi.diplomski.msakac.odmaralica.model.Image;
 import org.foi.diplomski.msakac.odmaralica.model.Residence;
@@ -28,8 +15,19 @@ import org.foi.diplomski.msakac.odmaralica.utils.SecurityConstants;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import lombok.RequiredArgsConstructor;
- 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class ImageServiceImpl implements IImageService {
@@ -39,20 +37,20 @@ public class ImageServiceImpl implements IImageService {
     private final ResidenceRepository residenceRepository;
     private final ImageRepository imageRepository;
     private final EntityManager entityManager;
-    private static String imageDirectory = System.getProperty("user.dir") + "/images/";
+    private static final String imageDirectory = System.getProperty("user.dir") + "/images/";
 
     public void uploadImage(MultipartFile file, Long userId, Long accommodationUnitId, Long residenceId) {
         // Getting user, creator, accommodation unit and residence
         AccommodationUnit accommodationUnit = null;
         User user = null;
         Residence residence = null;
-        if(userId != null){
+        if (userId != null) {
             user = userRepository.findById(userId).orElse(null);
         }
-        if(accommodationUnitId != null){
-           accommodationUnit = accommodationUnitRepository.findById(accommodationUnitId).orElse(null);
+        if (accommodationUnitId != null) {
+            accommodationUnit = accommodationUnitRepository.findById(accommodationUnitId).orElse(null);
         }
-        if(residenceId != null) {
+        if (residenceId != null) {
             residence = residenceRepository.findById(residenceId).orElse(null);
         }
         Long authenticatedUserId = SecurityConstants.getAuthenticatedUserId();
@@ -60,12 +58,12 @@ public class ImageServiceImpl implements IImageService {
 
         // Creating image object
         final Image image = Image.builder()
-            .user(user)
-            .accommodationUnit(accommodationUnit)
-            .residence(residence)
-            .createdBy(createdBy)
-            .createdAt(new Timestamp(System.currentTimeMillis()))
-            .build();
+                .user(user)
+                .accommodationUnit(accommodationUnit)
+                .residence(residence)
+                .createdBy(createdBy)
+                .createdAt(new Timestamp(System.currentTimeMillis()))
+                .build();
         Image savedImage = imageRepository.save(image);
 
 
@@ -81,7 +79,7 @@ public class ImageServiceImpl implements IImageService {
             String imageDirectory = getImageDirectoy();
             Path fileNamePath = Paths.get(imageDirectory, imageName);
             Files.write(fileNamePath, file.getBytes());
-        } catch(Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -98,7 +96,7 @@ public class ImageServiceImpl implements IImageService {
             }
             byte[] imageBytes = Files.readAllBytes(matchingImagePaths.get(0));
             return imageBytes;
-        } catch(Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -142,7 +140,7 @@ public class ImageServiceImpl implements IImageService {
                 return;
             }
             Files.delete(matchingImagePaths.get(0));
-        } catch(Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
         imageRepository.deleteById(id);
@@ -150,20 +148,20 @@ public class ImageServiceImpl implements IImageService {
 
     @Override
     public void deleteForType(String type, Long id) {
-        if(type.equals("accommodationUnit")) {
+        if (type.equals("accommodationUnit")) {
             List<Image> images = imageRepository.findAllByAccommodationUnitId(id);
             deleteImages(images);
-        } else if(type.equals("residence")) {
+        } else if (type.equals("residence")) {
             List<Image> images = imageRepository.findAllByResidenceId(id);
             deleteImages(images);
-        } else if(type.equals("user")) {
+        } else if (type.equals("user")) {
             List<Image> images = imageRepository.findAllByUserId(id);
             deleteImages(images);
         }
     }
 
     private void deleteImages(List<Image> images) {
-        for(Image image : images) {
+        for (Image image : images) {
             String imageNameToFind = image.getId() + "_";
             try {
                 List<Path> matchingImagePaths = Files.list(Paths.get(imageDirectory))
@@ -174,7 +172,7 @@ public class ImageServiceImpl implements IImageService {
                     Files.delete(matchingImagePaths.get(0));
                 }
                 imageRepository.deleteById(image.getId());
-            } catch(Exception e){
+            } catch (Exception e) {
                 throw new RuntimeException(e.getMessage());
             }
         }

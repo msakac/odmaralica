@@ -1,13 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.service.security.implementation;
 
-import java.sql.Timestamp;
-
-import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDTO;
-import org.foi.diplomski.msakac.odmaralica.dto.security.LoginRequestDTO;
-import org.foi.diplomski.msakac.odmaralica.dto.security.LoginResponseDTO;
-import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterRequestDTO;
-import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterResponseDTO;
-import org.foi.diplomski.msakac.odmaralica.dto.security.UserGetDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.security.*;
 import org.foi.diplomski.msakac.odmaralica.exceptions.AccountNotActivatedException;
 import org.foi.diplomski.msakac.odmaralica.exceptions.InvalidActivationTokenException;
 import org.foi.diplomski.msakac.odmaralica.mapper.security.UserMapper;
@@ -24,6 +17,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+
 @Service
 public class AuthenticationServiceImpl implements IAuthenticationService {
 
@@ -35,8 +30,8 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
     private final EmailSenderService emailSenderService;
 
     @Autowired
-    public AuthenticationServiceImpl(AuthenticationManager authenticationManager, IUserService userService, 
-            JwtTokenManager jwtTokenManager, IUserTokenService userTokenService, EmailSenderService emailSenderService, UserMapper userMapper) {
+    public AuthenticationServiceImpl(AuthenticationManager authenticationManager, IUserService userService,
+                                     JwtTokenManager jwtTokenManager, IUserTokenService userTokenService, EmailSenderService emailSenderService, UserMapper userMapper) {
         this.authenticationManager = authenticationManager;
         this.userService = userService;
         this.jwtTokenManager = jwtTokenManager;
@@ -48,7 +43,7 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
     public LoginResponseDTO login(LoginRequestDTO loginRequestDTO) {
         //Authenticate user
         final UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-            loginRequestDTO.getEmail(), loginRequestDTO.getPassword());
+                loginRequestDTO.getEmail(), loginRequestDTO.getPassword());
 
         authenticationManager.authenticate(usernamePasswordAuthenticationToken);
         final AuthenticatedUserDTO authenticatedUserDTO = userService.findAuthenticatedUserByEmail(loginRequestDTO.getEmail());
@@ -56,21 +51,21 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
         final User user = userMapper.convertToUser(authenticatedUserDTO);
 
         //Check if user is activated
-        if(user.getActivated() == false) {
+        if (!user.getActivated()) {
 
             UserToken activationToken = new UserToken(user, TokenType.Activation);
             // If there is no valid token, create new one and return true.
             boolean isCreated = userTokenService.deactivateAndCreateActivationToken(activationToken);
 
-            if(isCreated){
-                 UserGetDTO userGetDTO = userMapper.convertToUserGetDTO(user);
+            if (isCreated) {
+                UserGetDTO userGetDTO = userMapper.convertToUserGetDTO(user);
                 emailSenderService.sendActivationEmail(userGetDTO, activationToken);
                 throw new AccountNotActivatedException("Account with email '" + user.getEmail()
-                + "' is not activated. New activation token is being sent to your email.");
+                        + "' is not activated. New activation token is being sent to your email.");
             }
 
             throw new AccountNotActivatedException("Account with email '" + user.getEmail()
-                + "' is not activated. Please check your email for activation token.");
+                    + "' is not activated. Please check your email for activation token.");
         }
 
         //Create tokens and return them in response
@@ -106,9 +101,9 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
         UserToken activationToken = userTokenService.findByToken(token);
 
         // Check validity of token
-        if(activationToken == null || activationToken.isUsed()
-            || activationToken.getType() != TokenType.Activation
-            || current.after(activationToken.getExpiresAt())) {
+        if (activationToken == null || activationToken.isUsed()
+                || activationToken.getType() != TokenType.Activation
+                || current.after(activationToken.getExpiresAt())) {
 
             throw new InvalidActivationTokenException("Invalid activation token.");
         }

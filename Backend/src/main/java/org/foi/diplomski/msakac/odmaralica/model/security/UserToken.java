@@ -1,10 +1,13 @@
 package org.foi.diplomski.msakac.odmaralica.model.security;
 
-import lombok.*;
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.foi.diplomski.msakac.odmaralica.model.User;
 import org.foi.diplomski.msakac.odmaralica.utils.SecurityConstants;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.UUID;
@@ -20,17 +23,17 @@ public class UserToken implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name="token")
+    @Column(name = "token")
     private String token;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name="type")
+    @Column(name = "type")
     private TokenType type;
 
     @Column(name = "created_at", nullable = false)
@@ -39,7 +42,7 @@ public class UserToken implements Serializable {
     @Column(name = "expires_at", nullable = false)
     private Timestamp expiresAt;
 
-    @Column(name= "is_used", nullable = false)
+    @Column(name = "is_used", nullable = false)
     private boolean isUsed;
 
     public UserToken(User user, TokenType type) {
@@ -47,9 +50,9 @@ public class UserToken implements Serializable {
         this.type = type;
         this.createdAt = new Timestamp(System.currentTimeMillis());
         this.isUsed = false;
-        if(type.equals(TokenType.Activation)){
+        if (type.equals(TokenType.Activation)) {
             this.expiresAt = new Timestamp(System.currentTimeMillis() + SecurityConstants.ACTIVATION_TOKEN_EXPIRATION_TIME);
-        }else if(type.equals(TokenType.PasswordReset)){
+        } else if (type.equals(TokenType.PasswordReset)) {
             this.expiresAt = new Timestamp(System.currentTimeMillis() + SecurityConstants.PASSWORD_RESET_TOKEN_EXPIRATION_TIME);
         }
         this.token = UUID.randomUUID().toString();

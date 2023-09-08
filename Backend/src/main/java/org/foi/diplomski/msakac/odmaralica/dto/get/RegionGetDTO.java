@@ -1,11 +1,11 @@
 package org.foi.diplomski.msakac.odmaralica.dto.get;
 
-import org.foi.diplomski.msakac.odmaralica.model.Country;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.foi.diplomski.msakac.odmaralica.model.Country;
+
 @Getter
 @Setter
 @ToString

@@ -2,11 +2,11 @@ package org.foi.diplomski.msakac.odmaralica.mapper;
 
 import org.foi.diplomski.msakac.odmaralica.dto.get.ActivityTypeGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.get.LogGetDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.post.LogPostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.LogPutDTO;
 import org.foi.diplomski.msakac.odmaralica.model.ActivityType;
 import org.foi.diplomski.msakac.odmaralica.model.Log;
 import org.foi.diplomski.msakac.odmaralica.model.User;
-import org.foi.diplomski.msakac.odmaralica.dto.post.LogPostDTO;
 import org.foi.diplomski.msakac.odmaralica.service.IActivityTypeService;
 import org.foi.diplomski.msakac.odmaralica.service.security.implementation.UserServiceImpl;
 import org.mapstruct.Mapper;

@@ -25,12 +25,12 @@ public abstract class AddressMapper {
     protected CityMapper cityMapper = Mappers.getMapper(CityMapper.class);
     protected ResidenceMapper residenceMapper = Mappers.getMapper(ResidenceMapper.class);
 
-    @Mapping(source="addressPostDTO.residenceId", target="residence")
-    @Mapping(source="addressPostDTO.cityId", target="city")
+    @Mapping(source = "addressPostDTO.residenceId", target = "residence")
+    @Mapping(source = "addressPostDTO.cityId", target = "city")
     public abstract Address convert(AddressPostDTO addressPostDTO);
 
-    @Mapping(source="addressPutDTO.cityId", target="city")
-    @Mapping(source="addressPutDTO.residenceId", target="residence")
+    @Mapping(source = "addressPutDTO.cityId", target = "city")
+    @Mapping(source = "addressPutDTO.residenceId", target = "residence")
     public abstract Address convert(AddressPutDTO addressPutDTO);
 
     public abstract AddressGetDTO convert(Address address);

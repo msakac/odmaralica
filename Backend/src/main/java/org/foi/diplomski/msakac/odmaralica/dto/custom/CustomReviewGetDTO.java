@@ -1,12 +1,7 @@
 package org.foi.diplomski.msakac.odmaralica.dto.custom;
 
+import lombok.*;
 import org.foi.diplomski.msakac.odmaralica.dto.security.UserGetDTO;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter

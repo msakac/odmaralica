@@ -83,11 +83,7 @@ public class ReviewServiceImpl extends AbstractBaseService<Review, ReviewReposit
 
         List<Review> reviewsForResidence = repository.findByResidenceIdAndUserId(residenceId, userId);
 
-        if (userReservationsForResidenceInPast.size() > reviewsForResidence.size()) {
-            return true;
-        } else {
-            return false;
-        }
+        return userReservationsForResidenceInPast.size() > reviewsForResidence.size();
     }
 
     @Override

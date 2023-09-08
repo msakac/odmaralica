@@ -1,11 +1,11 @@
 package org.foi.diplomski.msakac.odmaralica.dto.custom;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.util.List;
 
 @Getter
 @Setter

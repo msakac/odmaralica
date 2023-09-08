@@ -1,16 +1,13 @@
 package org.foi.diplomski.msakac.odmaralica.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-
-import java.util.List;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
 import org.foi.diplomski.msakac.odmaralica.model.security.RefreshToken;
 import org.foi.diplomski.msakac.odmaralica.model.security.UserToken;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Getter
 @Setter

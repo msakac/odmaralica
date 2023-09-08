@@ -13,18 +13,17 @@ import org.foi.diplomski.msakac.odmaralica.service.base.AbstractBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.sql.Timestamp;
-
-import javax.persistence.EntityManager;
 
 @Service
 public class ReservationServiceImpl extends AbstractBaseService<Reservation, ReservationRepository, ReservationMapper, ReservationGetDTO, ReservationPostDTO, ReservationPutDTO> implements IReservationService {
-    private static DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    private static final DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
     private final PricePeriodRepository pricePeriodRepository;
 
 
@@ -35,7 +34,7 @@ public class ReservationServiceImpl extends AbstractBaseService<Reservation, Res
     }
 
     @Override
-    public ReservationGetDTO create(ReservationPostDTO entityPost){
+    public ReservationGetDTO create(ReservationPostDTO entityPost) {
         entityPost.setCreatedAt(Timestamp.from(new Date().toInstant()));
         Reservation reservation = convertPost(entityPost);
         this.validate(reservation);
@@ -68,13 +67,13 @@ public class ReservationServiceImpl extends AbstractBaseService<Reservation, Res
         return Reservation.class;
     }
 
-    private void validate(Reservation entity){
+    private void validate(Reservation entity) {
         // Check if start date is before end date
-        if(entity.getStartAt().after(entity.getEndAt())){
+        if (entity.getStartAt().after(entity.getEndAt())) {
             throw new IllegalArgumentException("Start date cannot be after end date");
         }
         // Check if created at is before start date
-        if(entity.getCreatedAt().after(entity.getStartAt())){
+        if (entity.getCreatedAt().after(entity.getStartAt())) {
             throw new IllegalArgumentException("Start date cannot be in the past");
         }
         // Check if reservation overlaps with existing reservation
@@ -94,11 +93,11 @@ public class ReservationServiceImpl extends AbstractBaseService<Reservation, Res
         //Write all reservation dates to list
         Date reservationDate = new Date(entity.getStartAt().getTime());
         while (reservationDate.before(entity.getEndAt())) {
-            try{
+            try {
                 Date dateNoTime = formatter.parse(formatter.format(reservationDate));
                 reservationDateList.add(dateNoTime);
                 reservationDate = new Date(reservationDate.getTime() + (24 * 60 * 60 * 1000)); // Increment date by one day
-            }catch(Exception e){
+            } catch (Exception e) {
                 throw new RuntimeException("Error parsing date");
             }
         }
@@ -109,11 +108,11 @@ public class ReservationServiceImpl extends AbstractBaseService<Reservation, Res
             Date pricePeriodDate = new Date(pricePeriod.getStartAt().getTime());
             Date pricePeriodEndDate = new Date(pricePeriod.getEndAt().getTime() + (24 * 60 * 60 * 1000));
             while (pricePeriodDate.before(pricePeriodEndDate)) {
-                try{
+                try {
                     Date dateNoTime = formatter.parse(formatter.format(pricePeriodDate));
                     pricePeriodDateList.add(dateNoTime);
                     pricePeriodDate = new Date(pricePeriodDate.getTime() + (24 * 60 * 60 * 1000)); // Increment date by one day
-                }catch(Exception e){
+                } catch (Exception e) {
                     throw new RuntimeException("Error parsing date");
                 }
             }

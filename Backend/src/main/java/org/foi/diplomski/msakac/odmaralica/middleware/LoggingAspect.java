@@ -1,12 +1,5 @@
 package org.foi.diplomski.msakac.odmaralica.middleware;
 
-import java.sql.Timestamp;
-import java.util.Arrays;
-import java.util.Date;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -27,6 +20,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.Date;
+
 @SuppressWarnings("unchecked")
 @Aspect
 @Component
@@ -44,23 +43,26 @@ public class LoggingAspect {
     private ActivityTypeServiceImpl activityTypeService;
 
     @Pointcut("within(@org.springframework.stereotype.Repository *)" +
-        " || within(@org.springframework.stereotype.Service *)" +
-        " || within(@org.springframework.web.bind.annotation.RestController *)")
-    public void springBeanPointcut() {}
+            " || within(@org.springframework.stereotype.Service *)" +
+            " || within(@org.springframework.web.bind.annotation.RestController *)")
+    public void springBeanPointcut() {
+    }
 
-   @Pointcut("within(org.foi.diplomski.msakac.odmaralica.controller..*)")
-    public void applicationPackagePointcut() {}
+    @Pointcut("within(org.foi.diplomski.msakac.odmaralica.controller..*)")
+    public void applicationPackagePointcut() {
+    }
 
     @Pointcut("@annotation(org.springframework.web.bind.annotation.GetMapping)" +
-        " || @annotation(org.springframework.web.bind.annotation.PutMapping)" +
-        " || @annotation(org.springframework.web.bind.annotation.DeleteMapping)" +
-        " || @annotation(org.springframework.web.bind.annotation.PostMapping)")
-    public void requestMappingMethods() {}
+            " || @annotation(org.springframework.web.bind.annotation.PutMapping)" +
+            " || @annotation(org.springframework.web.bind.annotation.DeleteMapping)" +
+            " || @annotation(org.springframework.web.bind.annotation.PostMapping)")
+    public void requestMappingMethods() {
+    }
 
     @AfterThrowing(pointcut = "applicationPackagePointcut() && (springBeanPointcut() || requestMappingMethods())", throwing = "e")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
         log.error("Exception in {}.{}() with cause = {}", joinPoint.getSignature().getDeclaringTypeName(),
-            joinPoint.getSignature().getName(), e.getCause() != null ? e.getCause() : "NULL");
+                joinPoint.getSignature().getName(), e.getCause() != null ? e.getCause() : "NULL");
     }
 
     @Around("applicationPackagePointcut() && (springBeanPointcut() || requestMappingMethods())")
@@ -74,7 +76,7 @@ public class LoggingAspect {
             return result;
         } catch (IllegalArgumentException e) {
             log.error("Illegal argument: {} in {}.{}()", Arrays.toString(joinPoint.getArgs()),
-                className, methodName);
+                    className, methodName);
             throw e;
         }
     }
@@ -84,7 +86,7 @@ public class LoggingAspect {
         long duration = (System.currentTimeMillis() - startTime);
         String httpMethod = request.getMethod();
         String endpoint = request.getRequestURI();
-        if(endpoint.contains("image")) {
+        if (endpoint.contains("image")) {
             return;
         }
         String activityType = getActivityType(httpMethod, endpoint);
@@ -93,7 +95,7 @@ public class LoggingAspect {
                     httpMethod, endpoint, request.getRemoteAddr(),
                     className, methodName);
 
-            CreateResponseDTO<Object> body = (CreateResponseDTO<Object>) result.getBody();
+            CreateResponseDTO<Object> body = result.getBody();
             if (response != null && body != null) {
                 String code = result.getStatusCode().toString();
                 String resMessage = body.getMessage();
@@ -107,16 +109,16 @@ public class LoggingAspect {
                 log.info(responseInfo);
 
                 LogPostDTO logPostDTO = LogPostDTO.builder()
-                    .userId(SecurityConstants.getAuthenticatedUserId())
-                    .activityTypeId(getActivityTypeId(activityType))
-                    .logMessage(resMessage)
-                    .httpMethod(httpMethod)
-                    .endpoint(endpoint)
-                    .statusCode(String.valueOf(code))
-                    .ipAddress(request.getRemoteAddr())
-                    .responseTime(String.valueOf(duration) + " ms")
-                    .createdAt(Timestamp.from(new Date().toInstant()))
-                    .build();
+                        .userId(SecurityConstants.getAuthenticatedUserId())
+                        .activityTypeId(getActivityTypeId(activityType))
+                        .logMessage(resMessage)
+                        .httpMethod(httpMethod)
+                        .endpoint(endpoint)
+                        .statusCode(code)
+                        .ipAddress(request.getRemoteAddr())
+                        .responseTime(duration + " ms")
+                        .createdAt(Timestamp.from(new Date().toInstant()))
+                        .build();
                 logService.create(logPostDTO);
             }
         }
@@ -130,7 +132,7 @@ public class LoggingAspect {
                 return "Registration";
             } else if (endpoint.equals("/auth/logout")) {
                 return "Logout";
-            } else{
+            } else {
                 return "Create";
             }
         } else if (httpMethod.equals("GET")) {
@@ -146,7 +148,7 @@ public class LoggingAspect {
     private Long getActivityTypeId(String activityTypeName) {
         ActivityType activityType = activityTypeService.findByName(activityTypeName);
         if (activityType == null) {
-             ActivityTypePostDTO activityTypePost = ActivityTypePostDTO.builder().name(activityTypeName).build();
+            ActivityTypePostDTO activityTypePost = ActivityTypePostDTO.builder().name(activityTypeName).build();
             ActivityTypeGetDTO newActivityType = activityTypeService.create(activityTypePost);
             return newActivityType.getId();
         }

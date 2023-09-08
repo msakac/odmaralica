@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserTokenRepository extends JpaRepository<UserToken, Long> {
     UserToken findByUserIdAndTypeAndIsUsedFalse(Long userId, TokenType type);
+
     UserToken findByToken(String token);
 }

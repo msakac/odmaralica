@@ -20,7 +20,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,7 +91,7 @@ public class CountryServiceImpl implements ICountryService {
     public List<CountryRegionCityGetDTO> findAllWithRegionsAndCities() {
         List<Country> countries = countryRepository.findAll();
         List<CountryRegionCityGetDTO> countryRegionCityGetDTOS = new ArrayList<>();
-        for(Country country : countries ) {
+        for (Country country : countries) {
             List<CustomRegionDTO> customRegionDTOS = getRegionsWithCountry(country.getId());
             CountryRegionCityGetDTO countryRegionCityGetDTO = new CountryRegionCityGetDTO(country.getId(), country.getName(), customRegionDTOS);
             countryRegionCityGetDTOS.add(countryRegionCityGetDTO);
@@ -102,7 +101,7 @@ public class CountryServiceImpl implements ICountryService {
 
     private List<CustomRegionDTO> getRegionsWithCountry(Long id) {
         List<Region> regions = regionRepository.findAllByCountryId(id);
-        List<CustomRegionDTO> customRegionDTOList = new ArrayList<>(); 
+        List<CustomRegionDTO> customRegionDTOList = new ArrayList<>();
         for (Region region : regions) {
             List<CustomCityDTO> customCityDTOList = getCitiesWithRegion(region.getId());
             CustomRegionDTO customRegionDTO = new CustomRegionDTO(region.getId(), region.getName(), customCityDTOList);
@@ -111,10 +110,10 @@ public class CountryServiceImpl implements ICountryService {
         return customRegionDTOList;
     }
 
-    private List<CustomCityDTO> getCitiesWithRegion(Long id){
+    private List<CustomCityDTO> getCitiesWithRegion(Long id) {
         List<City> cities = cityRepository.findAllByRegionId(id);
         List<CustomCityDTO> customCityDTOList = new ArrayList<>();
-        for(City city : cities){
+        for (City city : cities) {
             CustomCityDTO customCityDTO = new CustomCityDTO(city.getId(), city.getName(), city.getZip());
             customCityDTOList.add(customCityDTO);
         }

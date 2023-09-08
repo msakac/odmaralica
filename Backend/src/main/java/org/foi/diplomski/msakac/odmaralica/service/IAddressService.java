@@ -1,10 +1,11 @@
 package org.foi.diplomski.msakac.odmaralica.service;
 
-import java.util.List;
 import org.foi.diplomski.msakac.odmaralica.dto.get.AddressGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.AddressPostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.AddressPutDTO;
 import org.foi.diplomski.msakac.odmaralica.model.Address;
+
+import java.util.List;
 
 public interface IAddressService {
     Address convertPost(AddressPostDTO entityPost);

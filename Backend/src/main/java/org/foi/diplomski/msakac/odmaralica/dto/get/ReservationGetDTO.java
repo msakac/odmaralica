@@ -1,14 +1,14 @@
 package org.foi.diplomski.msakac.odmaralica.dto.get;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-
-import org.foi.diplomski.msakac.odmaralica.dto.security.UserGetDTO;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.foi.diplomski.msakac.odmaralica.dto.security.UserGetDTO;
+
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @Getter
 @Setter
 @ToString

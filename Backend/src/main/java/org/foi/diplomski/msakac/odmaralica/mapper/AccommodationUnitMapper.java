@@ -29,7 +29,7 @@ public abstract class AccommodationUnitMapper {
 
     public abstract AccommodationUnit convert(AccommodationUnitGetDTO accommodationUnitGetDTO);
 
-    protected Residence mapToResidence(long residenceId){
+    protected Residence mapToResidence(long residenceId) {
         ResidenceGetDTO residenceGet = residenceService.findById(residenceId);
         return residenceMapper.convert(residenceGet);
     }

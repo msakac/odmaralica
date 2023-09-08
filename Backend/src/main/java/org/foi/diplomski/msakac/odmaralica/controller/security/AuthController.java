@@ -1,24 +1,16 @@
 package org.foi.diplomski.msakac.odmaralica.controller.security;
 
-import javax.validation.Valid;
-
 import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
-import org.foi.diplomski.msakac.odmaralica.dto.security.LoginOpenAuthRequestDTO;
-import org.foi.diplomski.msakac.odmaralica.dto.security.LoginRequestDTO;
-import org.foi.diplomski.msakac.odmaralica.dto.security.LoginResponseDTO;
-import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterRequestDTO;
-import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterResponseDTO;
+import org.foi.diplomski.msakac.odmaralica.dto.security.*;
 import org.foi.diplomski.msakac.odmaralica.exceptions.EmailAlreadyExistException;
 import org.foi.diplomski.msakac.odmaralica.exceptions.InvalidRequestResponseBuilder;
 import org.foi.diplomski.msakac.odmaralica.service.security.IAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 @RestController
@@ -38,7 +30,7 @@ public class AuthController {
             LoginResponseDTO response = authService.login(loginRequest);
             CreateResponseDTO<LoginResponseDTO> loginResponse = new CreateResponseDTO<LoginResponseDTO>(response, HttpStatus.OK);
             return ResponseEntity.ok(loginResponse);
-        }catch(Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(InvalidRequestResponseBuilder.createResponse(e));
         }
     }
@@ -49,19 +41,19 @@ public class AuthController {
             LoginResponseDTO response = authService.loginOpenAuth(request.getToken());
             CreateResponseDTO<LoginResponseDTO> loginResponse = new CreateResponseDTO<LoginResponseDTO>(response, HttpStatus.OK);
             return ResponseEntity.ok(loginResponse);
-        }catch(Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(InvalidRequestResponseBuilder.createResponse(e));
         }
     }
 
     @PostMapping("/register")
     public ResponseEntity<Object> register(@Valid @RequestBody RegisterRequestDTO registerRequest) {
-        try{
+        try {
             RegisterResponseDTO response = authService.register(registerRequest);
             CreateResponseDTO<RegisterResponseDTO> regResponse = new CreateResponseDTO<RegisterResponseDTO>(response, HttpStatus.OK);
             return ResponseEntity.ok(regResponse);
-        } catch(Exception e){
-            if(e instanceof EmailAlreadyExistException){
+        } catch (Exception e) {
+            if (e instanceof EmailAlreadyExistException) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body(InvalidRequestResponseBuilder.createResponse(e));
             }
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(InvalidRequestResponseBuilder.createResponse(e));

@@ -9,11 +9,12 @@ import org.foi.diplomski.msakac.odmaralica.model.Address;
 import org.foi.diplomski.msakac.odmaralica.service.implementation.AddressServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/address")
-public class AddressController extends AbstractBaseController<Address, AddressGetDTO, AddressPostDTO, AddressPutDTO, AddressServiceImpl>{
+public class AddressController extends AbstractBaseController<Address, AddressGetDTO, AddressPostDTO, AddressPutDTO, AddressServiceImpl> {
 
     @Autowired
     public AddressController(AddressServiceImpl service) {

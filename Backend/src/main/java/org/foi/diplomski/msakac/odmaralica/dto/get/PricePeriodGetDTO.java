@@ -1,11 +1,12 @@
 package org.foi.diplomski.msakac.odmaralica.dto.get;
 
-import java.sql.Date;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.sql.Date;
+
 @Getter
 @Setter
 @ToString

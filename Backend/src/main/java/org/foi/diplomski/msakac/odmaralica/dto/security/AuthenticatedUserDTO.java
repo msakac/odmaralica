@@ -3,7 +3,6 @@ package org.foi.diplomski.msakac.odmaralica.dto.security;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import org.foi.diplomski.msakac.odmaralica.model.Image;
 import org.foi.diplomski.msakac.odmaralica.model.Role;
 

@@ -12,15 +12,14 @@ import org.foi.diplomski.msakac.odmaralica.service.ILogService;
 import org.foi.diplomski.msakac.odmaralica.service.base.AbstractBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import javax.crypto.Cipher;
-import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import java.nio.charset.StandardCharsets;
+import javax.persistence.EntityManager;
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
-import javax.persistence.EntityManager;
-import java.security.Key;
 
 @Service
 public class LogServiceImpl extends AbstractBaseService<Log, LogRepository, LogMapper, LogGetDTO, LogPostDTO, LogPutDTO> implements ILogService {
@@ -59,10 +58,10 @@ public class LogServiceImpl extends AbstractBaseService<Log, LogRepository, LogM
             try {
                 String encryptedUser = "";
                 String encryptedId = encrypt(entity.getId().toString());
-                if(entity.getUser() != null) {
+                if (entity.getUser() != null) {
                     encryptedUser = encrypt(entity.getUser().getEmail());
                 }
-                String encryptedActivityType = encrypt(entity.getActivityType().getName().toString());
+                String encryptedActivityType = encrypt(entity.getActivityType().getName());
                 String encryptedLogMessage = encrypt(entity.getLogMessage());
                 String encryptedCreatedAt = encrypt(entity.getCreatedAt().toString());
                 String encryptedHttpMethod = encrypt(entity.getHttpMethod());
@@ -71,9 +70,9 @@ public class LogServiceImpl extends AbstractBaseService<Log, LogRepository, LogM
                 String encryptedIpAddress = encrypt(entity.getIpAddress());
                 String encryptedResponseTime = encrypt(entity.getResponseTime());
 
-                EncryptedLogGetDTO encryptedLogEntry = new EncryptedLogGetDTO(encryptedId, encryptedUser, encryptedActivityType, 
-                    encryptedLogMessage, encryptedCreatedAt, encryptedHttpMethod, encryptedEndpoint, 
-                    encryptedStatusCode, encryptedIpAddress, encryptedResponseTime);
+                EncryptedLogGetDTO encryptedLogEntry = new EncryptedLogGetDTO(encryptedId, encryptedUser, encryptedActivityType,
+                        encryptedLogMessage, encryptedCreatedAt, encryptedHttpMethod, encryptedEndpoint,
+                        encryptedStatusCode, encryptedIpAddress, encryptedResponseTime);
                 getEntities.add(encryptedLogEntry);
 
             } catch (Exception e) {

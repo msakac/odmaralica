@@ -1,4 +1,5 @@
 package org.foi.diplomski.msakac.odmaralica.dto.post;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

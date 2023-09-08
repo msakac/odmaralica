@@ -1,9 +1,13 @@
 package org.foi.diplomski.msakac.odmaralica.dto.put;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.Date;
-import lombok.*;
-import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter

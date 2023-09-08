@@ -1,8 +1,5 @@
 package org.foi.diplomski.msakac.odmaralica.mapper;
 
-import java.sql.Date;
-import java.time.LocalDate;
-
 import org.foi.diplomski.msakac.odmaralica.dto.get.AccommodationUnitGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.get.ReservationGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.ReservationPostDTO;
@@ -20,6 +17,9 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public abstract class ReservationMapper {
     @Autowired
@@ -30,24 +30,24 @@ public abstract class ReservationMapper {
     protected UserMapper userMapper = Mappers.getMapper(UserMapper.class);
     protected AccommodationUnitMapper accommodationUnitMapper = Mappers.getMapper(AccommodationUnitMapper.class);
 
-    @Mapping(source="reservationPostDTO.userId", target="user")
-    @Mapping(source="reservationPostDTO.accommodationUnitId", target="accommodationUnit")
-    @Mapping(source="reservationPostDTO.createdAt", target="createdAt")
+    @Mapping(source = "reservationPostDTO.userId", target = "user")
+    @Mapping(source = "reservationPostDTO.accommodationUnitId", target = "accommodationUnit")
+    @Mapping(source = "reservationPostDTO.createdAt", target = "createdAt")
     public abstract Reservation convert(ReservationPostDTO reservationPostDTO);
 
-    @Mapping(source="reservationPutDTO.userEmail", target="user")
-    @Mapping(source="reservationPutDTO.accommodationUnitId", target="accommodationUnit")
+    @Mapping(source = "reservationPutDTO.userEmail", target = "user")
+    @Mapping(source = "reservationPutDTO.accommodationUnitId", target = "accommodationUnit")
     public abstract Reservation convert(ReservationPutDTO reservationPutDTO);
 
-    @Mapping(source="reservation.startAt", target="startAt", qualifiedByName = "formatLocalDate")
-    @Mapping(source="reservation.endAt", target="endAt", qualifiedByName = "formatLocalDate")
+    @Mapping(source = "reservation.startAt", target = "startAt", qualifiedByName = "formatLocalDate")
+    @Mapping(source = "reservation.endAt", target = "endAt", qualifiedByName = "formatLocalDate")
     public abstract ReservationGetDTO convert(Reservation reservation);
 
     protected User mapToUser(Long userId) {
         return userService.findById(userId);
     }
 
-    protected User mapToUser(String email)  {
+    protected User mapToUser(String email) {
         return userService.findByEmail(email);
     }
 

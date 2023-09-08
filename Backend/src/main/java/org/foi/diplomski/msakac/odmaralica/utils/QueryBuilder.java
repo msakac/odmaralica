@@ -1,7 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.utils;
 
 import javax.persistence.criteria.*;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -35,6 +34,7 @@ public class QueryBuilder<T> {
         }
         return attributePath;
     }
+
     //FIXME: Add support for sort, limit and offset
     public CriteriaQuery<T> buildQuery(String query) {
         Map<String, String> parsedQuery = parseQuery(query);
@@ -78,18 +78,21 @@ public class QueryBuilder<T> {
     private Comparable<?> castToComparable(String value) {
         try {
             return Integer.parseInt(value);
-        } catch (NumberFormatException ignored) {}
+        } catch (NumberFormatException ignored) {
+        }
 
         try {
             return Double.parseDouble(value);
-        } catch (NumberFormatException ignored) {}
+        } catch (NumberFormatException ignored) {
+        }
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
         try {
             Date date = dateFormat.parse(value);
             return date;
-        } catch (ParseException ignored) {}
+        } catch (ParseException ignored) {
+        }
 
         return value;
     }

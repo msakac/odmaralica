@@ -11,9 +11,8 @@ import org.foi.diplomski.msakac.odmaralica.service.base.AbstractBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
+import java.util.List;
 
 @Service
 public class PricePeriodServiceImpl extends AbstractBaseService<PricePeriod, PricePeriodRepository, PricePeriodMapper, PricePeriodGetDTO, PricePeriodPostDTO, PricePeriodPutDTO> implements IPricePeriodService {
@@ -24,7 +23,7 @@ public class PricePeriodServiceImpl extends AbstractBaseService<PricePeriod, Pri
     }
 
     @Override
-    public PricePeriodGetDTO create(PricePeriodPostDTO entityPost){
+    public PricePeriodGetDTO create(PricePeriodPostDTO entityPost) {
         PricePeriod period = convertPost(entityPost);
         this.validate(period);
         return super.create(entityPost);
@@ -56,15 +55,15 @@ public class PricePeriodServiceImpl extends AbstractBaseService<PricePeriod, Pri
         return PricePeriod.class;
     }
 
-    private void validate(PricePeriod entity){
+    private void validate(PricePeriod entity) {
         // Check if start date is after end date
-        if(entity.getStartAt().compareTo(entity.getEndAt()) > 0) {
+        if (entity.getStartAt().compareTo(entity.getEndAt()) > 0) {
             throw new RuntimeException("Start date cannot be after end date");
         }
 
         List<PricePeriod> pricePeriods = repository.findByAccommodationUnitId(entity.getAccommodationUnit().getId());
         for (PricePeriod pricePeriod : pricePeriods) {
-            if(pricePeriod.getId().equals(entity.getId())){
+            if (pricePeriod.getId().equals(entity.getId())) {
                 continue;
             }
             // Check if dates overlap

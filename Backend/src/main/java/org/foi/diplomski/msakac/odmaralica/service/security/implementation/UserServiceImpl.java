@@ -1,7 +1,5 @@
 package org.foi.diplomski.msakac.odmaralica.service.security.implementation;
 
-import java.util.List;
-
 import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.UserGetDTO;
@@ -19,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements IUserService {
 
@@ -34,7 +34,7 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, UserMapper mapper, RoleRepository roleRepository,
-            BCryptPasswordEncoder bCryptPasswordEncoder) {
+                           BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.mapper = mapper;
         this.roleRepository = roleRepository;
@@ -46,19 +46,19 @@ public class UserServiceImpl implements IUserService {
         checkRegisterRequest(registrationRequest);
 
         final User user = User.builder()
-            .name(registrationRequest.getName())
-            .surname(registrationRequest.getSurname())
-            .password(bCryptPasswordEncoder.encode(registrationRequest.getPassword()))
-            .email(registrationRequest.getEmail())
-            .role(getRole())
-            .activated(false).build();
+                .name(registrationRequest.getName())
+                .surname(registrationRequest.getSurname())
+                .password(bCryptPasswordEncoder.encode(registrationRequest.getPassword()))
+                .email(registrationRequest.getEmail())
+                .role(getRole())
+                .activated(false).build();
         userRepository.save(user);
 
         return user;
     }
 
     @Override
-    public User createUser(UserPostDTO user){
+    public User createUser(UserPostDTO user) {
         User userDto = mapper.convertToUser(user);
         userDto.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(userDto);
@@ -99,20 +99,20 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User update(User user) {
         //check if password is the same as in database, if not encode it
-        
+
         Long userId = SecurityConstants.getAuthenticatedUserId();
         User checkUser = findById(userId);
 
-        if(checkUser.getRole().getRole().equals("user") || checkUser.getRole().getRole().equals("renter")){
-            if(!checkUser.getId().equals(userId)){
+        if (checkUser.getRole().getRole().equals("user") || checkUser.getRole().getRole().equals("renter")) {
+            if (!checkUser.getId().equals(userId)) {
                 return null;
             }
         }
 
         User samePasswordUser = userRepository.findById(user.getId()).orElse(null);
-        if(!samePasswordUser.getPassword().equals(user.getPassword()) && user.getPassword().length() != 0){
+        if (!samePasswordUser.getPassword().equals(user.getPassword()) && user.getPassword().length() != 0) {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        }else {
+        } else {
             user.setPassword(samePasswordUser.getPassword());
         }
         return userRepository.save(user);
@@ -120,7 +120,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public AuthenticatedUserDTO getAuthenticatedUser(Long id) {
-        if(id == SecurityConstants.getAuthenticatedUserId()){
+        if (id == SecurityConstants.getAuthenticatedUserId()) {
             User user = findById(id);
             AuthenticatedUserDTO authenticatedUserDTO = mapper.convertToAuthenticatedUserDto(user);
             return authenticatedUserDTO;

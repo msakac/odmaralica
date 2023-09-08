@@ -1,7 +1,8 @@
 package org.foi.diplomski.msakac.odmaralica.security.oauth;
-import java.util.Map;
 
 import org.foi.diplomski.msakac.odmaralica.model.security.OAuth2UserInfo;
+
+import java.util.Map;
 
 public class GoogleOAuth2UserInfo extends OAuth2UserInfo {
 

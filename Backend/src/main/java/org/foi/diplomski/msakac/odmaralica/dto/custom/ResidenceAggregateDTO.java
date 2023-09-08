@@ -1,14 +1,10 @@
 package org.foi.diplomski.msakac.odmaralica.dto.custom;
 
-import java.util.List;
-
+import lombok.*;
 import org.foi.diplomski.msakac.odmaralica.dto.get.ResidenceTypeGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.UserGetDTO;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+
+import java.util.List;
 
 @Getter
 @Setter

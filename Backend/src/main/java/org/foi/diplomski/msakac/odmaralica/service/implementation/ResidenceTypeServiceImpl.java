@@ -1,7 +1,5 @@
 package org.foi.diplomski.msakac.odmaralica.service.implementation;
 
-import javax.persistence.EntityManager;
-
 import org.foi.diplomski.msakac.odmaralica.dto.get.ResidenceTypeGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.ResidenceTypePostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.ResidenceTypePutDTO;
@@ -12,6 +10,8 @@ import org.foi.diplomski.msakac.odmaralica.service.IResidenceTypeService;
 import org.foi.diplomski.msakac.odmaralica.service.base.AbstractBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityManager;
 
 @Service
 public class ResidenceTypeServiceImpl extends AbstractBaseService<ResidenceType, ResidenceTypeRepository, ResidenceTypeMapper, ResidenceTypeGetDTO, ResidenceTypePostDTO, ResidenceTypePutDTO> implements IResidenceTypeService {

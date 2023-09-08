@@ -1,12 +1,12 @@
 package org.foi.diplomski.msakac.odmaralica.service.security;
 
-import java.util.List;
-
 import org.foi.diplomski.msakac.odmaralica.dto.security.AuthenticatedUserDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.RegisterRequestDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.UserGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.UserPostDTO;
 import org.foi.diplomski.msakac.odmaralica.model.User;
+
+import java.util.List;
 
 
 public interface IUserService {

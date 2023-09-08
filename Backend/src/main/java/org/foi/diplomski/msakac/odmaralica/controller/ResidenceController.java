@@ -1,7 +1,5 @@
 package org.foi.diplomski.msakac.odmaralica.controller;
 
-import java.util.List;
-
 import org.foi.diplomski.msakac.odmaralica.controller.base.AbstractBaseController;
 import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.custom.ResidenceAggregateDTO;
@@ -13,11 +11,16 @@ import org.foi.diplomski.msakac.odmaralica.service.implementation.ResidenceServi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/residence")
-public class ResidenceController extends AbstractBaseController<Residence, ResidenceGetDTO, ResidencePostDTO, ResidencePutDTO, ResidenceServiceImpl>{
+public class ResidenceController extends AbstractBaseController<Residence, ResidenceGetDTO, ResidencePostDTO, ResidencePutDTO, ResidenceServiceImpl> {
 
     @Autowired
     public ResidenceController(ResidenceServiceImpl service) {
@@ -28,12 +31,14 @@ public class ResidenceController extends AbstractBaseController<Residence, Resid
     public CreateResponseDTO<Residence> getNotFoundResponse() {
         return new CreateResponseDTO<Residence>(HttpStatus.NOT_FOUND, "Residence not found");
     }
+
     @GetMapping("/aggregate")
     public ResponseEntity<Object> getAllAgregateResidences() {
         List<ResidenceAggregateDTO> residences = service.aggregateAllData();
         CreateResponseDTO<List<ResidenceAggregateDTO>> response = new CreateResponseDTO<List<ResidenceAggregateDTO>>(residences, HttpStatus.OK);
         return ResponseEntity.ok(response);
     }
+
     @GetMapping("/aggregate/{id}")
     public ResponseEntity<Object> getAggregateResidence(@PathVariable Long id) {
         ResidenceAggregateDTO aggregateResidence = service.aggregateData(id);

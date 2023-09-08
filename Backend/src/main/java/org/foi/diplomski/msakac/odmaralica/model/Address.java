@@ -21,8 +21,8 @@ public class Address implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "residence_id", referencedColumnName = "id", 
-                nullable = false)
+    @JoinColumn(name = "residence_id", referencedColumnName = "id",
+            nullable = false)
     private Residence residence;
 
     @Column(name = "street")

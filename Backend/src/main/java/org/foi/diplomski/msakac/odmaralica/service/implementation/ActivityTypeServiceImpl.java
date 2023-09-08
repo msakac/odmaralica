@@ -1,7 +1,5 @@
 package org.foi.diplomski.msakac.odmaralica.service.implementation;
 
-import javax.persistence.EntityManager;
-
 import org.foi.diplomski.msakac.odmaralica.dto.get.ActivityTypeGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.post.ActivityTypePostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.put.ActivityTypePutDTO;
@@ -12,6 +10,8 @@ import org.foi.diplomski.msakac.odmaralica.service.IActivityTypeService;
 import org.foi.diplomski.msakac.odmaralica.service.base.AbstractBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityManager;
 
 @Service
 public class ActivityTypeServiceImpl extends AbstractBaseService<ActivityType, ActivityTypeRepository, ActivityTypeMapper, ActivityTypeGetDTO, ActivityTypePostDTO, ActivityTypePutDTO> implements IActivityTypeService {

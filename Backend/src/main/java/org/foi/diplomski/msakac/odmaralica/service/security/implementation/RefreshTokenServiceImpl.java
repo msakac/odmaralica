@@ -1,7 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.service.security.implementation;
 
 import lombok.RequiredArgsConstructor;
-
 import org.foi.diplomski.msakac.odmaralica.model.security.RefreshToken;
 import org.foi.diplomski.msakac.odmaralica.repository.RefreshTokenRepository;
 import org.foi.diplomski.msakac.odmaralica.service.security.IRefreshTokenService;

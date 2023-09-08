@@ -31,29 +31,29 @@ public class JwtTokenManager {
         final Long id = user.getId();
         final Role userRole = user.getRole();
 
-		return JWT.create()
-				.withSubject(Long.toString(id))
-				.withIssuer(jwtProperties.getIssuer())
-				.withClaim("role", userRole.getRole())
-				.withIssuedAt(new Date())
-				.withExpiresAt(new Date(System.currentTimeMillis() + jwtProperties.getExpirationMinute() * 60 * 1000))
-				.sign(Algorithm.HMAC256(jwtProperties.getSecretKey().getBytes()));
+        return JWT.create()
+                .withSubject(Long.toString(id))
+                .withIssuer(jwtProperties.getIssuer())
+                .withClaim("role", userRole.getRole())
+                .withIssuedAt(new Date())
+                .withExpiresAt(new Date(System.currentTimeMillis() + jwtProperties.getExpirationMinute() * 60 * 1000))
+                .sign(Algorithm.HMAC256(jwtProperties.getSecretKey().getBytes()));
     }
 
     public String generateToken(Authentication authentication) {
 
-        CustomUser customUser =(CustomUser) authentication.getPrincipal();
+        CustomUser customUser = (CustomUser) authentication.getPrincipal();
         final Long id = customUser.getId();
         final User user = userService.findById(id);
         final Role userRole = user.getRole();
 
-		return JWT.create()
-				.withSubject(Long.toString(id))
-				.withIssuer(jwtProperties.getIssuer())
-				.withClaim("role", userRole.getRole())
-				.withIssuedAt(new Date())
-				.withExpiresAt(new Date(System.currentTimeMillis() + jwtProperties.getExpirationMinute() * 60 * 1000))
-				.sign(Algorithm.HMAC256(jwtProperties.getSecretKey().getBytes()));
+        return JWT.create()
+                .withSubject(Long.toString(id))
+                .withIssuer(jwtProperties.getIssuer())
+                .withClaim("role", userRole.getRole())
+                .withIssuedAt(new Date())
+                .withExpiresAt(new Date(System.currentTimeMillis() + jwtProperties.getExpirationMinute() * 60 * 1000))
+                .sign(Algorithm.HMAC256(jwtProperties.getSecretKey().getBytes()));
     }
 
     public String generateRefreshToken(User user) {

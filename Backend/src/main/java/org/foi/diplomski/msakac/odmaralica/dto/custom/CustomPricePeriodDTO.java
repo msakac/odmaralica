@@ -1,12 +1,12 @@
 package org.foi.diplomski.msakac.odmaralica.dto.custom;
 
-import java.util.Date;
-import org.foi.diplomski.msakac.odmaralica.dto.get.AmountGetDTO;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.foi.diplomski.msakac.odmaralica.dto.get.AmountGetDTO;
+
+import java.util.Date;
 
 @Getter
 @Setter

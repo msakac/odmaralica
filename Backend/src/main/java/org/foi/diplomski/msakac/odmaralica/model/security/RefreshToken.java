@@ -1,11 +1,9 @@
 package org.foi.diplomski.msakac.odmaralica.model.security;
 
 import lombok.*;
-
-import javax.persistence.*;
-
 import org.foi.diplomski.msakac.odmaralica.model.User;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -37,6 +35,6 @@ public class RefreshToken implements Serializable {
     @Column(name = "expires_at", nullable = false)
     private Timestamp expiresAt;
 
-    @Column(name= "is_expired", nullable = false)
+    @Column(name = "is_expired", nullable = false)
     private boolean isExpired;
 }

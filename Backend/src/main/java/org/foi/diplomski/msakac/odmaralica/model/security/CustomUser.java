@@ -1,5 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.model.security;
 
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -12,22 +13,20 @@ import java.util.Map;
 
 public class CustomUser extends User implements OAuth2User {
 
+    @Getter
     private Long id;
-
-    public Long getId() {
-        return id;
-    }
 
     public void setId(Long id) {
         this.id = id;
     }
 
     private Map<String, Object> attributes;
+
     //TODO dodati za aktivaciju i ostala sranja
     /*
      * boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked,
-    */
-    public CustomUser(String username, String password,  Collection<? extends GrantedAuthority> authorities, Long id) {
+     */
+    public CustomUser(String username, String password, Collection<? extends GrantedAuthority> authorities, Long id) {
         super(username, password, authorities);
         setId(id);
     }

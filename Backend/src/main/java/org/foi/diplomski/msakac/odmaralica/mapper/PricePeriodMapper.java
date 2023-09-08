@@ -27,16 +27,16 @@ public abstract class PricePeriodMapper {
     protected AccommodationUnitMapper accommodationUnitMapper = Mappers.getMapper(AccommodationUnitMapper.class);
     protected AmountMapper amountMapper = Mappers.getMapper(AmountMapper.class);
 
-    @Mapping(source="pricePeriodPostDTO.accommodationUnitId", target="accommodationUnit")
-    @Mapping(source="pricePeriodPostDTO.amountId", target="amount")
+    @Mapping(source = "pricePeriodPostDTO.accommodationUnitId", target = "accommodationUnit")
+    @Mapping(source = "pricePeriodPostDTO.amountId", target = "amount")
     public abstract PricePeriod convert(PricePeriodPostDTO pricePeriodPostDTO);
 
-    @Mapping(source="pricePeriodPutDTO.accommodationUnitId", target="accommodationUnit")
-    @Mapping(source="pricePeriodPutDTO.amountId", target="amount")
+    @Mapping(source = "pricePeriodPutDTO.accommodationUnitId", target = "accommodationUnit")
+    @Mapping(source = "pricePeriodPutDTO.amountId", target = "amount")
     public abstract PricePeriod convert(PricePeriodPutDTO pricePeriodPutDTO);
 
-    @Mapping(source="pricePeriod.startAt", target="startAt", dateFormat = "yyyy-MM-dd")
-    @Mapping(source="pricePeriod.endAt", target="endAt", dateFormat = "yyyy-MM-dd")
+    @Mapping(source = "pricePeriod.startAt", target = "startAt", dateFormat = "yyyy-MM-dd")
+    @Mapping(source = "pricePeriod.endAt", target = "endAt", dateFormat = "yyyy-MM-dd")
     public abstract PricePeriodGetDTO convert(PricePeriod pricePeriod);
 
     protected AccommodationUnit mapToAccommodationUnit(Long accommodationUnitId) {
