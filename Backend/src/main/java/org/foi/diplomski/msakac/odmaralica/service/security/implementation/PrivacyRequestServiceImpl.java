@@ -9,20 +9,19 @@ import org.foi.diplomski.msakac.odmaralica.model.security.PrivacyRequest;
 import org.foi.diplomski.msakac.odmaralica.repository.PrivacyRequestRepository;
 import org.foi.diplomski.msakac.odmaralica.repository.ReviewRepository;
 import org.foi.diplomski.msakac.odmaralica.repository.UserRepository;
+import org.foi.diplomski.msakac.odmaralica.service.base.AbstractBaseService;
 import org.foi.diplomski.msakac.odmaralica.service.security.IPrivacyRequestService;
 import org.foi.diplomski.msakac.odmaralica.utils.SecurityConstants;
-import org.foi.diplomski.msakac.odmaralica.service.base.AbstractBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.sql.Timestamp;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
 @Service
 public class PrivacyRequestServiceImpl extends AbstractBaseService<PrivacyRequest, PrivacyRequestRepository, PrivacyRequestMapper, PrivacyRequestGetDTO, PrivacyRequestPostDTO, PrivacyRequestPutDTO> implements IPrivacyRequestService {
-    
+
     private final UserRepository userRepository;
     private final ReviewRepository reviewRepository;
 
@@ -78,7 +77,7 @@ public class PrivacyRequestServiceImpl extends AbstractBaseService<PrivacyReques
         // Get the request
         PrivacyRequest request = repository.findById(id).orElse(null);
         if (request == null) {
-            return null;    
+            return null;
         }
         // Get the authenticated user
         Long authenticatedUserId = SecurityConstants.getAuthenticatedUserId();

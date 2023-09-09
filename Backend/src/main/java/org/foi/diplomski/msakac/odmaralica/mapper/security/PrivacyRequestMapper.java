@@ -1,6 +1,5 @@
 package org.foi.diplomski.msakac.odmaralica.mapper.security;
 
-import org.foi.diplomski.msakac.odmaralica.dto.get.ResidenceGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.PrivacyRequestGetDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.PrivacyRequestPostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.PrivacyRequestPutDTO;
@@ -32,6 +31,6 @@ public abstract class PrivacyRequestMapper {
         }
         return userService.findById(userId);
     }
-    
+
 
 }

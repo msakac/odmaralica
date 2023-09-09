@@ -18,7 +18,7 @@ public interface IUserService {
     AuthenticatedUserDTO getAuthenticatedUser(Long id);
 
     User update(User user);
-    
+
     User updateSecure(User user);
 
     User findById(Long id);

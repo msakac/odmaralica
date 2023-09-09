@@ -1,7 +1,6 @@
 package org.foi.diplomski.msakac.odmaralica.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.*;
 import org.foi.diplomski.msakac.odmaralica.model.security.RefreshToken;
 import org.foi.diplomski.msakac.odmaralica.model.security.UserToken;

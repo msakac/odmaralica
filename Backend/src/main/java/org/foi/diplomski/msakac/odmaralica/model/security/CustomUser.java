@@ -11,9 +11,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+@Getter
 public class CustomUser extends User implements OAuth2User {
 
-    @Getter
     private Long id;
 
     public void setId(Long id) {

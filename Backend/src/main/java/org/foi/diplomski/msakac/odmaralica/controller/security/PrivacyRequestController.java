@@ -1,4 +1,5 @@
 package org.foi.diplomski.msakac.odmaralica.controller.security;
+
 import org.foi.diplomski.msakac.odmaralica.controller.base.AbstractBaseController;
 import org.foi.diplomski.msakac.odmaralica.dto.common.CreateResponseDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.PrivacyRequestGetDTO;

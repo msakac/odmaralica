@@ -5,9 +5,8 @@ import org.foi.diplomski.msakac.odmaralica.dto.security.PrivacyRequestPostDTO;
 import org.foi.diplomski.msakac.odmaralica.dto.security.PrivacyRequestPutDTO;
 import org.foi.diplomski.msakac.odmaralica.model.security.PrivacyRequest;
 
-import java.util.List;
-
 import javax.validation.Valid;
+import java.util.List;
 
 public interface IPrivacyRequestService {
     PrivacyRequest convertPost(PrivacyRequestPostDTO entityPost);
@@ -27,7 +26,7 @@ public interface IPrivacyRequestService {
     void delete(Long id);
 
     List<PrivacyRequestGetDTO> find(String queryParams);
-    
+
     PrivacyRequestGetDTO acceptRequest(@Valid Long id);
 
     Class<PrivacyRequest> getEntityClass();
