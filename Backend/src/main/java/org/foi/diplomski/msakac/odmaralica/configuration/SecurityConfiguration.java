@@ -101,6 +101,7 @@ public class SecurityConfiguration {
                 .antMatchers(HttpMethod.GET, "/review/can-review/**").hasAnyAuthority("user", "moderator", "renter", "admin")
                 .antMatchers(HttpMethod.GET, "/privacy-request", "/privacy-request/**", "/privacy-request/find").hasAnyAuthority("user", "moderator", "renter", "admin")
                 .antMatchers(HttpMethod.POST, "/privacy-request").hasAnyAuthority("user", "moderator", "renter", "admin")
+                .antMatchers(HttpMethod.PUT, "/privacy-request/accept/**").hasAnyAuthority("moderator", "admin")
                 .antMatchers(HttpMethod.PUT, "/privacy-request").hasAnyAuthority("user", "moderator", "renter", "admin")
                 .anyRequest()
                 .authenticated()

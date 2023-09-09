@@ -111,7 +111,7 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
         // Activate user
         User user = activationToken.getUser();
         user.setActivated(true);
-        userService.update(user);
+        userService.updateSecure(user);
 
         // Set token as used
         activationToken.setUsed(true);

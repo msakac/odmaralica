@@ -119,6 +119,10 @@ public class UserServiceImpl implements IUserService {
         return userRepository.save(user);
     }
 
+    public User updateSecure(User user) {
+        return userRepository.save(user);
+    }
+
     @Override
     public AuthenticatedUserDTO getAuthenticatedUser(Long id) {
         if (id == SecurityConstants.getAuthenticatedUserId()) {
