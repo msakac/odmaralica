@@ -51,6 +51,7 @@ public class UserServiceImpl implements IUserService {
                 .password(bCryptPasswordEncoder.encode(registrationRequest.getPassword()))
                 .email(registrationRequest.getEmail())
                 .role(getRole())
+                .policyAccepted(false)
                 .activated(false).build();
         userRepository.save(user);
 

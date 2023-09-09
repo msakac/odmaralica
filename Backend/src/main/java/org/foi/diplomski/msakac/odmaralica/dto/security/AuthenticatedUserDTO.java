@@ -25,6 +25,8 @@ public class AuthenticatedUserDTO {
 
     private boolean activated;
 
+    private boolean policyAccepted;
+
     private String description;
 
     private String phoneNumber;

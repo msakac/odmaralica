@@ -64,6 +64,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         user.setRole(getRole());
         user.setPassword("no-password");
         user.setActivated(true);
+        user.setPolicyAccepted(false);
         user.setSurname(parts[1]);
         return userRepository.save(user);
     }

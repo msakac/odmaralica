@@ -1,6 +1,8 @@
 package org.foi.diplomski.msakac.odmaralica.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.*;
 import org.foi.diplomski.msakac.odmaralica.model.security.RefreshToken;
 import org.foi.diplomski.msakac.odmaralica.model.security.UserToken;
@@ -41,6 +43,9 @@ public class User {
 
     @NotNull
     private Boolean activated;
+
+    @Column(name = "policy_accepted")
+    private Boolean policyAccepted;
 
     private String description;
 
