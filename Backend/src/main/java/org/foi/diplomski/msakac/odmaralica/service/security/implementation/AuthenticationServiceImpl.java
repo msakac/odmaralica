@@ -14,6 +14,7 @@ import org.foi.diplomski.msakac.odmaralica.service.security.IUserService;
 import org.foi.diplomski.msakac.odmaralica.service.security.IUserTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,11 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
         final UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                 loginRequestDTO.getEmail(), loginRequestDTO.getPassword());
 
-        authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+        try{
+            authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+        }catch (Exception e){
+            throw new BadCredentialsException("Bad credentials for email " + loginRequestDTO.getEmail());
+        }
         final AuthenticatedUserDTO authenticatedUserDTO = userService.findAuthenticatedUserByEmail(loginRequestDTO.getEmail());
 
         final User user = userMapper.convertToUser(authenticatedUserDTO);

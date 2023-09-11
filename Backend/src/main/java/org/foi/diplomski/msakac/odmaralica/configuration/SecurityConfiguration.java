@@ -45,10 +45,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors()
-                .and()
-                .csrf()
-                .disable()
+                .cors().and().csrf().disable()
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/auth/login", "/auth/login-open-auth", "/auth/register", "/auth/activate").permitAll()
@@ -103,27 +100,12 @@ public class SecurityConfiguration {
                 .antMatchers(HttpMethod.POST, "/privacy-request").hasAnyAuthority("user", "moderator", "renter", "admin")
                 .antMatchers(HttpMethod.PUT, "/privacy-request/accept/**").hasAnyAuthority("moderator", "admin")
                 .antMatchers(HttpMethod.PUT, "/privacy-request").hasAnyAuthority("user", "moderator", "renter", "admin")
-                .anyRequest()
-                .authenticated()
-                .and()
-                .exceptionHandling()
-                .authenticationEntryPoint(unauthorizedHandler).and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .oauth2Login()
-                .authorizationEndpoint()
-                .baseUri("/oauth2/authorize")
-                .authorizationRequestRepository(cookieAuthorizationRequestRepository())
-                .and()
-                .redirectionEndpoint()
-                .baseUri("/oauth2/callback/*")
-                .and()
-                .userInfoEndpoint()
-                .userService(customOAuth2UserService)
-                .and()
-                .successHandler(oAuth2AuthenticationSuccessHandler)
-                .failureHandler(oAuth2AuthenticationFailureHandler);
+                .anyRequest().authenticated().and().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .oauth2Login().authorizationEndpoint().baseUri("/oauth2/authorize")
+                .authorizationRequestRepository(cookieAuthorizationRequestRepository()).and().redirectionEndpoint()
+                .baseUri("/oauth2/callback/*").and().userInfoEndpoint().userService(customOAuth2UserService)
+                .and().successHandler(oAuth2AuthenticationSuccessHandler).failureHandler(oAuth2AuthenticationFailureHandler);
         return http.build();
     }
 }

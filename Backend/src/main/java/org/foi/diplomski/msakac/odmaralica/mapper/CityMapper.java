@@ -15,22 +15,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public abstract class CityMapper {
-    @Autowired
-    protected IRegionService regionService;
-    protected RegionMapper regionMapper = Mappers.getMapper(RegionMapper.class);
+  @Autowired
+  protected IRegionService regionService;
+  protected RegionMapper regionMapper = Mappers.getMapper(RegionMapper.class);
 
-    @Mapping(source = "cityPostDTO.regionId", target = "region")
-    public abstract City convert(CityPostDTO cityPostDTO);
+  @Mapping(source = "cityPostDTO.regionId", target = "region")
+  public abstract City convert(CityPostDTO cityPostDTO);
 
-    @Mapping(source = "cityPutDTO.regionId", target = "region")
-    public abstract City convert(CityPutDTO cityPutDTO);
+  @Mapping(source = "cityPutDTO.regionId", target = "region")
+  public abstract City convert(CityPutDTO cityPutDTO);
 
-    public abstract CityGetDTO convert(City city);
+  public abstract CityGetDTO convert(City city);
 
-    public abstract City convert(CityGetDTO cityGetDTO);
+  public abstract City convert(CityGetDTO cityGetDTO);
 
-    protected Region mapToRegion(Long regionId) {
-        RegionGetDTO regionGetDTO = regionService.findById(regionId);
-        return regionMapper.convertToRegion(regionGetDTO);
-    }
+  protected Region mapToRegion(Long regionId) {
+    RegionGetDTO regionGetDTO = regionService.findById(regionId);
+    return regionMapper.convertToRegion(regionGetDTO);
+  }
 }

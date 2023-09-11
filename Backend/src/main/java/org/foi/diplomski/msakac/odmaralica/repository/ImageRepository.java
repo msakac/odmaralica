@@ -6,15 +6,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ImageRepository extends JpaRepository<Image, Long> {
-    void deleteByAccommodationUnitId(Long id);
+  void deleteByAccommodationUnitId(Long id);
 
-    void deleteByResidenceId(Long id);
+  void deleteByResidenceId(Long id);
 
-    void deleteByUserId(Long id);
+  void deleteByUserId(Long id);
 
-    List<Image> findAllByAccommodationUnitId(Long id);
+  List<Image> findAllByAccommodationUnitId(Long id);
 
-    List<Image> findAllByResidenceId(Long id);
+  List<Image> findAllByResidenceId(Long id);
 
-    List<Image> findAllByUserId(Long id);
+  List<Image> findAllByUserId(Long id);
 }
