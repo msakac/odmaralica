@@ -48,7 +48,7 @@ public class SecurityConfiguration {
                 .cors().and().csrf().disable()
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/auth/login", "/auth/login-open-auth", "/auth/register", "/auth/activate").permitAll()
+                .antMatchers(HttpMethod.POST, "/auth/login", "/auth/login-open-auth", "/auth/register", "/auth/activate", "/auth/refresh-token").permitAll()
                 .antMatchers(HttpMethod.GET, "/role").hasAuthority("admin")
                 .antMatchers(HttpMethod.POST, "/role", "/user").hasAuthority("admin")
                 .antMatchers(HttpMethod.PUT, "/role", "/user/**").hasAnyAuthority("user", "moderator", "renter", "admin")

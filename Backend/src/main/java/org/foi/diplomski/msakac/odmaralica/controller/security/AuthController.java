@@ -71,6 +71,16 @@ public class AuthController {
         }
     }
 
+    @PostMapping("/refresh-token")
+    public ResponseEntity<Object> refreshToken(@Valid @RequestBody RefreshTokenRequestDTO request) {
+        try {
+            LoginResponseDTO response = authService.refreshToken(request);
+            CreateResponseDTO<LoginResponseDTO> refreshTokenResponse = new CreateResponseDTO<LoginResponseDTO>(response, HttpStatus.OK);
+            return ResponseEntity.ok(refreshTokenResponse);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(InvalidRequestResponseBuilder.createResponse(e));
+        }
+    }
     //TODO dodati /log-out tako da morem deaktivirati refresh token
 
     //TODO dodati /reset-password da mogu resetirati lozinku korisnika

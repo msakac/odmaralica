@@ -96,7 +96,7 @@ public class JwtTokenManager {
         return equalsEmail && !tokenExpired;
     }
 
-    private boolean isTokenExpired(String token) {
+    public boolean isTokenExpired(String token) {
 
         final Date expirationDateFromToken = getExpirationDateFromToken(token);
         return expirationDateFromToken.before(new Date());
@@ -112,6 +112,27 @@ public class JwtTokenManager {
     private DecodedJWT getDecodedJWT(String token) {
 
         final JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(jwtProperties.getSecretKey().getBytes())).build();
+
+        return jwtVerifier.verify(token);
+    }
+
+    public Long getUserIdFromRefreshToken(String token) {
+
+        final DecodedJWT decodedJWT =  getDecodedJWTRefreshToken(token);
+
+        return Long.parseLong(decodedJWT.getSubject());
+    }
+
+
+    public boolean isRefreshTokenExpired(String token) {
+        DecodedJWT decodedJWT = getDecodedJWTRefreshToken(token);
+        Date expirationDateFromToken = decodedJWT.getExpiresAt();
+        return expirationDateFromToken.before(new Date());
+    }
+
+    private DecodedJWT getDecodedJWTRefreshToken(String token) {
+
+        final JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(jwtProperties.getRefreshSecretKey().getBytes())).build();
 
         return jwtVerifier.verify(token);
     }

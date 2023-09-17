@@ -90,7 +90,6 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
         return new LoginResponseDTO(token, refreshToken, authenticatedUserDTO);
     }
 
-
     public RegisterResponseDTO register(RegisterRequestDTO registerRequestDTO) {
         User registeredUser = userService.registration(registerRequestDTO);
         UserToken activationToken = new UserToken(registeredUser, TokenType.Activation);
@@ -123,6 +122,23 @@ public class AuthenticationServiceImpl implements IAuthenticationService {
         userTokenService.update(activationToken);
 
         emailSenderService.sendActivationSuccessEmail(userMapper.convertToUserGetDTO(user));
+    }
+
+    @Override
+    public LoginResponseDTO refreshToken(RefreshTokenRequestDTO request) {
+        //check if refresh token is valid
+        //if valid, create new access token and return it
+        //if not valid, throw exception
+        final Long userId = jwtTokenManager.getUserIdFromRefreshToken(request.getRefreshToken());
+        final User user = userService.findById(userId);
+        final boolean tokenExpired = jwtTokenManager.isRefreshTokenExpired(request.getRefreshToken());
+        if (tokenExpired) {
+            throw new BadCredentialsException("Refresh token expired.");
+        }
+        final String accessToken = jwtTokenManager.generateToken(user);
+        final AuthenticatedUserDTO authenticatedUserDTO = userService.findAuthenticatedUserByEmail(user.getEmail());
+        return new LoginResponseDTO(accessToken, request.getRefreshToken(), authenticatedUserDTO);
+        
     }
 
 }
